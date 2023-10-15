@@ -59,7 +59,7 @@ const Login: React.FC = () => {
                 LOGIN
               </button>
               <div className="login__cta">
-                Don't have an account? <span className="login__signup">Sign up</span>
+                Don't have an account? <span>Sign up</span>
               </div>
             </Form>
           )}
