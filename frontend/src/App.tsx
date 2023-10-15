@@ -27,7 +27,7 @@ const App: React.FC = () => {
           <Route path={'/forgot-password'} element={<ForgotPassword />}></Route>
           <Route path={'/reset-password'} element={<ResetPassword />}></Route>
           {/* PRIVATE ROUTE */}
-          <Route element={<ProtectedRoute user={false} />}>
+          <Route element={<ProtectedRoute user={true} />}>
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>

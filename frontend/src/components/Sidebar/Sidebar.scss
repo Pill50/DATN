@@ -1,0 +1,42 @@
+.sidebar {
+  width: 200px;
+  border-right: 1px solid #eee;
+
+  .container {
+  }
+
+  &__list {
+    padding: 60px 16px 16px 16px;
+  }
+
+  &__block {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    gap: 8px;
+  }
+
+  &__block:hover,
+  &__block.active:hover {
+    background: #e0e8f7;
+    color: var(--blueColor);
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  &__block.logout {
+    margin: 16px;
+    color: var(--redColor);
+  }
+
+  .active {
+    color: var(--blueColor);
+  }
+
+  .devider {
+    display: block;
+    height: 1px;
+    width: 100%;
+    background: #eee;
+  }
+}
