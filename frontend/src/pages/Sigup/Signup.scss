@@ -1,4 +1,4 @@
-.login {
+.signup {
   .container {
     padding: 0 12px;
     margin-bottom: 40px;
@@ -28,7 +28,7 @@
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
   }
 
-  &__title {
+  .signup__title {
     text-align: center;
     color: var(--blueColor);
     font-weight: 700;
@@ -65,17 +65,6 @@
     }
   }
 
-  &__forgot,
-  &__signup {
-    color: var(--blueColor);
-    margin-bottom: 16px;
-    cursor: pointer;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
   &__btn {
     height: 56px;
     background: var(--blueColor);
@@ -91,5 +80,15 @@
   &__cta {
     margin-top: 8px;
     text-align: center;
+
+    span {
+      color: var(--blueColor);
+      margin-bottom: 16px;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 }
