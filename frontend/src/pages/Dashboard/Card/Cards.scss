@@ -1,0 +1,41 @@
+.card {
+  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+
+  &__green {
+    background-color: var(--greenColor);
+  }
+
+  &__red {
+    background-color: var(--redColor);
+  }
+
+  &__yellow {
+    background-color: var(--yellowColor);
+  }
+
+  &__wrapper {
+    width: 300px;
+    height: 100px;
+    border-radius: 8px;
+    color: white;
+    padding: 8px;
+    text-align: center;
+  }
+
+  &__label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+  }
+
+  &__value {
+    font-size: 32px;
+  }
+}
