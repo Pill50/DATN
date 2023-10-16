@@ -40,7 +40,7 @@ export const DashboardIcon = ({ width = '24px', height = '24px', className = '' 
     <path
       d="M3 13H11V3H3V13ZM3 21H11V15H3V21ZM13 21H21V11H13V21ZM13 3V9H21V3H13Z"
       fill="currentColor"
-      fill-opacity="0.87"
+      fillOpacity="0.87"
     />
   </svg>
 );
