@@ -2,26 +2,25 @@ import * as React from 'react';
 import './Table.scss';
 import { DeleteIcon, EditIcon } from '@/components/Icons';
 
-type Area = {
+type Device = {
   id: number;
   name: string;
-  devices: number;
-  age: number;
+  water_flow: number;
 };
 
 interface DataTableProps {
-  data: Area[];
+  data: Device[];
 }
 
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
   const tableHead: string[] = Object.keys(data[0]);
   tableHead.push('action');
 
-  const handleViewAreaDetail = (id: number) => {
+  const handleViewDeviceDetail = (id: number) => {
     console.log('Edit id: ', id);
   };
 
-  const handleDeleteArea = (id: number) => {
+  const handleDeleteDevice = (id: number) => {
     console.log('Delete id: ', id);
   };
 
@@ -35,18 +34,17 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((areaItem: any, index: number) => {
+        {data.map((deviceItem: any, index: number) => {
           return (
             <tr key={index}>
-              <td>{areaItem.id}</td>
-              <td>{areaItem.name}</td>
-              <td>{areaItem.devices}</td>
-              <td>{areaItem.age}</td>
+              <td>{deviceItem.id}</td>
+              <td>{deviceItem.name}</td>
+              <td>{deviceItem.water_flow}</td>
               <td>
-                <span onClick={() => handleViewAreaDetail(areaItem.id)}>
+                <span onClick={() => handleViewDeviceDetail(deviceItem.id)}>
                   <EditIcon />
                 </span>
-                <span onClick={() => handleDeleteArea(areaItem.id)}>
+                <span onClick={() => handleDeleteDevice(deviceItem.id)}>
                   <DeleteIcon />
                 </span>
               </td>

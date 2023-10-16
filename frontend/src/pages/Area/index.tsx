@@ -1,9 +1,19 @@
 import React from 'react';
 import './Area.scss';
 import Sidebar from '@/components/Sidebar/Sidebar';
-import SelectOption from './SelectOption/SelectOption';
+import SelectOption from '../../components/SelectOption/SelectOption';
 import DataTable from './Table/Table';
-import BasicModal from './ModalCreate/ModalCreate';
+import ModalCreateArea from './ModalCreate/ModalCreate';
+
+// MOCK DATA
+import { dataArea } from '@/Mockdata/ListDataArea';
+
+type Area = {
+  id: number;
+  name: string;
+  devices: number;
+  age: number;
+};
 
 const Area: React.FC = () => {
   return (
@@ -13,11 +23,11 @@ const Area: React.FC = () => {
         <h1 className="title">AREA</h1>
         <div className="area__action">
           <SelectOption />
-          <BasicModal />
+          <ModalCreateArea />
         </div>
         <div className="area__content">
           <div className="area__table">
-            <DataTable />
+            <DataTable data={dataArea} />
           </div>
           <div className="area__map">THIS IS MAP</div>
         </div>

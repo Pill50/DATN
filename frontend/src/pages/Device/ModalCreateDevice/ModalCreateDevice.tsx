@@ -1,16 +1,16 @@
 import * as React from 'react';
-import './ModalCreate.scss';
+import './ModalCreateDevice.scss';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { AddIcon } from '@/components/Icons';
 
-export default function ModalCreateArea() {
+export default function ModalCreateDevice() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleCreateArea = () => {
-    console.log('CREATE NEW AREA');
+    console.log('CREATE NEW DEVICE');
     setOpen(false);
   };
 
@@ -29,13 +29,13 @@ export default function ModalCreateArea() {
       >
         <div className="modal__box">
           <h2 id="modal-modal-title" className="modal__title">
-            CREATE NEW AREA
+            CREATE NEW DEVICE
           </h2>
           <div id="modal-modal-description" className="modal__desc">
             <div className="modal__row">
               <div className="modal__group">
-                <label htmlFor="name">Name of area</label>
-                <input id="name" type="text" placeholder="Area's name" />
+                <label htmlFor="name">Name of device</label>
+                <input id="name" type="text" placeholder="Device's name" />
               </div>
               <div className="modal__group">
                 <label htmlFor="address">Address</label>
@@ -44,12 +44,12 @@ export default function ModalCreateArea() {
             </div>
             <div className="modal__row">
               <div className="modal__group">
-                <label htmlFor="device">Number of devices</label>
-                <input id="device" type="number" defaultValue={1} />
+                <label htmlFor="resident">Number of residents</label>
+                <input id="resident" type="number" defaultValue={1} />
               </div>
               <div className="modal__group">
-                <label htmlFor="Total water">Total water flow per month (m3)</label>
-                <input id="Total water" type="number" defaultValue={1000} />
+                <label htmlFor="waterSource">Water supply source</label>
+                <input id="waterSource" type="text" />
               </div>
             </div>
             <div className="modal__action">

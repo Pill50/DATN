@@ -13,19 +13,27 @@ const SelectOption = () => {
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 150, fontSize: 16 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Area</InputLabel>
+        <InputLabel id="demo-simple-select-label" style={{ fontSize: 14, marginTop: -6 }}>
+          Area
+        </InputLabel>
         <Select
           labelId="demo-simple-select-label"
-          id="demo-simple-select"
           value={area}
           label="Area"
+          style={{ fontSize: 16, height: 40, padding: 10 }}
           onChange={handleChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem style={{ fontSize: 16 }} value={10}>
+            Ten
+          </MenuItem>
+          <MenuItem style={{ fontSize: 16 }} value={20}>
+            Twenty
+          </MenuItem>
+          <MenuItem style={{ fontSize: 16 }} value={30}>
+            Thirty
+          </MenuItem>
         </Select>
       </FormControl>
     </Box>

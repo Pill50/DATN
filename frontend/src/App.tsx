@@ -12,6 +12,7 @@ import ChangePassword from './pages/ChangePassword';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
 import Area from './pages/Area';
+import Device from './pages/Device';
 
 const App: React.FC = () => {
   // const [user, setUser] = useState<boolean>(true);
@@ -32,6 +33,7 @@ const App: React.FC = () => {
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/area" element={<Area />} />
+            <Route path="/device" element={<Device />} />
           </Route>
           <Route path={'*'} element={<NotFound />}></Route>
         </Routes>
