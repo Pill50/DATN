@@ -1,0 +1,65 @@
+.modal {
+  input {
+    border: 1px solid var(--blueColor);
+    width: 250px;
+    max-width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  &__box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 20px;
+    color: var(--blueColor);
+  }
+
+  &__row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  &__group {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+  }
+
+  &__action {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    font-size: 16px;
+  }
+
+  &__btn {
+    font-weight: 500;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 8px;
+  }
+
+  &__btn:hover {
+    opacity: 0.8;
+  }
+
+  &__action-cancel {
+    background: #eee;
+  }
+  &__action-create {
+    background: var(--blueColor);
+    color: white;
+  }
+}

@@ -2,9 +2,8 @@ import React from 'react';
 import './Area.scss';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import SelectOption from './SelectOption/SelectOption';
-import { Button } from '@mui/material';
-import { AddIcon } from '@/components/Icons';
 import DataTable from './Table/Table';
+import BasicModal from './ModalCreate/ModalCreate';
 
 const Area: React.FC = () => {
   return (
@@ -14,10 +13,7 @@ const Area: React.FC = () => {
         <h1 className="title">AREA</h1>
         <div className="area__action">
           <SelectOption />
-          <Button variant="contained">
-            <AddIcon />
-            CREATE
-          </Button>
+          <BasicModal />
         </div>
         <div className="area__content">
           <div className="area__table">
