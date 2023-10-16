@@ -1,64 +1,44 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Sidebar.scss';
 import { AreaIcon, DashboardIcon, DeviceIcon, LogoutIcon, NotificationIcon, ProfileIcon } from '../Icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
-  const [activeLink, setActiveLink] = useState<string>('dashboard');
+  const location = useLocation();
 
-  const handleLinkClick = (path: string) => {
-    setActiveLink(path);
+  const isActive = (path: string) => {
+    return location.pathname === path ? 'active' : '';
   };
 
   return (
     <div className="sidebar">
       <div className="container">
         <ul className="sidebar__list">
-          <Link
-            to={'/profile'}
-            className={`sidebar__item ${activeLink === 'profile' ? 'active' : ''}`}
-            onClick={() => handleLinkClick('profile')}
-          >
+          <Link to={'/profile'} className={`sidebar__item ${isActive('/profile')}`}>
             <div className="sidebar__block">
               <ProfileIcon />
               <span>My profile</span>
             </div>
           </Link>
-          <Link
-            to={'/dashboard'}
-            className={`sidebar__item ${activeLink === 'dashboard' ? 'active' : ''}`}
-            onClick={() => handleLinkClick('dashboard')}
-          >
+          <Link to={'/dashboard'} className={`sidebar__item ${isActive('/dashboard')}`}>
             <div className="sidebar__block">
               <DashboardIcon />
               <span>Dashboard</span>
             </div>
           </Link>
-          <Link
-            to={'/area'}
-            className={`sidebar__item ${activeLink === 'area' ? 'active' : ''}`}
-            onClick={() => handleLinkClick('area')}
-          >
+          <Link to={'/area'} className={`sidebar__item ${isActive('/area')}`}>
             <div className="sidebar__block">
               <AreaIcon />
               <span>Area</span>
             </div>
           </Link>
-          <Link
-            to={'/device'}
-            className={`sidebar__item ${activeLink === 'device' ? 'active' : ''}`}
-            onClick={() => handleLinkClick('device')}
-          >
+          <Link to="/device" className={`sidebar__item ${isActive('/device')}`}>
             <div className="sidebar__block">
               <DeviceIcon />
               <span>Device</span>
             </div>
           </Link>
-          <Link
-            to={'/notification'}
-            className={`sidebar__item ${activeLink === 'notification' ? 'active' : ''}`}
-            onClick={() => handleLinkClick('notification')}
-          >
+          <Link to="/notification" className={`sidebar__item ${isActive('/notification')}`}>
             <div className="sidebar__block">
               <NotificationIcon />
               <span>Notification</span>

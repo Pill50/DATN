@@ -1,0 +1,44 @@
+.area {
+  display: flex;
+
+  .content {
+    padding: 0 16px;
+    flex: 1;
+  }
+
+  .title {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--blueColor);
+  }
+
+  &__action {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+    font-size: 20px;
+
+    button {
+      background: var(--greenColor);
+      font-size: 20px;
+    }
+
+    button:hover {
+      background: var(--greenColor);
+      opacity: 0.8;
+    }
+  }
+
+  &__content {
+    margin-top: 16px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 16px;
+  }
+
+  &__map {
+    flex: 1;
+    height: 400px;
+    border: 1px solid #333;
+  }
+}
