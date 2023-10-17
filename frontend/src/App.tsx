@@ -16,6 +16,7 @@ import Device from './pages/Device';
 import Notification from './pages/Notification';
 import Profile from './pages/Profile';
 import DetailArea from './pages/DetailArea';
+import DetailDevice from './pages/DetailDevice';
 
 const App: React.FC = () => {
   // const [user, setUser] = useState<boolean>(true);
@@ -37,6 +38,7 @@ const App: React.FC = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/area/:areaID" element={<DetailArea />} />
             <Route path="/area" element={<Area />} />
+            <Route path="/device/:deviceID" element={<DetailDevice />} />
             <Route path="/device" element={<Device />} />
             <Route path="/notification" element={<Notification />} />
             <Route path="/profile" element={<Profile />} />

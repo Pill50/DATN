@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './Table.scss';
 import { DeleteIcon, EditIcon } from '@/components/Icons';
+import { useNavigate } from 'react-router-dom';
 
 type Device = {
   id: number;
@@ -16,11 +17,13 @@ interface DataTableProps {
 }
 
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
+  const navigate = useNavigate();
   const tableHead: string[] = Object.keys(data[0]);
   tableHead.push('action');
 
   const handleViewDeviceDetail = (id: number) => {
     console.log('Edit id: ', id);
+    navigate(`/device/${id}`)
   };
 
   const handleDeleteDevice = (id: number) => {
