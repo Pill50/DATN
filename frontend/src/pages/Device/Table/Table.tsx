@@ -4,8 +4,11 @@ import { DeleteIcon, EditIcon } from '@/components/Icons';
 
 type Device = {
   id: number;
-  name: string;
+  address: string;
+  water_meter: number;
   water_flow: number;
+  installation: string;
+  pin_percent: number;
 };
 
 interface DataTableProps {
@@ -34,12 +37,15 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((deviceItem: any, index: number) => {
+        {data.map((deviceItem: Device, index: number) => {
           return (
             <tr key={index}>
               <td>{deviceItem.id}</td>
-              <td>{deviceItem.name}</td>
+              <td>{deviceItem.address}</td>
+              <td>{deviceItem.water_meter}</td>
               <td>{deviceItem.water_flow}</td>
+              <td>{deviceItem.installation}</td>
+              <td>{deviceItem.pin_percent}</td>
               <td>
                 <span onClick={() => handleViewDeviceDetail(deviceItem.id)}>
                   <EditIcon />

@@ -1,0 +1,30 @@
+.detail_area {
+  display: flex;
+
+  .content {
+    padding: 0 16px;
+    flex: 1;
+  }
+
+  .title {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--blueColor);
+  }
+
+  &__content {
+    margin-top: 16px;
+    margin-bottom: 40px;
+  }
+
+  &__info {
+    display: grid;
+    border: 1px solid var(--blueColor);
+    border-radius: 8px;
+    background-color: #e0e8e7;
+    padding: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 60px;
+    margin-bottom: 12px;
+  }
+}

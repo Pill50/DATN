@@ -2,14 +2,15 @@ import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import './Login.scss';
+import { Link } from 'react-router-dom';
 
 const validationSchema = yup.object({
-  username: yup.string().required('Username is required'),
+  email: yup.string().email('Invalid Email').required('Email is required').trim(),
   password: yup.string().min(8, 'Password should be of minimum 8 characters length').required('Password is required'),
 });
 
 const initialValues = {
-  username: '',
+  email: '',
   password: '',
 };
 
@@ -29,17 +30,17 @@ const Login: React.FC = () => {
             <Form className="" onSubmit={formik.handleSubmit}>
               <h1 className="login__title">LOGIN TO YOUR ACCOUNT</h1>
               <div className="login__group">
-                <label htmlFor="username" className="">
-                  Username
+                <label htmlFor="email" className="">
+                  Email
                 </label>
                 <Field
-                  id="username"
-                  name="username"
+                  id="email"
+                  name="email"
                   type="text"
-                  placeholder="username"
-                  className={`${formik.errors.username && formik.touched.username ? 'border-error' : ''}`}
+                  placeholder="Enter your email"
+                  className={`${formik.errors.email && formik.touched.email ? 'border-error' : ''}`}
                 />
-                <ErrorMessage name="username" component="span" className="error-msg" />
+                <ErrorMessage name="email" component="span" className="error-msg" />
               </div>
               <div className="login__group">
                 <label htmlFor="password" className="">
@@ -54,12 +55,14 @@ const Login: React.FC = () => {
                 />
                 <ErrorMessage name="password" component="span" className="error-msg" />
               </div>
-              <p className="login__forgot">Forgot password?</p>
+              <Link to="/forgot-password" className="login__forgot">
+                Forgot password?
+              </Link>
               <button type="submit" className="login__btn">
                 LOGIN
               </button>
               <div className="login__cta">
-                Don't have an account? <span>Sign up</span>
+                Don't have an account? <Link to={'/signup'}>Sign up</Link>
               </div>
             </Form>
           )}

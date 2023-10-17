@@ -23,18 +23,17 @@
     color: var(--blueColor);
   }
 
-  &__row {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
   &__group {
     display: flex;
     flex-shrink: 0;
     flex-direction: column;
+    margin-bottom: 16px;
+  }
+
+  &__group:nth-child(2) {
+    label {
+      margin-bottom: 16px;
+    }
   }
 
   &__action {

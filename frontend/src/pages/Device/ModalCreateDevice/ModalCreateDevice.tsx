@@ -3,6 +3,9 @@ import './ModalCreateDevice.scss';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { AddIcon } from '@/components/Icons';
+import SelectOption from '@/components/SelectOption/SelectOption';
+
+const addressSupplyDevice = ['Ward 1', 'Ward 2', 'Ward 3', 'Ward 4', 'Ward 5'];
 
 export default function ModalCreateDevice() {
   const [open, setOpen] = React.useState(false);
@@ -10,7 +13,7 @@ export default function ModalCreateDevice() {
   const handleClose = () => setOpen(false);
 
   const handleCreateArea = () => {
-    console.log('CREATE NEW DEVICE');
+    console.log('CREATE NEW WATER METER');
     setOpen(false);
   };
 
@@ -32,25 +35,13 @@ export default function ModalCreateDevice() {
             CREATE NEW DEVICE
           </h2>
           <div id="modal-modal-description" className="modal__desc">
-            <div className="modal__row">
-              <div className="modal__group">
-                <label htmlFor="name">Name of device</label>
-                <input id="name" type="text" placeholder="Device's name" />
-              </div>
-              <div className="modal__group">
-                <label htmlFor="address">Address</label>
-                <input id="address" type="text" placeholder="Address" />
-              </div>
+            <div className="modal__group">
+              <label htmlFor="supply_address">Address of device</label>
+              <input id="supply_address" type="text" placeholder="Address of device supply" />
             </div>
-            <div className="modal__row">
-              <div className="modal__group">
-                <label htmlFor="resident">Number of residents</label>
-                <input id="resident" type="number" defaultValue={1} />
-              </div>
-              <div className="modal__group">
-                <label htmlFor="waterSource">Water supply source</label>
-                <input id="waterSource" type="text" />
-              </div>
+            <div className="modal__group">
+              <label>Address of device</label>
+              <SelectOption label="Adress" options={addressSupplyDevice} />
             </div>
             <div className="modal__action">
               <button className="modal__btn modal__action-cancel" onClick={handleClose}>

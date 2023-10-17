@@ -2,6 +2,7 @@ import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import './Forgotpassword.scss';
+import { Link } from 'react-router-dom';
 
 const validationSchema = yup.object({
   email: yup.string().email('Invalid Email').required('Email is required').trim(),
@@ -45,10 +46,10 @@ const ForgotPassword: React.FC = () => {
               </button>
               <div className="forgotpassword__cta">
                 <p>
-                  Already have an account? <span>Login</span>
+                  Already have an account? <Link to={'/login'}>Login</Link>
                 </p>
                 <p>
-                  Don't have an account? <span>Sign up</span>
+                  Don't have an account? <Link to={'/signup'}>Sign up</Link>
                 </p>
               </div>
             </Form>

@@ -2,9 +2,9 @@ import React from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as yup from 'yup';
 import './Signup.scss';
+import { Link } from 'react-router-dom';
 
 const validationSchema = yup.object({
-  username: yup.string().required('Username is required').trim(),
   email: yup.string().email('Invalid Email').required('Email is required').trim(),
   password: yup
     .string()
@@ -20,7 +20,6 @@ const validationSchema = yup.object({
 });
 
 const initialValues = {
-  username: '',
   email: '',
   password: '',
   confirmPassword: '',
@@ -41,20 +40,6 @@ const Signup: React.FC = () => {
           {(formik) => (
             <Form className="" onSubmit={formik.handleSubmit}>
               <h1 className="signup__title">SIGN UP YOUR NEW ACCOUNT</h1>
-              {/* USERNAME */}
-              <div className="signup__group">
-                <label htmlFor="username" className="">
-                  Username
-                </label>
-                <Field
-                  id="username"
-                  name="username"
-                  type="text"
-                  placeholder="Username"
-                  className={`${formik.errors.username && formik.touched.username ? 'border-error' : ''}`}
-                />
-                <ErrorMessage name="username" component="span" className="error-msg" />
-              </div>
               {/* EMAIL */}
               <div className="signup__group">
                 <label htmlFor="email" className="">
@@ -101,7 +86,7 @@ const Signup: React.FC = () => {
                 SIGN UP
               </button>
               <div className="signup__cta">
-                Already have an account? <span>Login</span>
+                Already have an account? <Link to="/login">Login</Link>
               </div>
             </Form>
           )}

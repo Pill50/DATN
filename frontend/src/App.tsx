@@ -14,6 +14,8 @@ import Dashboard from './pages/Dashboard';
 import Area from './pages/Area';
 import Device from './pages/Device';
 import Notification from './pages/Notification';
+import Profile from './pages/Profile';
+import DetailArea from './pages/DetailArea';
 
 const App: React.FC = () => {
   // const [user, setUser] = useState<boolean>(true);
@@ -33,9 +35,11 @@ const App: React.FC = () => {
           <Route element={<ProtectedRoute user={true} />}>
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/area/:areaID" element={<DetailArea />} />
             <Route path="/area" element={<Area />} />
             <Route path="/device" element={<Device />} />
             <Route path="/notification" element={<Notification />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
           <Route path={'*'} element={<NotFound />}></Route>
         </Routes>

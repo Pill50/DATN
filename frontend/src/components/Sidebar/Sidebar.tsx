@@ -7,7 +7,7 @@ const Sidebar: React.FC = () => {
   const location = useLocation();
 
   const isActive = (path: string) => {
-    return location.pathname === path ? 'active' : '';
+    return location.pathname.startsWith(path) ? 'active' : '';
   };
 
   return (

@@ -1,10 +1,12 @@
 import * as React from 'react';
 import './Table.scss';
 import { DeleteIcon, EditIcon } from '@/components/Icons';
+import { useNavigate } from 'react-router-dom';
 
 type Area = {
   id: number;
-  name: string;
+  address: string;
+  total_water_supply: number;
   devices: number;
   age: number;
 };
@@ -14,11 +16,14 @@ interface DataTableProps {
 }
 
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
+  const navigate = useNavigate();
+
   const tableHead: string[] = Object.keys(data[0]);
   tableHead.push('action');
 
   const handleViewAreaDetail = (id: number) => {
     console.log('Edit id: ', id);
+    navigate(`/area/${id}`);
   };
 
   const handleDeleteArea = (id: number) => {
@@ -35,11 +40,12 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((areaItem: any, index: number) => {
+        {data.map((areaItem: Area, index: number) => {
           return (
             <tr key={index}>
               <td>{areaItem.id}</td>
-              <td>{areaItem.name}</td>
+              <td>{areaItem.address}</td>
+              <td>{areaItem.total_water_supply}</td>
               <td>{areaItem.devices}</td>
               <td>{areaItem.age}</td>
               <td>

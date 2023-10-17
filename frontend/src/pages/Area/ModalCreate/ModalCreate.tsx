@@ -25,38 +25,38 @@ export default function ModalCreateArea() {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        className="modal"
+        className="modal-create"
       >
-        <div className="modal__box">
-          <h2 id="modal-modal-title" className="modal__title">
+        <div className="modal-create__box">
+          <h2 id="modal-modal-title" className="modal-create__title">
             CREATE NEW AREA
           </h2>
-          <div id="modal-modal-description" className="modal__desc">
-            <div className="modal__row">
-              <div className="modal__group">
+          <div id="modal-modal-description" className="modal-create__desc">
+            <div className="modal-create__row">
+              <div className="modal-create__group">
                 <label htmlFor="name">Name of area</label>
                 <input id="name" type="text" placeholder="Area's name" />
               </div>
-              <div className="modal__group">
+              <div className="modal-create__group">
                 <label htmlFor="address">Address</label>
                 <input id="address" type="text" placeholder="Address" />
               </div>
             </div>
-            <div className="modal__row">
-              <div className="modal__group">
+            <div className="modal-create__row">
+              <div className="modal-create__group">
                 <label htmlFor="device">Number of devices</label>
                 <input id="device" type="number" defaultValue={1} />
               </div>
-              <div className="modal__group">
+              <div className="modal-create__group">
                 <label htmlFor="Total water">Total water flow per month (m3)</label>
                 <input id="Total water" type="number" defaultValue={1000} />
               </div>
             </div>
-            <div className="modal__action">
-              <button className="modal__btn modal__action-cancel" onClick={handleClose}>
+            <div className="modal-create__action">
+              <button className="modal-create__btn modal-create__action-cancel" onClick={handleClose}>
                 CANCEL
               </button>
-              <button className="modal__btn modal__action-create" onClick={handleCreateArea}>
+              <button className="modal-create__btn modal-create__action-create" onClick={handleCreateArea}>
                 CREATE
               </button>
             </div>
