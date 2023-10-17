@@ -36,9 +36,13 @@
     gap: 16px;
   }
 
-  &__map {
+  &__table {
     flex: 1;
-    height: 400px;
+  }
+
+  &__map {
+    width: 500px;
+    height: 500px;
     border: 1px solid #333;
   }
 }

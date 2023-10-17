@@ -13,6 +13,7 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
 import Area from './pages/Area';
 import Device from './pages/Device';
+import Notification from './pages/Notification';
 
 const App: React.FC = () => {
   // const [user, setUser] = useState<boolean>(true);
@@ -34,6 +35,7 @@ const App: React.FC = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/area" element={<Area />} />
             <Route path="/device" element={<Device />} />
+            <Route path="/notification" element={<Notification />} />
           </Route>
           <Route path={'*'} element={<NotFound />}></Route>
         </Routes>

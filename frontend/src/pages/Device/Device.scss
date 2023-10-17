@@ -37,6 +37,7 @@
   }
 
   &__info {
+    flex: 1;
     p {
       font-weight: 600;
     }
@@ -47,8 +48,37 @@
   }
 
   &__map {
-    flex: 1;
-    height: 400px;
+    width: 500px;
+    height: 500px;
     border: 1px solid #333;
+  }
+
+  &__chart {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 100px;
+  }
+
+  &__chart--info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+
+    h3 {
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    span {
+      color: var(--greenColor);
+    }
+  }
+
+  &__chart--title {
+    font-weight: 600;
+    font-size: 20px;
+    text-align: center;
+    color: var(--blueColor);
+    margin-bottom: 8px;
   }
 }

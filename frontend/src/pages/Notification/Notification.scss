@@ -1,0 +1,69 @@
+.notification {
+  display: flex;
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding: 16px;
+  }
+
+  .title {
+    text-align: center;
+    margin-top: 20px;
+    color: var(--blueColor);
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+
+  &__btn {
+    align-self: flex-end;
+    width: fit-content;
+    padding: 12px 24px;
+    border-radius: 8px;
+    color: white;
+    background-color: var(--greenColor);
+    cursor: pointer;
+  }
+
+  &__btn:hover {
+    opacity: 0.8;
+  }
+
+  &__card {
+    width: 700px;
+    border: 1px solid var(--blueColor);
+    border-radius: 8px;
+    padding: 16px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__card--info {
+    font-weight: 600;
+    font-style: italic;
+
+    span {
+      color: var(--greenColor);
+    }
+  }
+
+  &__card--time {
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  &__close {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 2px;
+  }
+}

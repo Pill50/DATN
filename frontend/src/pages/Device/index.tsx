@@ -7,6 +7,7 @@ import DataTable from './Table/Table';
 
 // MOCK DATA
 import { dataDevice } from '@/Mockdata/ListDataDevice';
+import Chart from './Chart/Chart';
 
 const Device: React.FC = () => {
   return (
@@ -27,7 +28,17 @@ const Device: React.FC = () => {
             <p>Status: Good / Leak water / Overflow </p>
             <DataTable data={dataDevice} />
           </div>
-          <div className="device__map">THIS IS A MAP</div>
+          <div className="device__map">THIS IS MAP</div>
+        </div>
+        <div className="device__chart">
+          <div className="device__chart--info">
+            <h3>
+              AREA: <span>N1</span>
+            </h3>
+            <SelectOption />
+          </div>
+          <Chart />
+          <p className="device__chart--title">The water consumption chart for the area (m3/month)</p>
         </div>
       </div>
     </div>
