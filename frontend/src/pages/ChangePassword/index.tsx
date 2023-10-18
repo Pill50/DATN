@@ -5,6 +5,7 @@ import { ErrorMessage, Field, Formik, Form } from 'formik';
 import { changePasswordValidationSchema } from '@/validations/auth';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import { ChangePasswordType } from '@/types/auth';
+import Button from '@/components/Button';
 
 const initialValues: ChangePasswordType = {
   currentPassword: '',
@@ -75,12 +76,12 @@ const ChangePassword: React.FC = () => {
                 </div>
               </div>
               <div className="changePassword__action">
-                <Link to={'/profile'} className="changePassword__action--cancel">
+                <Button to={'/profile'} outline>
                   CANCEL
-                </Link>
-                <button className="changePassword__action--save" type="submit">
-                  SAVE
-                </button>
+                </Button>
+                <Button type="submit" primary>
+                  CREATE
+                </Button>
               </div>
             </Form>
           )}
