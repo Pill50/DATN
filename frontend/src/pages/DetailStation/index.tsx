@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import ModalEditStation from './ModalEdit/ModalEdit';
 import WaterConsumptionGraph from './Graph';
 import Chart from './Chart/Chart';
+import ModalDelete from '@/components/ModalDelete/ModalDelete';
 
 // MOCK DATA
 // import { dataStation } from '@/Mockdata/ListDataStation';
@@ -19,12 +20,16 @@ import Chart from './Chart/Chart';
 const DetailStation: React.FC = () => {
   const { stationID } = useParams();
   console.log(stationID);
+
   return (
     <div className="detail_station">
       <Sidebar />
       <div className="content">
         <h1 className="title">INFORMATION OF STATION</h1>
-        <ModalEditStation stationID={stationID as string} />
+        <div className="detail_station__action">
+          <ModalEditStation stationID={stationID as string} />
+          <ModalDelete itemID={stationID as string} />
+        </div>
         <div className="detail_station__content">
           <div className="detail_station__info">
             <p className="detail_station__address">Address: 45 Tan Lap, Di An</p>

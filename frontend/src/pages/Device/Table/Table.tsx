@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './Table.scss';
-import { DeleteIcon, EditIcon } from '@/components/Icons';
 import { useNavigate } from 'react-router-dom';
 
 type Device = {
@@ -19,15 +18,10 @@ interface DataTableProps {
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
   const navigate = useNavigate();
   const tableHead: string[] = Object.keys(data[0]);
-  tableHead.push('action');
 
   const handleViewDeviceDetail = (id: number) => {
     console.log('Edit id: ', id);
-    navigate(`/device/${id}`)
-  };
-
-  const handleDeleteDevice = (id: number) => {
-    console.log('Delete id: ', id);
+    navigate(`/device/${id}`);
   };
 
   return (
@@ -42,21 +36,13 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
       <tbody>
         {data.map((deviceItem: Device, index: number) => {
           return (
-            <tr key={index}>
+            <tr key={index} onClick={() => handleViewDeviceDetail(deviceItem.id)}>
               <td>{deviceItem.id}</td>
               <td>{deviceItem.address}</td>
               <td>{deviceItem.water_meter}</td>
               <td>{deviceItem.water_flow}</td>
               <td>{deviceItem.installation}</td>
               <td>{deviceItem.pin_percent}</td>
-              <td>
-                <span onClick={() => handleViewDeviceDetail(deviceItem.id)}>
-                  <EditIcon />
-                </span>
-                <span onClick={() => handleDeleteDevice(deviceItem.id)}>
-                  <DeleteIcon />
-                </span>
-              </td>
             </tr>
           );
         })}

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './Table.scss';
-import { DeleteIcon, EditIcon } from '@/components/Icons';
 import { useNavigate } from 'react-router-dom';
 
 type Station = {
@@ -19,15 +18,10 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
   const navigate = useNavigate();
 
   const tableHead: string[] = Object.keys(data[0]);
-  tableHead.push('action');
 
   const handleViewStationDetail = (id: number) => {
     console.log('Edit id: ', id);
     navigate(`/station/${id}`);
-  };
-
-  const handleDeleteStation = (id: number) => {
-    console.log('Delete id: ', id);
   };
 
   return (
@@ -42,20 +36,12 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
       <tbody>
         {data.map((stationItem: Station, index: number) => {
           return (
-            <tr key={index}>
+            <tr key={index} onClick={() => handleViewStationDetail(stationItem.id)}>
               <td>{stationItem.id}</td>
               <td>{stationItem.address}</td>
               <td>{stationItem.total_water_supply}</td>
               <td>{stationItem.devices}</td>
               <td>{stationItem.installation_at}</td>
-              <td>
-                <span onClick={() => handleViewStationDetail(stationItem.id)}>
-                  <EditIcon />
-                </span>
-                <span onClick={() => handleDeleteStation(stationItem.id)}>
-                  <DeleteIcon />
-                </span>
-              </td>
             </tr>
           );
         })}

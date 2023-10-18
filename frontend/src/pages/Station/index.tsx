@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Station.scss';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import SelectOption from '../../components/SelectOption/SelectOption';
@@ -7,14 +7,7 @@ import ModalCreateStation from './ModalCreate/ModalCreate';
 
 // MOCK DATA
 import { dataStation } from '@/Mockdata/ListDataStation';
-const stationOptions = ['Ward 1', 'Ward 2', 'Ward 3', 'Ward 4', 'Ward 4'];
-
-type Station = {
-  id: number;
-  station: string;
-  devices: number;
-  age: number;
-};
+const stationOptions = ['All', 'Station 1', 'Station 2', 'Station 3'];
 
 const Station: React.FC = () => {
   return (
@@ -25,6 +18,7 @@ const Station: React.FC = () => {
         <div className="station__action">
           <SelectOption label="Station" options={stationOptions} />
           <ModalCreateStation />
+          <button>UPDATE NEW DATA</button>
         </div>
         <div className="station__content">
           <div className="station__table">

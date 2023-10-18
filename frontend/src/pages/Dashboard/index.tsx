@@ -12,7 +12,7 @@ const Dashboard: React.FC = () => {
 
   const cardList = [
     {
-      title: 'WATER SUPPLY STATION',
+      title: 'WATER SUPPLY STATIONS',
       icon: TotalWaterSuplyIcon,
       color: 'green',
       value: totalWaterSupply,

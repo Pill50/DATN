@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './ModalDelete.scss';
 import Modal from '@mui/material/Modal';
+import { DeleteIcon } from '@/components/Icons';
 
 interface ModalEditStationProp {
   itemID: string;
@@ -18,24 +19,28 @@ const ModalDelete: React.FC<ModalEditStationProp> = ({ itemID }) => {
 
   return (
     <div>
+      <button className="deleteBtn" onClick={handleOpen}>
+        <DeleteIcon />
+        DELETE
+      </button>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        className="modal-edit"
+        className="modal-delete"
       >
-        <div className="modal-edit__box">
-          <h2 id="modal-modal-title" className="modal-edit__title">
+        <div className="modal-delete__box">
+          <h2 id="modal-modal-title" className="modal-delete__title">
             ARE YOU SURE?
           </h2>
-          <div id="modal-modal-description" className="modal-edit__desc">
+          <div id="modal-modal-description" className="modal-delete__desc">
             <p>Do you really want to delete this item?</p>
-            <div className="modal-edit__action">
-              <button className="modal-edit__btn modal-edit__action-cancel" onClick={handleClose}>
+            <div className="modal-delete__action">
+              <button className="modal-delete__btn modal-delete__action-cancel" onClick={handleClose}>
                 CANCEL
               </button>
-              <button className="modal-edit__btn modal-edit__action-delete" onClick={handleDeleteItem}>
+              <button className="modal-delete__btn modal-delete__action-delete" onClick={handleDeleteItem}>
                 DELETE
               </button>
             </div>

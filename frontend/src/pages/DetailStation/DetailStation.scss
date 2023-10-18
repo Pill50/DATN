@@ -12,6 +12,26 @@
     color: var(--blueColor);
   }
 
+  &__action {
+    display: flex;
+    gap: 8px;
+
+    &--delete {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--redColor);
+      border-radius: 4px;
+      padding: 0 12px;
+      color: white;
+      cursor: pointer;
+    }
+
+    &--delete:hover {
+      opacity: 0.8;
+    }
+  }
+
   &__content {
     margin-top: 16px;
     margin-bottom: 40px;

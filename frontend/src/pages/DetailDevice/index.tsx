@@ -7,17 +7,18 @@ import Switch from '@mui/material/Switch';
 import { useParams } from 'react-router-dom';
 import Chart from './Chart/Chart';
 import WaterMeterChart from './WatermeterChart/Chart';
+import ModalDelete from '@/components/ModalDelete/ModalDelete';
 
 const DetailDevice: React.FC = () => {
   const { deviceID } = useParams();
-  console.log(deviceID);
+
   return (
     <div className="detail_device">
       <Sidebar />
       <div className="content">
         <h1 className="title">INFORMATION OF DEVICE</h1>
         <div className="detail_device__action">
-          <button className="detail_device__deleteBtn">DELETE</button>
+          <ModalDelete itemID={deviceID as string} />
           <FormGroup>
             <FormControlLabel control={<Switch defaultChecked />} label="Relay Status" />
           </FormGroup>

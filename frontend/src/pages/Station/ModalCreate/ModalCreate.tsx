@@ -32,25 +32,17 @@ export default function ModalCreateStation() {
             CREATE NEW STATION
           </h2>
           <div id="modal-modal-description" className="modal-create__desc">
-            <div className="modal-create__row">
-              <div className="modal-create__group">
-                <label htmlFor="name">Name of station</label>
-                <input id="name" type="text" placeholder="Station's name" />
-              </div>
-              <div className="modal-create__group">
-                <label htmlFor="address">Address</label>
-                <input id="address" type="text" placeholder="Address" />
-              </div>
+            <div className="modal-create__group">
+              <label htmlFor="address">Address</label>
+              <input id="address" type="text" placeholder="Address" />
             </div>
-            <div className="modal-create__row">
-              <div className="modal-create__group">
-                <label htmlFor="device">Number of devices</label>
-                <input id="device" type="number" defaultValue={1} />
-              </div>
-              <div className="modal-create__group">
-                <label htmlFor="Total water">Total water flow per month (m3)</label>
-                <input id="Total water" type="number" defaultValue={1000} />
-              </div>
+            <div className="modal-create__group">
+              <label htmlFor="device">Number of devices</label>
+              <input id="device" type="number" defaultValue={1} />
+            </div>
+            <div className="modal-create__group">
+              <label htmlFor="Total water">Total water flow per month (m3)</label>
+              <input id="Total water" type="number" defaultValue={1000} />
             </div>
             <div className="modal-create__action">
               <button className="modal-create__btn modal-create__action-cancel" onClick={handleClose}>

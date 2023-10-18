@@ -1,4 +1,19 @@
-.modal-edit {
+.deleteBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  background: var(--redColor);
+  color: white;
+}
+
+.deleteBtn:hover {
+  opacity: 0.9;
+}
+
+.modal-delete {
   input {
     border: 1px solid var(--blueColor);
     width: 250px;
@@ -20,7 +35,7 @@
   &__title {
     text-align: center;
     font-size: 20px;
-    color: var(--blueColor);
+    color: var(--redColor);
   }
 
   &__action {
@@ -28,6 +43,7 @@
     justify-content: flex-end;
     gap: 8px;
     font-size: 16px;
+    margin-top: 12px;
   }
 
   &__btn {
