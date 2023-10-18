@@ -4,17 +4,17 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { EditIcon } from '@/components/Icons';
 
-interface ModalEditAreaProp {
-  areaID: string;
+interface ModalEditStationProp {
+  stationID: string;
 }
 
-const ModalEditArea: React.FC<ModalEditAreaProp> = ({ areaID }) => {
+const ModalEditStation: React.FC<ModalEditStationProp> = ({ stationID }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleEditArea = () => {
-    console.log('EDIT AREA: ', areaID);
+  const handleEditStation = () => {
+    console.log('EDIT STATION: ', stationID);
     setOpen(false);
   };
 
@@ -33,7 +33,7 @@ const ModalEditArea: React.FC<ModalEditAreaProp> = ({ areaID }) => {
       >
         <div className="modal-edit__box">
           <h2 id="modal-modal-title" className="modal-edit__title">
-            EDIT AREA INFORMATION
+            EDIT STATION INFORMATION
           </h2>
           <div id="modal-modal-description" className="modal-edit__desc">
             <div className="modal-edit__group">
@@ -53,7 +53,7 @@ const ModalEditArea: React.FC<ModalEditAreaProp> = ({ areaID }) => {
               <button className="modal-edit__btn modal-edit__action-cancel" onClick={handleClose}>
                 CANCEL
               </button>
-              <button className="modal-edit__btn modal-edit__action-create" onClick={handleEditArea}>
+              <button className="modal-edit__btn modal-edit__action-create" onClick={handleEditStation}>
                 EDIT
               </button>
             </div>
@@ -64,4 +64,4 @@ const ModalEditArea: React.FC<ModalEditAreaProp> = ({ areaID }) => {
   );
 };
 
-export default ModalEditArea;
+export default ModalEditStation;

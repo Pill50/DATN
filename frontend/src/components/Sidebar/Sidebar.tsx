@@ -1,6 +1,6 @@
 import React from 'react';
 import './Sidebar.scss';
-import { AreaIcon, DashboardIcon, DeviceIcon, LogoutIcon, NotificationIcon, ProfileIcon } from '../Icons';
+import { TotalWaterSuplyIcon, DashboardIcon, DeviceIcon, LogoutIcon, NotificationIcon, ProfileIcon } from '../Icons';
 import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
@@ -26,10 +26,10 @@ const Sidebar: React.FC = () => {
               <span>Dashboard</span>
             </div>
           </Link>
-          <Link to={'/area'} className={`sidebar__item ${isActive('/area')}`}>
+          <Link to={'/station'} className={`sidebar__item ${isActive('/station')}`}>
             <div className="sidebar__block">
-              <AreaIcon />
-              <span>Area</span>
+              <TotalWaterSuplyIcon />
+              <span>Station</span>
             </div>
           </Link>
           <Link to="/device" className={`sidebar__item ${isActive('/device')}`}>

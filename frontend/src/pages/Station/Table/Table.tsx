@@ -3,16 +3,16 @@ import './Table.scss';
 import { DeleteIcon, EditIcon } from '@/components/Icons';
 import { useNavigate } from 'react-router-dom';
 
-type Area = {
+type Station = {
   id: number;
   address: string;
   total_water_supply: number;
   devices: number;
-  age: number;
+  installation_at: string;
 };
 
 interface DataTableProps {
-  data: Area[];
+  data: Station[];
 }
 
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
@@ -21,12 +21,12 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
   const tableHead: string[] = Object.keys(data[0]);
   tableHead.push('action');
 
-  const handleViewAreaDetail = (id: number) => {
+  const handleViewStationDetail = (id: number) => {
     console.log('Edit id: ', id);
-    navigate(`/area/${id}`);
+    navigate(`/station/${id}`);
   };
 
-  const handleDeleteArea = (id: number) => {
+  const handleDeleteStation = (id: number) => {
     console.log('Delete id: ', id);
   };
 
@@ -40,19 +40,19 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((areaItem: Area, index: number) => {
+        {data.map((stationItem: Station, index: number) => {
           return (
             <tr key={index}>
-              <td>{areaItem.id}</td>
-              <td>{areaItem.address}</td>
-              <td>{areaItem.total_water_supply}</td>
-              <td>{areaItem.devices}</td>
-              <td>{areaItem.age}</td>
+              <td>{stationItem.id}</td>
+              <td>{stationItem.address}</td>
+              <td>{stationItem.total_water_supply}</td>
+              <td>{stationItem.devices}</td>
+              <td>{stationItem.installation_at}</td>
               <td>
-                <span onClick={() => handleViewAreaDetail(areaItem.id)}>
+                <span onClick={() => handleViewStationDetail(stationItem.id)}>
                   <EditIcon />
                 </span>
-                <span onClick={() => handleDeleteArea(areaItem.id)}>
+                <span onClick={() => handleDeleteStation(stationItem.id)}>
                   <DeleteIcon />
                 </span>
               </td>

@@ -4,13 +4,13 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { AddIcon } from '@/components/Icons';
 
-export default function ModalCreateArea() {
+export default function ModalCreateStation() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleCreateArea = () => {
-    console.log('CREATE NEW AREA');
+  const handleCreateStation = () => {
+    console.log('CREATE NEW STATION');
     setOpen(false);
   };
 
@@ -29,13 +29,13 @@ export default function ModalCreateArea() {
       >
         <div className="modal-create__box">
           <h2 id="modal-modal-title" className="modal-create__title">
-            CREATE NEW AREA
+            CREATE NEW STATION
           </h2>
           <div id="modal-modal-description" className="modal-create__desc">
             <div className="modal-create__row">
               <div className="modal-create__group">
-                <label htmlFor="name">Name of area</label>
-                <input id="name" type="text" placeholder="Area's name" />
+                <label htmlFor="name">Name of station</label>
+                <input id="name" type="text" placeholder="Station's name" />
               </div>
               <div className="modal-create__group">
                 <label htmlFor="address">Address</label>
@@ -56,7 +56,7 @@ export default function ModalCreateArea() {
               <button className="modal-create__btn modal-create__action-cancel" onClick={handleClose}>
                 CANCEL
               </button>
-              <button className="modal-create__btn modal-create__action-create" onClick={handleCreateArea}>
+              <button className="modal-create__btn modal-create__action-create" onClick={handleCreateStation}>
                 CREATE
               </button>
             </div>

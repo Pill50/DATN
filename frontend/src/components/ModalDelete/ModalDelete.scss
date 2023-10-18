@@ -1,4 +1,4 @@
-.modal {
+.modal-edit {
   input {
     border: 1px solid var(--blueColor);
     width: 250px;
@@ -23,19 +23,6 @@
     color: var(--blueColor);
   }
 
-  &__group {
-    display: flex;
-    flex-shrink: 0;
-    flex-direction: column;
-    margin-bottom: 16px;
-  }
-
-  &__group:nth-child(3) {
-    label {
-      margin-bottom: 16px;
-    }
-  }
-
   &__action {
     display: flex;
     justify-content: flex-end;
@@ -57,8 +44,9 @@
   &__action-cancel {
     background: #eee;
   }
-  &__action-create {
-    background: var(--blueColor);
+
+  &__action-delete {
+    background: var(--redColor);
     color: white;
   }
 }

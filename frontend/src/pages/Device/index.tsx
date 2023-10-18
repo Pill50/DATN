@@ -7,7 +7,7 @@ import DataTable from './Table/Table';
 
 // MOCK DATA
 import { dataDevice } from '@/Mockdata/ListDataDevice';
-const areaOptions = ['Ward 1', 'Ward 2', 'Ward 3', 'Ward 4', 'Ward 5'];
+const stationOptions = ['Ward 1', 'Ward 2', 'Ward 3', 'Ward 4', 'Ward 5'];
 
 const Device: React.FC = () => {
   return (
@@ -16,7 +16,7 @@ const Device: React.FC = () => {
       <div className="content">
         <h1 className="title">DEVICE</h1>
         <div className="device__action">
-          <SelectOption label="Area" options={areaOptions} />
+          <SelectOption label="Station" options={stationOptions} />
           <ModalCreateDevice />
         </div>
         <div className="device__content">

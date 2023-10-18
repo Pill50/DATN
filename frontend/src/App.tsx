@@ -11,11 +11,11 @@ import NotFound from './pages/NotFound';
 import ChangePassword from './pages/ChangePassword';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
-import Area from './pages/Area';
+import Station from './pages/Station';
 import Device from './pages/Device';
 import Notification from './pages/Notification';
 import Profile from './pages/Profile';
-import DetailArea from './pages/DetailArea';
+import DetailStation from './pages/DetailStation';
 import DetailDevice from './pages/DetailDevice';
 
 const App: React.FC = () => {
@@ -36,8 +36,8 @@ const App: React.FC = () => {
           <Route element={<ProtectedRoute user={true} />}>
             <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/area/:areaID" element={<DetailArea />} />
-            <Route path="/area" element={<Area />} />
+            <Route path="/station/:stationID" element={<DetailStation />} />
+            <Route path="/station" element={<Station />} />
             <Route path="/device/:deviceID" element={<DetailDevice />} />
             <Route path="/device" element={<Device />} />
             <Route path="/notification" element={<Notification />} />

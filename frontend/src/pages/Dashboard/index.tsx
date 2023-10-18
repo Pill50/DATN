@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import './Dashboard.scss';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import Cards from './Card/Cards';
-import { AreaIcon, DeviceIcon, NotificationIcon } from '@/components/Icons';
+import { TotalWaterSuplyIcon, DeviceIcon, NotificationIcon } from '@/components/Icons';
 import WaterConsumptionGraph from './Graph';
 
 const Dashboard: React.FC = () => {
-  const [area, setArea] = useState<number>(10);
+  const [totalWaterSupply, setTotalWaterSupply] = useState<number>(3);
   const [devices, setDevices] = useState<number>(20);
-  const [notifications, setNotifications] = useState<number>(30);
+  const [notifications, setNotifications] = useState<number>(3);
 
   const cardList = [
     {
-      title: 'AREA',
-      icon: AreaIcon,
+      title: 'WATER SUPPLY STATION',
+      icon: TotalWaterSuplyIcon,
       color: 'green',
-      value: area,
+      value: totalWaterSupply,
     },
     {
       title: 'DEVICES',

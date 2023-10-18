@@ -15,7 +15,7 @@ export const ProfileIcon = ({ width = '24px', height = '24px', className = '' })
   </svg>
 );
 
-export const AreaIcon = ({ width = '24px', height = '24px', className = '' }) => (
+export const TotalWaterSuplyIcon = ({ width = '24px', height = '24px', className = '' }) => (
   <svg
     className={className}
     width={width}

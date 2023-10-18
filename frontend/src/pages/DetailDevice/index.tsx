@@ -24,6 +24,7 @@ const DetailDevice: React.FC = () => {
         </div>
         <div className="detail_device__content">
           <div className="detail_device__info">
+            <p className="detail_device__key">Device key: ash88i97bcbk8uasd72</p>
             <p className="detail_device__address">Address: 45 Tan Lap, Di An</p>
             <p className="detail_device__devices">New water meter: 1000</p>
             <p className="detail_device__totalWater">New water flow: 1234</p>

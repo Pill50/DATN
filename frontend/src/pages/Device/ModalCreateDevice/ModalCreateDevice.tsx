@@ -12,7 +12,7 @@ export default function ModalCreateDevice() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const handleCreateArea = () => {
+  const handleCreateWaterMeter = () => {
     console.log('CREATE NEW WATER METER');
     setOpen(false);
   };
@@ -36,18 +36,22 @@ export default function ModalCreateDevice() {
           </h2>
           <div id="modal-modal-description" className="modal__desc">
             <div className="modal__group">
-              <label htmlFor="supply_address">Address of device</label>
+              <label htmlFor="device_key">Device key</label>
+              <input id="device_key" type="text" placeholder="Device key" />
+            </div>
+            <div className="modal__group">
+              <label htmlFor="supply_address">Address of station</label>
               <input id="supply_address" type="text" placeholder="Address of device supply" />
             </div>
             <div className="modal__group">
               <label>Address of device</label>
-              <SelectOption label="Adress" options={addressSupplyDevice} />
+              <SelectOption label="adress" options={addressSupplyDevice} />
             </div>
             <div className="modal__action">
               <button className="modal__btn modal__action-cancel" onClick={handleClose}>
                 CANCEL
               </button>
-              <button className="modal__btn modal__action-create" onClick={handleCreateArea}>
+              <button className="modal__btn modal__action-create" onClick={handleCreateWaterMeter}>
                 CREATE
               </button>
             </div>
