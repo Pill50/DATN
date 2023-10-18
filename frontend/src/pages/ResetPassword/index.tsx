@@ -1,21 +1,7 @@
 import React from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as yup from 'yup';
 import './ResetPassword.scss';
-
-const validationSchema = yup.object({
-  password: yup
-    .string()
-    .required('Password is required')
-    .min(8, 'Weak password')
-    .max(32, 'Password is too long')
-    .trim(),
-  confirmPassword: yup
-    .string()
-    .required('Confirm password is required')
-    .oneOf([yup.ref('password')], 'Confirm password is not match')
-    .trim(),
-});
+import { resetPasswordValidationSchema } from '@/validations/auth';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
 
 const initialValues = {
   password: '',
@@ -33,7 +19,7 @@ const ResetPassword: React.FC = () => {
         <h1 className="slogan">
           <span>Protect</span> Our Water, <span>Sustain</span> Our Future, <span>Every Drop Matters!</span>
         </h1>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={resetPasswordValidationSchema}>
           {(formik) => (
             <Form className="" onSubmit={formik.handleSubmit}>
               <h1 className="resetpassword__title">RESET PASSWORD</h1>

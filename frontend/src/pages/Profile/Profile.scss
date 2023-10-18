@@ -89,14 +89,16 @@
     margin-top: 12px;
     align-self: flex-end;
 
-    button {
+    button,
+    a {
       padding: 12px;
       border-radius: 8px;
       color: white;
       cursor: pointer;
     }
 
-    button:hover {
+    button:hover,
+    a:hover {
       opacity: 0.8;
     }
   }

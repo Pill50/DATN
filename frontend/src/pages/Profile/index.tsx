@@ -4,6 +4,7 @@ import * as yup from 'yup';
 
 import Sidebar from '@/components/Sidebar/Sidebar';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { Link } from 'react-router-dom';
 
 const validationSchema = yup.object({
   username: yup.string().required('Username is required').trim(),
@@ -134,8 +135,12 @@ const Profile: React.FC = () => {
                 </div>
               </div>
               <div className="profile__action">
-                <button className="profile__action--pw">CHANGE PASSWORD</button>
-                <button className="profile__action--save">SAVE</button>
+                <Link to={'/change-password'} className="profile__action--pw">
+                  CHANGE PASSWORD
+                </Link>
+                <button type="submit" className="profile__action--save">
+                  SAVE
+                </button>
               </div>
             </Form>
           )}

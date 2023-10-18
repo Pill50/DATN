@@ -1,23 +1,8 @@
 import React from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as yup from 'yup';
-import './Signup.scss';
 import { Link } from 'react-router-dom';
-
-const validationSchema = yup.object({
-  email: yup.string().email('Invalid Email').required('Email is required').trim(),
-  password: yup
-    .string()
-    .required('Password is required')
-    .min(8, 'Weak password')
-    .max(32, 'Password is too long')
-    .trim(),
-  confirmPassword: yup
-    .string()
-    .required('Confirm password is required')
-    .oneOf([yup.ref('password')], 'Confirm password is not match')
-    .trim(),
-});
+import './Signup.scss';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { registerValidationSchema } from '@/validations/auth';
 
 const initialValues = {
   email: '',
@@ -36,7 +21,7 @@ const Signup: React.FC = () => {
         <h1 className="slogan">
           <span>Protect</span> Our Water, <span>Sustain</span> Our Future, <span>Every Drop Matters!</span>
         </h1>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={registerValidationSchema}>
           {(formik) => (
             <Form className="" onSubmit={formik.handleSubmit}>
               <h1 className="signup__title">SIGN UP YOUR NEW ACCOUNT</h1>

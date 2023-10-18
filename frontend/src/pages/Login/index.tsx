@@ -1,13 +1,8 @@
 import React from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import * as yup from 'yup';
-import './Login.scss';
 import { Link } from 'react-router-dom';
-
-const validationSchema = yup.object({
-  email: yup.string().email('Invalid Email').required('Email is required').trim(),
-  password: yup.string().min(8, 'Password should be of minimum 8 characters length').required('Password is required'),
-});
+import './Login.scss';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { loginValidationSchema } from '@/validations/auth';
 
 const initialValues = {
   email: '',
@@ -25,7 +20,7 @@ const Login: React.FC = () => {
         <h1 className="slogan">
           <span>Protect</span> Our Water, <span>Sustain</span> Our Future, <span>Every Drop Matters!</span>
         </h1>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={loginValidationSchema}>
           {(formik) => (
             <Form className="" onSubmit={formik.handleSubmit}>
               <h1 className="login__title">LOGIN TO YOUR ACCOUNT</h1>
