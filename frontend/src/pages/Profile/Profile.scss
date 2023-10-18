@@ -82,29 +82,8 @@
   }
 
   &__action {
+    display: flex;
     margin-top: 12px;
     align-self: flex-end;
-
-    button,
-    a {
-      padding: 12px;
-      border-radius: 8px;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover,
-    a:hover {
-      opacity: 0.8;
-    }
-  }
-
-  &__action--pw {
-    background: $greenColor;
-    margin-right: 8px;
-  }
-
-  &__action--save {
-    background: $blueColor;
   }
 }

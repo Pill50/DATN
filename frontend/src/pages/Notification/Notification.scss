@@ -20,19 +20,8 @@
     gap: 8px;
   }
 
-  &__btn {
+  button {
     align-self: flex-end;
-    width: fit-content;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: 500;
-    color: white;
-    background-color: $greenColor;
-    cursor: pointer;
-  }
-
-  &__btn:hover {
-    opacity: 0.8;
   }
 
   &__card {

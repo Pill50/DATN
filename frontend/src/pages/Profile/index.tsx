@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import './Profile.scss';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { profileValidationSchema } from '@/validations/user';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import { UserType } from '@/types/user';
+import Button from '@/components/Button';
 
 const initialValues: UserType = {
   email: '',
@@ -108,12 +108,12 @@ const Profile: React.FC = () => {
                 </div>
               </div>
               <div className="profile__action">
-                <Link to={'/change-password'} className="profile__action--pw">
+                <Button to={'/change-password'} secondary>
                   CHANGE PASSWORD
-                </Link>
-                <button type="submit" className="profile__action--save">
+                </Button>
+                <Button type="submit" primary>
                   SAVE
-                </button>
+                </Button>
               </div>
             </Form>
           )}

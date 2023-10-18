@@ -58,26 +58,5 @@
 
   &__action {
     @include flexJustifyEnd;
-    gap: 8px;
-    font-size: 16px;
-  }
-
-  &__btn {
-    font-weight: 500;
-    padding: 12px;
-    cursor: pointer;
-    border-radius: 8px;
-  }
-
-  &__btn:hover {
-    opacity: 0.8;
-  }
-
-  &__action-cancel {
-    background: #eee;
-  }
-  &__action-create {
-    background: $blueColor;
-    color: white;
   }
 }

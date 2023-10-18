@@ -7,6 +7,7 @@ import ModalCreateStation from './ModalCreate/ModalCreate';
 
 // MOCK DATA
 import { dataStation } from '@/Mockdata/ListDataStation';
+import Button from '@/components/Button';
 const stationOptions = ['All', 'Station 1', 'Station 2', 'Station 3'];
 
 const Station: React.FC = () => {
@@ -18,7 +19,9 @@ const Station: React.FC = () => {
         <div className="station__action">
           <SelectOption label="Station" options={stationOptions} />
           <ModalCreateStation />
-          <button>UPDATE NEW DATA</button>
+          <Button outline small>
+            UPDATE NEW DATA
+          </Button>
         </div>
         <div className="station__content">
           <div className="station__table">

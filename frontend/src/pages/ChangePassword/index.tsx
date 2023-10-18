@@ -12,7 +12,7 @@ const initialValues: ChangePasswordType = {
   confirmPassword: '',
 };
 
-const handleSubmit = () => {
+const handleChangePassword = () => {
   console.log('SUBMIT CHANGE PASSWORD');
 };
 
@@ -22,7 +22,11 @@ const ChangePassword: React.FC = () => {
       <Sidebar />
       <div className="content">
         <h1 className="title">CHANGE PASSWORD</h1>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={changePasswordValidationSchema}>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={handleChangePassword}
+          validationSchema={changePasswordValidationSchema}
+        >
           {(formik) => (
             <Form className="" onSubmit={formik.handleSubmit}>
               <div className="changePassword__info">
@@ -74,7 +78,7 @@ const ChangePassword: React.FC = () => {
                 <Link to={'/profile'} className="changePassword__action--cancel">
                   CANCEL
                 </Link>
-                <button className="changePassword__action--save" type="submit" onClick={handleSubmit}>
+                <button className="changePassword__action--save" type="submit">
                   SAVE
                 </button>
               </div>

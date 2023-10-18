@@ -64,18 +64,6 @@
     }
   }
 
-  &__btn {
-    height: 56px;
-    background: $blueColor;
-    border-radius: 8px;
-    color: #fff;
-    cursor: pointer;
-
-    &:hover {
-      opacity: 0.8;
-    }
-  }
-
   &__cta {
     margin-top: 8px;
     text-align: center;

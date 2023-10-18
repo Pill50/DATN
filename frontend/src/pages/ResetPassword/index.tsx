@@ -3,6 +3,7 @@ import './ResetPassword.scss';
 import { resetPasswordValidationSchema } from '@/validations/auth';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { ResetPasswordType } from '@/types/auth';
+import Button from '@/components/Button';
 
 const initialValues: ResetPasswordType = {
   password: '',
@@ -50,9 +51,9 @@ const ResetPassword: React.FC = () => {
                 />
                 <ErrorMessage name="confirmPassword" component="span" className="error-msg" />
               </div>
-              <button type="submit" className="resetpassword__btn">
+              <Button type="submit" primary>
                 SUBMIT
-              </button>
+              </Button>
             </Form>
           )}
         </Formik>

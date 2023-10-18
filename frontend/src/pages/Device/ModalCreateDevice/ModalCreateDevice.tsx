@@ -1,12 +1,12 @@
 import * as React from 'react';
 import './ModalCreateDevice.scss';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { AddIcon } from '@/components/Icons';
 import SelectOption from '@/components/SelectOption/SelectOption';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { createDeviceValidationSchema } from '@/validations/device';
 import { CreateNewDeviceType } from '@/types/device';
+import Button from '@/components/Button';
 
 const initialValues: CreateNewDeviceType = {
   address: '',
@@ -27,8 +27,7 @@ export default function ModalCreateDevice() {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen} style={{ height: 40 }}>
-        <AddIcon />
+      <Button primary onClick={handleOpen} leftIcon={<AddIcon />} small>
         CREATE
       </Button>
       <Modal
@@ -66,12 +65,12 @@ export default function ModalCreateDevice() {
                     <SelectOption label="Adress of station" options={addressSupplyDevice} />
                   </div>
                   <div className="modal__action">
-                    <button className="modal__btn modal__action-cancel" onClick={handleClose}>
+                    <Button outline onClick={handleClose}>
                       CANCEL
-                    </button>
-                    <button className="modal__btn modal__action-create" type="submit">
+                    </Button>
+                    <Button type="submit" primary>
                       CREATE
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </Form>

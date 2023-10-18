@@ -1,11 +1,11 @@
 import * as React from 'react';
 import './ModalCreate.scss';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { AddIcon } from '@/components/Icons';
 import { createStationValidationSchema } from '@/validations/station';
 import { CreateNewStationType } from '@/types/station';
+import Button from '@/components/Button';
 
 const initialValues: CreateNewStationType = {
   address: '',
@@ -25,8 +25,7 @@ const ModalCreateStation: React.FC = () => {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen} style={{ height: 40 }}>
-        <AddIcon />
+      <Button primary onClick={handleOpen} leftIcon={<AddIcon />} small>
         CREATE
       </Button>
       <Modal
@@ -84,12 +83,12 @@ const ModalCreateStation: React.FC = () => {
                     <ErrorMessage name="totalWaterSupply" component="span" className="error-msg" />
                   </div>
                   <div className="modal-create__action">
-                    <button className="modal-create__btn modal-create__action-cancel" onClick={handleClose}>
+                    <Button outline onClick={handleClose}>
                       CANCEL
-                    </button>
-                    <button className="modal-create__btn modal-create__action-create" type="submit">
+                    </Button>
+                    <Button type="submit" primary>
                       CREATE
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </Form>

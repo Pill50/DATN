@@ -4,6 +4,7 @@ import './Forgotpassword.scss';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
 import { ForgotPasswordType } from '@/types/auth';
+import Button from '@/components/Button';
 
 const initialValues: ForgotPasswordType = {
   email: '',
@@ -38,9 +39,9 @@ const ForgotPassword: React.FC = () => {
                 />
                 <ErrorMessage name="email" component="span" className="error-msg" />
               </div>
-              <button type="submit" className="forgotpassword__btn">
-                RESET PASSWORD
-              </button>
+              <Button type="submit" primary>
+                SUBMIT
+              </Button>
               <div className="forgotpassword__cta">
                 <p>
                   Already have an account? <Link to={'/login'}>Login</Link>

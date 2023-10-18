@@ -4,6 +4,7 @@ import './Login.scss';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { loginValidationSchema } from '@/validations/auth';
 import { LoginType } from '@/types/auth';
+import Button from '@/components/Button';
 
 const initialValues: LoginType = {
   email: '',
@@ -54,9 +55,9 @@ const Login: React.FC = () => {
               <Link to="/forgot-password" className="login__forgot">
                 Forgot password?
               </Link>
-              <button type="submit" className="login__btn">
+              <Button type="submit" primary>
                 LOGIN
-              </button>
+              </Button>
               <div className="login__cta">
                 Don't have an account? <Link to={'/signup'}>Sign up</Link>
               </div>

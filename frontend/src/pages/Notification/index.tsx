@@ -6,6 +6,7 @@ import Card from './Card/Card';
 // MOCK DATA
 import { notiList } from '@/Mockdata/NotiList';
 import { NotificationType } from '@/types/notification';
+import Button from '@/components/Button';
 
 const Notification: React.FC = () => {
   return (
@@ -14,7 +15,7 @@ const Notification: React.FC = () => {
       <div className="content">
         <h1 className="title">NOTIFICATION</h1>
         <div className="notification__cards">
-          <button className="notification__btn">CLEAR ALL</button>
+          <Button secondary>CLEAR ALL</Button>
           {notiList.map((noti: NotificationType) => {
             return <Card key={noti.id} content={noti} />;
           })}

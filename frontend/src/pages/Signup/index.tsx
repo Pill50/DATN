@@ -4,6 +4,7 @@ import './Signup.scss';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { registerValidationSchema } from '@/validations/auth';
 import { SignUpType } from '@/types/auth';
+import Button from '@/components/Button';
 
 const initialValues: SignUpType = {
   email: '',
@@ -68,9 +69,9 @@ const Signup: React.FC = () => {
                 />
                 <ErrorMessage name="confirmPassword" component="span" className="error-msg" />
               </div>
-              <button type="submit" className="signup__btn">
+              <Button type="submit" primary>
                 SIGN UP
-              </button>
+              </Button>
               <div className="signup__cta">
                 Already have an account? <Link to="/login">Login</Link>
               </div>
