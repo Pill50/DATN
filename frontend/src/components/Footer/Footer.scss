@@ -6,16 +6,13 @@ footer {
 }
 
 .footer__top {
+  @include flexCenter;
   height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: $primaryColor;
 }
 
 .footer__content {
-  display: flex;
-  justify-content: space-between;
+  @include flexJustifyBetween;
   width: 1000px;
   padding: 0 12px;
 }
@@ -44,10 +41,8 @@ footer {
 }
 
 .footer__bottom {
+  @include flexCenter;
   height: 72px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #696969;
   color: #fff;
 }

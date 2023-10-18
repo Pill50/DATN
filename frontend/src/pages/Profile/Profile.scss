@@ -1,12 +1,10 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
 .profile {
   display: flex;
   .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flexColumnCenter;
     flex: 1;
   }
 
@@ -17,16 +15,13 @@
   }
 
   form {
+    @include flexColumn;
     padding: 16px;
     width: 50%;
-    display: flex;
-    flex-direction: column;
   }
 
   &__image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexCenter;
     align-self: center;
     margin-bottom: 12px;
     width: 100%;
@@ -60,8 +55,7 @@
   }
 
   &__group {
-    display: flex;
-    flex-direction: column;
+    @include flexColumn;
 
     label {
       margin-bottom: 4px;

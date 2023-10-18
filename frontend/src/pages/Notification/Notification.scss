@@ -1,11 +1,10 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
 .notification {
   display: flex;
   .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @include flexColumnCenter;
     flex: 1;
     padding: 16px;
   }
@@ -17,10 +16,7 @@
   }
 
   &__cards {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include flexColumnCenter;
     gap: 8px;
   }
 

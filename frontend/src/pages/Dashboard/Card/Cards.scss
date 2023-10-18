@@ -1,11 +1,10 @@
 @import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .card {
-  padding: 16px;
-  display: flex;
+  @include flexCenter;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+  padding: 16px;
   gap: 32px;
 
   &__green {
@@ -30,9 +29,7 @@
   }
 
   &__label {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include flexCenter;
     gap: 8px;
     font-size: 20px;
   }

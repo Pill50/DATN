@@ -1,4 +1,5 @@
 @import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .modal {
   input {
@@ -26,9 +27,8 @@
   }
 
   &__group {
-    display: flex;
+    @include flexColumn;
     flex-shrink: 0;
-    flex-direction: column;
     margin-bottom: 16px;
 
     label {
@@ -63,8 +63,7 @@
   }
 
   &__action {
-    display: flex;
-    justify-content: flex-end;
+    @include flexJustifyEnd;
     gap: 8px;
     font-size: 16px;
   }

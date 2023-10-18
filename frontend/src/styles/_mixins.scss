@@ -42,3 +42,32 @@
     @content;
   }
 }
+
+// Flex box
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexColumnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flexJustifyEnd {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@mixin flexJustifyBetween {
+  display: flex;
+  justify-content: space-between;
+}

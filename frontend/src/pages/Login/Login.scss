@@ -1,13 +1,12 @@
 @import '../../styles/variables';
+@import '../../styles/mixins';
 
 .login {
   .container {
+    @include flexCenter;
+    flex-direction: column;
     padding: 0 12px;
     margin-bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
   }
 
   .slogan {
@@ -22,10 +21,9 @@
   }
 
   form {
+    @include flexColumn;
     width: 382px;
     max-width: 100%;
-    display: flex;
-    flex-direction: column;
     padding: 16px;
     border-radius: 12px;
     background: #f2f2f2;
@@ -40,8 +38,7 @@
   }
 
   &__group {
-    display: flex;
-    flex-direction: column;
+    @include flexColumn;
     margin: 8px 0;
 
     label {
