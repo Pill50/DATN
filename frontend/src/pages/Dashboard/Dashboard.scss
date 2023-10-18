@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .dashboard {
   display: flex;
   .content {
@@ -7,6 +9,6 @@
   .title {
     text-align: center;
     margin-top: 20px;
-    color: var(--blueColor);
+    color: $blueColor;
   }
 }

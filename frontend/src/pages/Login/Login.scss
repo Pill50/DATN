@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .login {
   .container {
     padding: 0 12px;
@@ -15,7 +17,7 @@
     font-size: 40px;
     font-weight: 700;
     span {
-      color: var(--redColor);
+      color: $redColor;
     }
   }
 
@@ -32,7 +34,7 @@
 
   &__title {
     text-align: center;
-    color: var(--blueColor);
+    color: $blueColor;
     font-weight: 700;
     font-size: 20px;
   }
@@ -54,7 +56,7 @@
     }
 
     input.border-error {
-      border-color: var(--redColor);
+      border-color: $redColor;
     }
 
     input::placeholder {
@@ -62,12 +64,12 @@
     }
 
     .error-msg {
-      color: var(--redColor);
+      color: $redColor;
     }
   }
 
   &__forgot {
-    color: var(--blueColor);
+    color: $blueColor;
     margin-bottom: 16px;
     cursor: pointer;
 
@@ -78,7 +80,7 @@
 
   &__btn {
     height: 56px;
-    background: var(--blueColor);
+    background: $blueColor;
     border-radius: 8px;
     color: #fff;
     cursor: pointer;
@@ -93,7 +95,7 @@
     text-align: center;
 
     a {
-      color: var(--blueColor);
+      color: $blueColor;
       margin-bottom: 16px;
       cursor: pointer;
 

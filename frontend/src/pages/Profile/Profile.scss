@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .profile {
   display: flex;
   .content {
@@ -11,7 +13,7 @@
   .title {
     text-align: center;
     margin-top: 20px;
-    color: var(--blueColor);
+    color: $blueColor;
   }
 
   form {
@@ -45,7 +47,7 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background: var(--yellowColor);
+    background: $yellowColor;
     color: white;
     cursor: pointer;
     object-fit: cover;
@@ -69,11 +71,11 @@
       height: 56px;
       padding: 16px;
       border-radius: 8px;
-      border: 1px solid var(--blueColor);
+      border: 1px solid $blueColor;
     }
 
     input.border-error {
-      border-color: var(--redColor);
+      border-color: $redColor;
     }
 
     input::placeholder {
@@ -81,7 +83,7 @@
     }
 
     .error-msg {
-      color: var(--redColor);
+      color: $redColor;
     }
   }
 
@@ -104,11 +106,11 @@
   }
 
   &__action--pw {
-    background: var(--greenColor);
+    background: $greenColor;
     margin-right: 8px;
   }
 
   &__action--save {
-    background: var(--blueColor);
+    background: $blueColor;
   }
 }

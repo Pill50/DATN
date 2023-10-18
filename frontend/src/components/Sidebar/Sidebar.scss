@@ -1,9 +1,8 @@
+@import '../../styles/variables';
+
 .sidebar {
   width: 200px;
   border-right: 1px solid #eee;
-
-  .container {
-  }
 
   &__list {
     padding: 60px 16px 16px 16px;
@@ -19,18 +18,18 @@
   &__block:hover,
   &__block.active:hover {
     background: #e0e8f7;
-    color: var(--blueColor);
+    color: $blueColor;
     cursor: pointer;
     border-radius: 8px;
   }
 
   &__block.logout {
     margin: 16px;
-    color: var(--redColor);
+    color: $redColor;
   }
 
   .active {
-    color: var(--blueColor);
+    color: $blueColor;
   }
 
   .devider {

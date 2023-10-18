@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .graph {
   height: 500px;
   width: 100%;
@@ -12,7 +14,7 @@
   &__title {
     font-size: 20px;
     text-align: center;
-    color: var(--blueColor);
+    color: $blueColor;
     margin-left: 50%;
     transform: translateX(-50%);
   }

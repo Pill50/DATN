@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .notification {
   display: flex;
   .content {
@@ -11,7 +13,7 @@
   .title {
     text-align: center;
     margin-top: 20px;
-    color: var(--blueColor);
+    color: $blueColor;
   }
 
   &__cards {
@@ -29,7 +31,7 @@
     border-radius: 8px;
     font-weight: 500;
     color: white;
-    background-color: var(--greenColor);
+    background-color: $greenColor;
     cursor: pointer;
   }
 
@@ -39,7 +41,7 @@
 
   &__card {
     width: 700px;
-    border: 1px solid var(--blueColor);
+    border: 1px solid $blueColor;
     border-radius: 8px;
     padding: 16px;
     position: relative;
@@ -52,7 +54,7 @@
     font-style: italic;
 
     span {
-      color: var(--greenColor);
+      color: $greenColor;
     }
   }
 

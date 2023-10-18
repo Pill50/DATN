@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .card {
   padding: 16px;
   display: flex;
@@ -7,15 +9,15 @@
   gap: 32px;
 
   &__green {
-    background-color: var(--greenColor);
+    background-color: $greenColor;
   }
 
   &__red {
-    background-color: var(--redColor);
+    background-color: $redColor;
   }
 
   &__yellow {
-    background-color: var(--yellowColor);
+    background-color: $yellowColor;
   }
 
   &__wrapper {

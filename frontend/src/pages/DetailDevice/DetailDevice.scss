@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .detail_device {
   display: flex;
 
@@ -9,7 +11,7 @@
   .title {
     text-align: center;
     margin-top: 20px;
-    color: var(--blueColor);
+    color: $blueColor;
   }
 
   &__action {
@@ -25,7 +27,7 @@
     cursor: pointer;
     padding: 12px 24px;
     border-radius: 8px;
-    background: var(--redColor);
+    background: $redColor;
     color: white;
   }
 
@@ -40,7 +42,7 @@
 
   &__info {
     display: grid;
-    border: 1px solid var(--blueColor);
+    border: 1px solid $blueColor;
     border-radius: 8px;
     background-color: #e0e8e7;
     padding: 12px;

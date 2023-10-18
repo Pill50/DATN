@@ -1,6 +1,8 @@
+@import '../../../styles/variables';
+
 .modal-create {
   input {
-    border: 1px solid var(--blueColor);
+    border: 1px solid $blueColor;
     width: 250px;
     max-width: 100%;
     padding: 12px;
@@ -20,7 +22,7 @@
   &__title {
     text-align: center;
     font-size: 20px;
-    color: var(--blueColor);
+    color: $blueColor;
   }
 
   &__group {
@@ -37,11 +39,11 @@
       height: 56px;
       padding: 16px;
       border-radius: 8px;
-      border: 1px solid var(--blueColor);
+      border: 1px solid $blueColor;
     }
 
     input.border-error {
-      border-color: var(--redColor);
+      border-color: $redColor;
     }
 
     input::placeholder {
@@ -50,7 +52,7 @@
 
     .error-msg {
       max-width: 250px;
-      color: var(--redColor);
+      color: $redColor;
     }
   }
 
@@ -76,7 +78,7 @@
     background: #eee;
   }
   &__action-create {
-    background: var(--blueColor);
+    background: $blueColor;
     color: white;
   }
 }

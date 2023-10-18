@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .deleteBtn {
   display: flex;
   justify-content: center;
@@ -5,7 +7,7 @@
   cursor: pointer;
   padding: 8px;
   border-radius: 4px;
-  background: var(--redColor);
+  background: $redColor;
   color: white;
 }
 
@@ -15,7 +17,7 @@
 
 .modal-delete {
   input {
-    border: 1px solid var(--blueColor);
+    border: 1px solid $blueColor;
     width: 250px;
     max-width: 100%;
     padding: 12px;
@@ -35,7 +37,7 @@
   &__title {
     text-align: center;
     font-size: 20px;
-    color: var(--redColor);
+    color: $redColor;
   }
 
   &__action {
@@ -62,7 +64,7 @@
   }
 
   &__action-delete {
-    background: var(--redColor);
+    background: $redColor;
     color: white;
   }
 }

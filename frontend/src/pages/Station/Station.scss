@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .station {
   display: flex;
 
@@ -9,7 +11,7 @@
   .title {
     text-align: center;
     margin-top: 20px;
-    color: var(--blueColor);
+    color: $blueColor;
   }
 
   &__action {
@@ -19,7 +21,7 @@
     font-size: 20px;
 
     button {
-      background: var(--greenColor);
+      background: $greenColor;
       cursor: pointer;
       font-weight: 500;
       color: white;
@@ -29,7 +31,7 @@
     }
 
     button:hover {
-      background: var(--greenColor);
+      background: $greenColor;
       opacity: 0.8;
     }
   }
