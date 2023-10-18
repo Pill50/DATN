@@ -7,16 +7,6 @@ import WaterConsumptionGraph from './Graph';
 import Chart from './Chart/Chart';
 import ModalDelete from '@/components/ModalDelete/ModalDelete';
 
-// MOCK DATA
-// import { dataStation } from '@/Mockdata/ListDataStation';
-
-// type Station = {
-//   id: number;
-//   station: string;
-//   devices: number;
-//   age: number;
-// };
-
 const DetailStation: React.FC = () => {
   const { stationID } = useParams();
   console.log(stationID);

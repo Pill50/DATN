@@ -4,6 +4,14 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { AddIcon } from '@/components/Icons';
 import SelectOption from '@/components/SelectOption/SelectOption';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { createDeviceValidationSchema } from '@/validations/device';
+
+const initialValues = {
+  key: '',
+  address: '',
+  addressOfStation: 0,
+};
 
 const addressSupplyDevice = ['Ward 1', 'Ward 2', 'Ward 3', 'Ward 4', 'Ward 5'];
 
@@ -31,31 +39,55 @@ export default function ModalCreateDevice() {
         className="modal"
       >
         <div className="modal__box">
-          <h2 id="modal-modal-title" className="modal__title">
-            CREATE NEW DEVICE
-          </h2>
-          <div id="modal-modal-description" className="modal__desc">
-            <div className="modal__group">
-              <label htmlFor="device_key">Device key</label>
-              <input id="device_key" type="text" placeholder="Device key" />
-            </div>
-            <div className="modal__group">
-              <label htmlFor="supply_address">Address of station</label>
-              <input id="supply_address" type="text" placeholder="Address of device supply" />
-            </div>
-            <div className="modal__group">
-              <label>Address of device</label>
-              <SelectOption label="adress" options={addressSupplyDevice} />
-            </div>
-            <div className="modal__action">
-              <button className="modal__btn modal__action-cancel" onClick={handleClose}>
-                CANCEL
-              </button>
-              <button className="modal__btn modal__action-create" onClick={handleCreateWaterMeter}>
-                CREATE
-              </button>
-            </div>
-          </div>
+          <Formik
+            initialValues={initialValues}
+            onSubmit={handleCreateWaterMeter}
+            validationSchema={createDeviceValidationSchema}
+          >
+            {(formik) => (
+              <Form className="" onSubmit={formik.handleSubmit}>
+                <h2 id="modal-modal-title" className="modal__title">
+                  CREATE NEW DEVICE
+                </h2>
+                <div id="modal-modal-description" className="modal__desc">
+                  <div className="modal__group">
+                    <label htmlFor="device_key">Device key</label>
+                    <Field
+                      id="device_key"
+                      name="key"
+                      type="text"
+                      placeholder="Enter your key"
+                      className={`${formik.errors.key && formik.touched.key ? 'border-error' : ''}`}
+                    />
+                    <ErrorMessage name="key" component="span" className="error-msg" />
+                  </div>
+                  <div className="modal__group">
+                    <label htmlFor="device_address">Address of device</label>
+                    <Field
+                      id="device_address"
+                      name="address"
+                      type="text"
+                      placeholder="Enter your address"
+                      className={`${formik.errors.address && formik.touched.address ? 'border-error' : ''}`}
+                    />
+                    <ErrorMessage name="address" component="span" className="error-msg" />
+                  </div>
+                  <div className="modal__group">
+                    <label htmlFor="supply_address">Address of station</label>
+                    <SelectOption label="Adress of station" options={addressSupplyDevice} />
+                  </div>
+                  <div className="modal__action">
+                    <button className="modal__btn modal__action-cancel" onClick={handleClose}>
+                      CANCEL
+                    </button>
+                    <button className="modal__btn modal__action-create" type="submit">
+                      CREATE
+                    </button>
+                  </div>
+                </div>
+              </Form>
+            )}
+          </Formik>
         </div>
       </Modal>
     </div>

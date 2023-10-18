@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Station.scss';
 import Sidebar from '@/components/Sidebar/Sidebar';
 import SelectOption from '../../components/SelectOption/SelectOption';

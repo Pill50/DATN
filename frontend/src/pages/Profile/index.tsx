@@ -1,30 +1,15 @@
 import React, { useState, useRef } from 'react';
-import './Profile.scss';
-import * as yup from 'yup';
-
-import Sidebar from '@/components/Sidebar/Sidebar';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
-
-const validationSchema = yup.object({
-  username: yup.string().required('Username is required').trim(),
-  email: yup.string().email('Invalid Email').required('Email is required').trim(),
-  password: yup
-    .string()
-    .required('Password is required')
-    .min(8, 'Weak password')
-    .max(32, 'Password is too long')
-    .trim(),
-  address: yup.string(),
-  role: yup.string(),
-});
+import './Profile.scss';
+import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { profileValidationSchema } from '@/validations/user';
+import Sidebar from '@/components/Sidebar/Sidebar';
 
 const initialValues = {
-  username: '',
   email: '',
-  password: '',
   address: '',
-  role: '',
+  password: '',
+  key: '',
 };
 
 const handleSubmit = () => {
@@ -53,7 +38,7 @@ const Profile: React.FC = () => {
       <Sidebar />
       <div className="content">
         <h1 className="title">PROFILE</h1>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={validationSchema}>
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={profileValidationSchema}>
           {(formik) => (
             <Form className="" onSubmit={formik.handleSubmit}>
               <div className="profile__image">
@@ -69,19 +54,6 @@ const Profile: React.FC = () => {
               </div>
               <div className="profile__info">
                 <div className="profile__group">
-                  <label htmlFor="username" className="">
-                    Username
-                  </label>
-                  <Field
-                    id="username"
-                    name="username"
-                    type="text"
-                    placeholder="username"
-                    className={`${formik.errors.username && formik.touched.username ? 'border-error' : ''}`}
-                  />
-                  <ErrorMessage name="username" component="span" className="error-msg" />
-                </div>
-                <div className="profile__group">
                   <label htmlFor="email" className="">
                     Email
                   </label>
@@ -89,23 +61,10 @@ const Profile: React.FC = () => {
                     id="email"
                     name="email"
                     type="text"
-                    placeholder="email"
+                    placeholder="Email"
                     className={`${formik.errors.email && formik.touched.email ? 'border-error' : ''}`}
                   />
                   <ErrorMessage name="email" component="span" className="error-msg" />
-                </div>
-                <div className="profile__group">
-                  <label htmlFor="password" className="">
-                    Password
-                  </label>
-                  <Field
-                    id="password"
-                    name="password"
-                    type="password"
-                    placeholder="password"
-                    className={`${formik.errors.password && formik.touched.password ? 'border-error' : ''}`}
-                  />
-                  <ErrorMessage name="password" component="span" className="error-msg" />
                 </div>
                 <div className="profile__group">
                   <label htmlFor="address" className="">
@@ -115,23 +74,36 @@ const Profile: React.FC = () => {
                     id="address"
                     name="address"
                     type="text"
-                    placeholder="address"
+                    placeholder="Address"
                     className={`${formik.errors.address && formik.touched.address ? 'border-error' : ''}`}
                   />
                   <ErrorMessage name="address" component="span" className="error-msg" />
                 </div>
                 <div className="profile__group">
-                  <label htmlFor="role" className="">
-                    Role
+                  <label htmlFor="password" className="">
+                    Password
                   </label>
                   <Field
-                    id="role"
-                    name="role"
-                    type="text"
-                    placeholder="role"
-                    className={`${formik.errors.role && formik.touched.role ? 'border-error' : ''}`}
+                    id="password"
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    className={`${formik.errors.password && formik.touched.password ? 'border-error' : ''}`}
                   />
-                  <ErrorMessage name="role" component="span" className="error-msg" />
+                  <ErrorMessage name="password" component="span" className="error-msg" />
+                </div>
+                <div className="profile__group">
+                  <label htmlFor="key" className="">
+                    Key
+                  </label>
+                  <Field
+                    id="key"
+                    name="key"
+                    type="text"
+                    placeholder="Key"
+                    className={`${formik.errors.key && formik.touched.key ? 'border-error' : ''}`}
+                  />
+                  <ErrorMessage name="key" component="span" className="error-msg" />
                 </div>
               </div>
               <div className="profile__action">

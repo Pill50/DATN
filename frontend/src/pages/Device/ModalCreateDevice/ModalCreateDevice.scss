@@ -28,6 +28,30 @@
     flex-shrink: 0;
     flex-direction: column;
     margin-bottom: 16px;
+
+    label {
+      margin-bottom: 4px;
+    }
+
+    input {
+      height: 56px;
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--blueColor);
+    }
+
+    input.border-error {
+      border-color: var(--redColor);
+    }
+
+    input::placeholder {
+      color: #eeeeee;
+    }
+
+    .error-msg {
+      max-width: 250px;
+      color: var(--redColor);
+    }
   }
 
   &__group:nth-child(3) {
