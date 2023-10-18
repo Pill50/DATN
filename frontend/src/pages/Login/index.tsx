@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import './Login.scss';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { loginValidationSchema } from '@/validations/auth';
+import { LoginType } from '@/types/auth';
 
-const initialValues = {
+const initialValues: LoginType = {
   email: '',
   password: '',
 };

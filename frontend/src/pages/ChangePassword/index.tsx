@@ -4,8 +4,9 @@ import './Changepassword.scss';
 import { ErrorMessage, Field, Formik, Form } from 'formik';
 import { changePasswordValidationSchema } from '@/validations/auth';
 import Sidebar from '@/components/Sidebar/Sidebar';
+import { ChangePasswordType } from '@/types/auth';
 
-const initialValues = {
+const initialValues: ChangePasswordType = {
   currentPassword: '',
   newPassword: '',
   confirmPassword: '',

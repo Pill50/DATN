@@ -4,8 +4,9 @@ import './Profile.scss';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { profileValidationSchema } from '@/validations/user';
 import Sidebar from '@/components/Sidebar/Sidebar';
+import { UserType } from '@/types/user';
 
-const initialValues = {
+const initialValues: UserType = {
   email: '',
   address: '',
   password: '',

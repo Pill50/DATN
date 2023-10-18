@@ -5,8 +5,9 @@ import Modal from '@mui/material/Modal';
 import { EditIcon } from '@/components/Icons';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { editStationValidationSchema } from '@/validations/station';
+import { EditStationType } from '@/types/station';
 
-const initialValues = {
+const initialValues: EditStationType = {
   address: '',
   installationAt: '',
   threshold: 0,

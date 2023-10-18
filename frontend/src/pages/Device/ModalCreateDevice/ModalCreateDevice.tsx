@@ -6,11 +6,11 @@ import { AddIcon } from '@/components/Icons';
 import SelectOption from '@/components/SelectOption/SelectOption';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { createDeviceValidationSchema } from '@/validations/device';
+import { CreateNewDeviceType } from '@/types/device';
 
-const initialValues = {
-  key: '',
+const initialValues: CreateNewDeviceType = {
   address: '',
-  addressOfStation: 0,
+  addressOfStation: '',
 };
 
 const addressSupplyDevice = ['Ward 1', 'Ward 2', 'Ward 3', 'Ward 4', 'Ward 5'];
@@ -50,17 +50,6 @@ export default function ModalCreateDevice() {
                   CREATE NEW DEVICE
                 </h2>
                 <div id="modal-modal-description" className="modal__desc">
-                  <div className="modal__group">
-                    <label htmlFor="device_key">Device key</label>
-                    <Field
-                      id="device_key"
-                      name="key"
-                      type="text"
-                      placeholder="Enter your key"
-                      className={`${formik.errors.key && formik.touched.key ? 'border-error' : ''}`}
-                    />
-                    <ErrorMessage name="key" component="span" className="error-msg" />
-                  </div>
                   <div className="modal__group">
                     <label htmlFor="device_address">Address of device</label>
                     <Field

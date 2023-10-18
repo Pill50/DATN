@@ -1,24 +1,14 @@
 import * as React from 'react';
 import './Table.scss';
 import { useNavigate } from 'react-router-dom';
-
-type Station = {
-  id: number;
-  address: string;
-  total_water_supply: number;
-  devices: number;
-  installation_at: string;
-};
+import { StationType } from '@/types/station';
 
 interface DataTableProps {
-  data: Station[];
+  data: StationType[];
 }
 
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
   const navigate = useNavigate();
-
-  const tableHead: string[] = Object.keys(data[0]);
-
   const handleViewStationDetail = (id: number) => {
     console.log('Edit id: ', id);
     navigate(`/station/${id}`);
@@ -28,20 +18,22 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
     <table>
       <thead>
         <tr>
-          {tableHead.map((data, index) => {
-            return <th key={index}>{data.toUpperCase()}</th>;
-          })}
+          <th>ID</th>
+          <th>ADDRESS</th>
+          <th>TOTAL WATER SUPPLY</th>
+          <th>DEVICES</th>
+          <th>INSTALLATION AT</th>
         </tr>
       </thead>
       <tbody>
-        {data.map((stationItem: Station, index: number) => {
+        {data.map((stationItem: StationType, index: number) => {
           return (
             <tr key={index} onClick={() => handleViewStationDetail(stationItem.id)}>
               <td>{stationItem.id}</td>
               <td>{stationItem.address}</td>
-              <td>{stationItem.total_water_supply}</td>
+              <td>{stationItem.totalWaterSupply}</td>
               <td>{stationItem.devices}</td>
-              <td>{stationItem.installation_at}</td>
+              <td>{stationItem.installationAt}</td>
             </tr>
           );
         })}

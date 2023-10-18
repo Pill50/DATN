@@ -3,8 +3,9 @@ import { forgotPasswordValidationSchema } from '@/validations/auth';
 import './Forgotpassword.scss';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
+import { ForgotPasswordType } from '@/types/auth';
 
-const initialValues = {
+const initialValues: ForgotPasswordType = {
   email: '',
 };
 

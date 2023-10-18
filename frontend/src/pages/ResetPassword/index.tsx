@@ -2,8 +2,9 @@ import React from 'react';
 import './ResetPassword.scss';
 import { resetPasswordValidationSchema } from '@/validations/auth';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { ResetPasswordType } from '@/types/auth';
 
-const initialValues = {
+const initialValues: ResetPasswordType = {
   password: '',
   confirmPassword: '',
 };

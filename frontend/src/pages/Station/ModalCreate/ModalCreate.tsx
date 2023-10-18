@@ -5,8 +5,9 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { AddIcon } from '@/components/Icons';
 import { createStationValidationSchema } from '@/validations/station';
+import { CreateNewStationType } from '@/types/station';
 
-const initialValues = {
+const initialValues: CreateNewStationType = {
   address: '',
   numOfDevices: 0,
   totalWaterSupply: 0,

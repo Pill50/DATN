@@ -1,4 +1,6 @@
-export const notiList = [
+import { NotificationType } from '@/types/notification';
+
+export const notiList: NotificationType[] = [
   {
     id: 1,
     device: {

@@ -1,18 +1,10 @@
 import * as React from 'react';
 import './Table.scss';
 import { useNavigate } from 'react-router-dom';
-
-type Device = {
-  id: number;
-  address: string;
-  water_meter: number;
-  water_flow: number;
-  installation: string;
-  pin_percent: number;
-};
+import { DeviceType } from '@/types/device';
 
 interface DataTableProps {
-  data: Device[];
+  data: DeviceType[];
 }
 
 const DataTable: React.FC<DataTableProps> = ({ data }) => {
@@ -34,15 +26,15 @@ const DataTable: React.FC<DataTableProps> = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.map((deviceItem: Device, index: number) => {
+        {data.map((deviceItem: DeviceType, index: number) => {
           return (
             <tr key={index} onClick={() => handleViewDeviceDetail(deviceItem.id)}>
               <td>{deviceItem.id}</td>
               <td>{deviceItem.address}</td>
-              <td>{deviceItem.water_meter}</td>
-              <td>{deviceItem.water_flow}</td>
-              <td>{deviceItem.installation}</td>
-              <td>{deviceItem.pin_percent}</td>
+              <td>{deviceItem.waterMeter}</td>
+              <td>{deviceItem.waterFlow}</td>
+              <td>{deviceItem.installationAt}</td>
+              <td>{deviceItem.pinPercent}</td>
             </tr>
           );
         })}
