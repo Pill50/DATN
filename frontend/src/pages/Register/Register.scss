@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 @import '../../styles/mixins';
 
-.signup {
+.register {
   .container {
     @include flexColumnCenter;
     padding: 0 12px;
@@ -10,7 +10,7 @@
 
   @include slogan;
 
-  .signup__title {
+  &__title {
     text-align: center;
     color: $blueColor;
     font-weight: 700;

@@ -1,24 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Signup.scss';
+import './Register.scss';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { registerValidationSchema } from '@/validations/auth';
-import { SignUpType } from '@/types/auth';
+import { RegisterType } from '@/types/auth';
 import Button from '@/components/Button';
+import { useAppDispatch } from '@/hooks/hooks';
+import { authActions } from '@/redux/slices';
 
-const initialValues: SignUpType = {
+const initialValues: RegisterType = {
   email: '',
   password: '',
   confirmPassword: '',
 };
 
-const handleSubmit = () => {
-  console.log('REGISTER SUBMIT');
-};
+const Register: React.FC = () => {
+  const dispatch = useAppDispatch();
 
-const Signup: React.FC = () => {
+  const handleSubmit = async (values: RegisterType) => {
+    //@ts-ignore
+    dispatch(authActions.register(values)).then((response) => {
+      console.log(response);
+    });
+  };
+
   return (
-    <div className="signup">
+    <div className="register">
       <div className="container">
         <h1 className="slogan">
           <span>Protect</span> Our Water, <span>Sustain</span> Our Future, <span>Every Drop Matters!</span>
@@ -26,9 +33,9 @@ const Signup: React.FC = () => {
         <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={registerValidationSchema}>
           {(formik) => (
             <Form className="" onSubmit={formik.handleSubmit}>
-              <h1 className="signup__title">SIGN UP YOUR NEW ACCOUNT</h1>
+              <h1 className="register__title">SIGN UP YOUR NEW ACCOUNT</h1>
               {/* EMAIL */}
-              <div className="signup__group">
+              <div className="register__group">
                 <label htmlFor="email" className="">
                   Email
                 </label>
@@ -42,7 +49,7 @@ const Signup: React.FC = () => {
                 <ErrorMessage name="email" component="span" className="error-msg" />
               </div>
               {/* PASSWORD */}
-              <div className="signup__group">
+              <div className="register__group">
                 <label htmlFor="password" className="">
                   Password
                 </label>
@@ -56,7 +63,7 @@ const Signup: React.FC = () => {
                 <ErrorMessage name="password" component="span" className="error-msg" />
               </div>
               {/* CONFIRM PASSWORD */}
-              <div className="signup__group">
+              <div className="register__group">
                 <label htmlFor="confirmPassword" className="">
                   Confirm Password
                 </label>
@@ -72,7 +79,7 @@ const Signup: React.FC = () => {
               <Button type="submit" primary>
                 SIGN UP
               </Button>
-              <div className="signup__cta">
+              <div className="register__cta">
                 Already have an account? <Link to="/login">Login</Link>
               </div>
             </Form>
@@ -83,4 +90,4 @@ const Signup: React.FC = () => {
   );
 };
 
-export default Signup;
+export default Register;

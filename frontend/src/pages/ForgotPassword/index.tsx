@@ -47,7 +47,7 @@ const ForgotPassword: React.FC = () => {
                   Already have an account? <Link to={'/login'}>Login</Link>
                 </p>
                 <p>
-                  Don't have an account? <Link to={'/signup'}>Sign up</Link>
+                  Don't have an account? <Link to={'/register'}>Sign up</Link>
                 </p>
               </div>
             </Form>

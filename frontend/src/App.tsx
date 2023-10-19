@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Register from './pages/Register';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -28,8 +28,8 @@ const App: React.FC = () => {
         <Routes>
           <Route index element={<Login />}></Route>
           <Route path={'/login'} element={<Login />}></Route>
-          <Route path={'/signup'} element={<Signup />}></Route>
-          <Route path={'/signup'} element={<Signup />}></Route>
+          <Route path={'/register'} element={<Register />}></Route>
+          <Route path={'/register'} element={<Register />}></Route>
           <Route path={'/forgot-password'} element={<ForgotPassword />}></Route>
           <Route path={'/reset-password'} element={<ResetPassword />}></Route>
           {/* PRIVATE ROUTE */}
