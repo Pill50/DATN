@@ -744,3 +744,28 @@
     opacity: 1;
   }
 }
+
+// slide
+@-webkit-keyframes slide {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes slide {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}

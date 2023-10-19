@@ -1,4 +1,5 @@
-/* Center tables for demo */
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 /* Default Table Style */
 table {
@@ -57,3 +58,17 @@ table span {
 //   padding: 0.5em;
 //   border: 1px solid grey;
 // }
+
+@include smMaxBreakPoint {
+  table td,
+  table th {
+    font-size: 8px;
+  }
+}
+
+@include mdMaxBreakPoint {
+  table td,
+  table th {
+    font-size: 8px;
+  }
+}

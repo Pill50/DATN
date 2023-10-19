@@ -7,7 +7,8 @@ footer {
 
 .footer__top {
   @include flexCenter;
-  height: 200px;
+  padding: 12px;
+  min-height: 200px;
   background-color: $primaryColor;
 }
 
@@ -25,6 +26,7 @@ footer {
   }
 
   p {
+    color: $greenColor;
     font-weight: 700;
     font-size: 20px;
   }
@@ -45,4 +47,22 @@ footer {
   height: 72px;
   background-color: #696969;
   color: #fff;
+}
+
+// BREAK POINT
+@include mdMaxBreakPoint {
+  .footer__content {
+    flex-direction: column;
+  }
+
+  .footer__list {
+    margin-bottom: 12px;
+  }
+
+  .footer__item {
+    &-icon {
+      transform: scale(1.8);
+      margin-left: 2px;
+    }
+  }
 }

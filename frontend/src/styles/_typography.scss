@@ -8,7 +8,7 @@ h1 {
   line-height: 1.2em;
   margin: 0;
 
-  @include smMinBreakPoint {
+  @include smMaxBreakPoint {
     font-size: 32px;
   }
 }
@@ -27,7 +27,7 @@ h3 {
   line-height: 125%;
   margin: 0;
 
-  @include customMinBreakPoint(400) {
+  @include customMaxBreakPoint(400) {
     font-size: 18px;
   }
 }

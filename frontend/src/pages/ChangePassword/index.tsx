@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Changepassword.scss';
 import { ErrorMessage, Field, Formik, Form } from 'formik';
 import { changePasswordValidationSchema } from '@/validations/auth';
@@ -76,10 +75,10 @@ const ChangePassword: React.FC = () => {
                 </div>
               </div>
               <div className="changePassword__action">
-                <Button to={'/profile'} outline>
+                <Button to={'/profile'} outline small>
                   CANCEL
                 </Button>
-                <Button type="submit" primary>
+                <Button type="submit" primary small>
                   CREATE
                 </Button>
               </div>

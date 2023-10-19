@@ -55,3 +55,11 @@
     right: 2px;
   }
 }
+
+@include mdMaxBreakPoint {
+  .notification {
+    &__card {
+      width: 100%;
+    }
+  }
+}

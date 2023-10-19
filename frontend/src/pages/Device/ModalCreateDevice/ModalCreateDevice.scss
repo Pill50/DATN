@@ -28,32 +28,9 @@
 
   &__group {
     @include flexColumn;
+    @include formInput;
     flex-shrink: 0;
     margin-bottom: 16px;
-
-    label {
-      margin-bottom: 4px;
-    }
-
-    input {
-      height: 56px;
-      padding: 16px;
-      border-radius: 8px;
-      border: 1px solid $blueColor;
-    }
-
-    input.border-error {
-      border-color: $redColor;
-    }
-
-    input::placeholder {
-      color: #eeeeee;
-    }
-
-    .error-msg {
-      max-width: 250px;
-      color: $redColor;
-    }
   }
 
   &__group:nth-child(2) {

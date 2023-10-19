@@ -38,3 +38,9 @@
     font-size: 32px;
   }
 }
+
+@include mdMaxBreakPoint {
+  .card {
+    gap: 16px;
+  }
+}

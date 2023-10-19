@@ -8,26 +8,7 @@
     margin-bottom: 40px;
   }
 
-  .slogan {
-    margin-top: 40px;
-    max-width: 700px;
-    text-align: center;
-    font-size: 40px;
-    font-weight: 700;
-    span {
-      color: $redColor;
-    }
-  }
-
-  form {
-    @include flexColumn;
-    width: 382px;
-    max-width: 100%;
-    padding: 16px;
-    border-radius: 12px;
-    background: #f2f2f2;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  }
+  @include slogan;
 
   .signup__title {
     text-align: center;
@@ -36,32 +17,12 @@
     font-size: 20px;
   }
 
+  @include formWrapper;
+
   &__group {
     @include flexColumn;
+    @include formInput;
     margin: 8px 0;
-
-    label {
-      margin-bottom: 4px;
-    }
-
-    input {
-      height: 56px;
-      padding: 16px;
-      border-radius: 8px;
-      border: 1px solid #e3e3e3;
-    }
-
-    input.border-error {
-      border-color: $redColor;
-    }
-
-    input::placeholder {
-      color: #eeeeee;
-    }
-
-    .error-msg {
-      color: $redColor;
-    }
   }
 
   &__cta {

@@ -56,34 +56,23 @@
 
   &__group {
     @include flexColumn;
-
-    label {
-      margin-bottom: 4px;
-    }
-
-    input {
-      height: 56px;
-      padding: 16px;
-      border-radius: 8px;
-      border: 1px solid $blueColor;
-    }
-
-    input.border-error {
-      border-color: $redColor;
-    }
-
-    input::placeholder {
-      color: #eeeeee;
-    }
-
-    .error-msg {
-      color: $redColor;
-    }
+    @include formInput;
   }
 
   &__action {
     display: flex;
     margin-top: 12px;
     align-self: flex-end;
+  }
+}
+
+@include smMaxBreakPoint {
+  .profile {
+    form {
+      width: 100%;
+    }
+    &__info {
+      grid-template-columns: 1fr;
+    }
   }
 }
