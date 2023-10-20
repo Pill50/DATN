@@ -1,0 +1,132 @@
+@import './variables';
+
+// Breakpoints
+@mixin smMaxBreakPoint {
+  @media (max-width: #{$screen-sm}) {
+    @content;
+  }
+}
+
+@mixin mdMaxBreakPoint {
+  @media (max-width: #{$screen-md}) {
+    @content;
+  }
+}
+
+@mixin lgMaxBreakPoint {
+  @media (max-width: #{$screen-lg}) {
+    @content;
+  }
+}
+
+@mixin xlMaxBreakPoint {
+  @media (max-width: #{$screen-xl}) {
+    @content;
+  }
+}
+
+@mixin xxlMaxBreakPoint {
+  @media (max-width: #{$screen-xxl}) {
+    @content;
+  }
+}
+
+@mixin customMaxBreakPoint($size) {
+  @media (max-width: ($size+'px')) {
+    @content;
+  }
+}
+
+@mixin customMaxBreakPoint($size) {
+  @media (max-width: ($size+'px')) {
+    @content;
+  }
+}
+
+// Flex box
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexColumnCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flexJustifyEnd {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@mixin flexJustifyBetween {
+  display: flex;
+  justify-content: space-between;
+}
+
+// Slogan
+@mixin slogan {
+  .slogan {
+    margin: 40px 0 20px 0;
+    max-width: 700px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    span {
+      color: $redColor;
+    }
+  }
+
+  @include mdMaxBreakPoint {
+    .slogan {
+      font-size: 32px;
+    }
+  }
+}
+
+// Form
+@mixin formWrapper {
+  form {
+    @include flexColumn;
+    width: 300px;
+    max-width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f2f2f2;
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  }
+}
+
+@mixin formInput {
+  label {
+    margin-bottom: 4px;
+  }
+
+  input {
+    height: 44px;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid $blueColor;
+  }
+
+  input.border-error {
+    border-color: $redColor;
+  }
+
+  input::placeholder {
+    color: #eeeeee;
+  }
+
+  .error-msg {
+    color: $redColor;
+    font-size: 14px;
+  }
+}

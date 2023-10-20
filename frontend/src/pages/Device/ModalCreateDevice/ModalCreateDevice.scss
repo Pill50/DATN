@@ -1,0 +1,45 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.modal {
+  input {
+    border: 1px solid $blueColor;
+    width: 250px;
+    max-width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  &__box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 20px;
+    color: $blueColor;
+  }
+
+  &__group {
+    @include flexColumn;
+    @include formInput;
+    flex-shrink: 0;
+    margin-bottom: 16px;
+  }
+
+  &__group:nth-child(2) {
+    label {
+      margin-bottom: 16px;
+    }
+  }
+
+  &__action {
+    @include flexJustifyEnd;
+  }
+}

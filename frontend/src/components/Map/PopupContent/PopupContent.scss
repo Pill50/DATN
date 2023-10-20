@@ -1,0 +1,9 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.popupMap {
+  padding: 8px;
+  &__station {
+    color: $redColor;
+  }
+}

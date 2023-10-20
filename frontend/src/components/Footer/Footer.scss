@@ -1,0 +1,68 @@
+@import '../../styles//variables';
+@import '../../styles//mixins';
+
+footer {
+  margin-top: auto;
+}
+
+.footer__top {
+  @include flexCenter;
+  padding: 12px;
+  min-height: 200px;
+  background-color: $primaryColor;
+}
+
+.footer__content {
+  @include flexJustifyBetween;
+  width: 1000px;
+  padding: 0 12px;
+}
+
+.footer__list {
+  h3 {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: $greenColor;
+    font-weight: 700;
+    font-size: 20px;
+  }
+}
+
+.footer__item {
+  &-icon {
+    transform: scale(1.8);
+  }
+
+  span {
+    margin-left: 8px;
+  }
+}
+
+.footer__bottom {
+  @include flexCenter;
+  height: 72px;
+  background-color: #696969;
+  color: #fff;
+}
+
+// BREAK POINT
+@include mdMaxBreakPoint {
+  .footer__content {
+    flex-direction: column;
+  }
+
+  .footer__list {
+    margin-bottom: 12px;
+  }
+
+  .footer__item {
+    &-icon {
+      transform: scale(1.8);
+      margin-left: 2px;
+    }
+  }
+}
