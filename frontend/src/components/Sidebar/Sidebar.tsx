@@ -12,7 +12,7 @@ import {
 import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
-  const [isDisplaySidebar, setIsDisplaySidebar] = useState<Boolean>(false);
+  const [isDisplaySidebar, setIsDisplaySidebar] = useState<Boolean>(true);
 
   const location = useLocation();
 
@@ -20,11 +20,11 @@ const Sidebar: React.FC = () => {
     return location.pathname.startsWith(path) ? 'active' : '';
   };
 
-  useEffect(() => {
-    if (window.innerWidth > 1200) {
-      setIsDisplaySidebar(true);
-    }
-  }, [window]);
+  // useEffect(() => {
+  //   if (window.innerWidth > 1200) {
+  //     setIsDisplaySidebar(true);
+  //   }
+  // }, [window]);
 
   const toggleDisplay = () => {
     setIsDisplaySidebar(!isDisplaySidebar);

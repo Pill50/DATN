@@ -8,6 +8,8 @@ import ModalCreateStation from './ModalCreate/ModalCreate';
 // MOCK DATA
 import { dataStation } from '@/Mockdata/ListDataStation';
 import Button from '@/components/Button';
+import MapComp from '@/components/Map';
+
 const stationOptions = ['All', 'Station 1', 'Station 2', 'Station 3'];
 
 const Station: React.FC = () => {
@@ -27,7 +29,9 @@ const Station: React.FC = () => {
           <div className="station__table">
             <DataTable data={dataStation} />
           </div>
-          <div className="station__map">THIS IS MAP</div>
+          <div className="station__map">
+            <MapComp />
+          </div>
         </div>
       </div>
     </div>

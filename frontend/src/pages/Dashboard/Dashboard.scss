@@ -1,5 +1,4 @@
 @import '../../styles/variables';
-@import '../../styles/mixins';
 
 .dashboard {
   display: flex;
@@ -11,16 +10,5 @@
     text-align: center;
     margin-top: 20px;
     color: $blueColor;
-  }
-}
-
-@include lgMaxBreakPoint {
-  .dashboard {
-    margin-top: 40px;
-    display: block;
-
-    .title {
-      margin-top: 0;
-    }
   }
 }
