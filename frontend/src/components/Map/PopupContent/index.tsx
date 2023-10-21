@@ -1,14 +1,39 @@
 import React from 'react';
 import './PopupContent.scss';
+import { useNavigate } from 'react-router-dom';
 
-const PopupContent: React.FC = () => {
+type Marker = {
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  waterConsumptionPerDay: number;
+  lifetime: string;
+  totalDevice?: number;
+};
+
+interface PopupContentProp {
+  info: Marker;
+}
+
+const PopupContent: React.FC<PopupContentProp> = ({ info }) => {
+  const navigate = useNavigate();
+
+  const handleViewDetailInfoMarker = () => {
+    if (info.name.includes('Tram Tong')) {
+      navigate('/station/1');
+    } else {
+      navigate('/device/1');
+    }
+  };
+
   return (
-    <div className="popupMap">
-      <p className="popupMap__station">Station N1</p>
-      <p className="popupMap__address">Address: 268 Ly Thuong Kiet, Q10</p>
-      <p className="popupMap__lifetime">Life time: 1 year</p>
-      <p className="popupMap__waterflow">Total water flow per month: 1000m3</p>
-      <p className="popupMap__devices">Total devices: 10</p>
+    <div className="popupMap" onClick={handleViewDetailInfoMarker}>
+      <p className="popupMap__station">Station: {info.name}</p>
+      <p className="popupMap__address">Address: {info.address}</p>
+      <p className="popupMap__lifetime">Life time: {info.lifetime}</p>
+      <p className="popupMap__waterflow">Water consumption per day: {info.waterConsumptionPerDay} m3</p>
+      {info.totalDevice && <p className="popupMap__devices">Total devices: {info.totalDevice}</p>}
     </div>
   );
 };

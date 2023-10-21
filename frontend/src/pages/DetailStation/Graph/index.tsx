@@ -6,14 +6,14 @@ import CustomTooltip from '@/utils/CustomTooltip/CustomTooltip';
 // MOCK DATA
 import { deviceWaterSupply } from '../../../Mockdata/DeviceWaterSupply';
 import SelectOption from '@/components/SelectOption/SelectOption';
-const yearOptions = ['2019', '2020', '2021', '2022', '2023'];
+const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const WaterConsumptionGraph: React.FC = () => {
   return (
     <div className="graph">
       <div className="graph__option">
-        <p className="graph__title">Chart of total water supply by month (m3/month)</p>
-        <SelectOption label={'Year'} options={yearOptions} />
+        <p className="graph__title">Bar chart of total water consumption per hour (m3/hour)</p>
+        <SelectOption label={'Day'} options={dayOptions} />
       </div>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
@@ -32,7 +32,7 @@ const WaterConsumptionGraph: React.FC = () => {
           <YAxis />
           <Tooltip content={<CustomTooltip />} />
           <Legend />
-          <Bar dataKey="value" fill="#0f9c58" />
+          <Bar dataKey="dailyConsumption" fill="#0f9c58" />
         </BarChart>
       </ResponsiveContainer>
     </div>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './ModalEdit.scss';
+import './ModalEditDevice.scss';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { EditIcon } from '@/components/Icons';
@@ -39,7 +39,7 @@ const ModalEditStation: React.FC<ModalEditStationProp> = ({ stationID }) => {
         aria-describedby="modal-modal-description"
         className="modal-edit"
       >
-        <div className="modal-edit__box">
+        <div className="modal-edit-device__box">
           <Formik
             initialValues={initialValues}
             onSubmit={handleEditStation}

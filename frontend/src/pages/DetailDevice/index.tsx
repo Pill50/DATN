@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import Chart from './Chart/Chart';
 import WaterMeterChart from './WatermeterChart/Chart';
 import ModalDelete from '@/components/ModalDelete/ModalDelete';
+import ModalEditDevice from './ModalEditDevice/ModalEditDevice';
 
 const DetailDevice: React.FC = () => {
   const { deviceID } = useParams();
@@ -19,19 +20,23 @@ const DetailDevice: React.FC = () => {
         <h1 className="title">INFORMATION OF DEVICE</h1>
         <div className="detail_device__action">
           <ModalDelete itemID={deviceID as string} />
-          <FormGroup>
-            <FormControlLabel control={<Switch defaultChecked />} label="Relay Status" />
-          </FormGroup>
+          <ModalEditDevice deviceID={deviceID as string} />
         </div>
         <div className="detail_device__content">
-          <div className="detail_device__info">
-            <p className="detail_device__key">Device key: ash88i97bcbk8uasd72</p>
-            <p className="detail_device__address">Address: 45 Tan Lap, Di An</p>
-            <p className="detail_device__devices">New water meter: 1000</p>
-            <p className="detail_device__totalWater">New water flow: 1234</p>
-            <p className="detail_device__install">Installation at: 12/12/2023</p>
-            <p className="detail_device__threshold">Pin percent: 90</p>
-            <p className="detail_device__status">Status: Good</p>
+          <div className="detail_device__block">
+            <div className="detail_device__info">
+              <p className="detail_device__address">Address: Khoa KHMT</p>
+              <p className="detail_device__devices">New water meter: 1000</p>
+              <p className="detail_device__totalWater">New water flow: 1234</p>
+              <p className="detail_device__install">Installation at: 12/12/2022</p>
+              <p className="detail_device__threshold">Pin percent: 90</p>
+              <p className="detail_device__status">Status: Good</p>
+            </div>
+            <div className="detail_device__relay">
+              <FormGroup>
+                <FormControlLabel control={<Switch defaultChecked />} label="Relay Status" />
+              </FormGroup>
+            </div>
           </div>
           <WaterMeterChart />
           <Chart />

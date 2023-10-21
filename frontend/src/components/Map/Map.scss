@@ -1,0 +1,18 @@
+@import '../../styles/variables';
+
+.marker__desc {
+  text-align: center;
+}
+
+.marker__icon {
+  color: $redColor;
+}
+
+.marker__icon--device {
+  color: $blueColor;
+}
+
+.marker__name {
+  font-weight: 600;
+  color: $redColor;
+}

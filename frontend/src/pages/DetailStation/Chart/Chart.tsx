@@ -5,6 +5,10 @@ import SelectOption from '@/components/SelectOption/SelectOption';
 
 const WaterFlowPerHour = [
   {
+    time: '0h',
+    value: 3434,
+  },
+  {
     time: '1h',
     value: 4000,
   },
@@ -52,14 +56,58 @@ const WaterFlowPerHour = [
     time: '12h',
     value: 3434,
   },
+  {
+    time: '13h',
+    value: 4000,
+  },
+  {
+    time: '14h',
+    value: 5788,
+  },
+  {
+    time: '15h',
+    value: 6565,
+  },
+  {
+    time: '16h',
+    value: 2323,
+  },
+  {
+    time: '17h',
+    value: 4000,
+  },
+  {
+    time: '18h',
+    value: 2323,
+  },
+  {
+    time: '19h',
+    value: 3452,
+  },
+  {
+    time: '20h',
+    value: 1212,
+  },
+  {
+    time: '21h',
+    value: 7457,
+  },
+  {
+    time: '22h',
+    value: 5656,
+  },
+  {
+    time: '23h',
+    value: 4000,
+  },
 ];
-const dayOptions = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const dayOptions = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const Chart: React.FC = () => {
   return (
     <div className="chart">
       <div className="chart__option">
-        <p className="chart__title">Hourly flow pressure chart</p>
+        <p className="chart__title">Hourly water flow chart</p>
         <SelectOption label={'Day'} options={dayOptions} />
       </div>
       <ResponsiveContainer width="100%" height="100%">

@@ -10,7 +10,7 @@ const CustomTooltip: React.FC = ({ active, payload, label }: any) => {
           {payload.map((data: any, index: number) => {
             return (
               <p key={index} className="item">
-                Device {index} : {data.value}
+                Value : {data.value}
               </p>
             );
           })}

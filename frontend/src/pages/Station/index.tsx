@@ -25,13 +25,11 @@ const Station: React.FC = () => {
             UPDATE NEW DATA
           </Button>
         </div>
-        <div className="station__content">
-          <div className="station__table">
-            <DataTable data={dataStation} />
-          </div>
-          <div className="station__map">
-            <MapComp />
-          </div>
+        <div className="station__table">
+          <DataTable data={dataStation} />
+        </div>
+        <div className="station__map">
+          <MapComp />
         </div>
       </div>
     </div>

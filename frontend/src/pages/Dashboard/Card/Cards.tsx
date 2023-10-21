@@ -3,7 +3,7 @@ import './Cards.scss';
 
 type Card = {
   title: string;
-  icon: React.FC;
+  icon?: React.FC;
   color: string;
   value: number;
 };
@@ -17,7 +17,7 @@ const Cards: React.FC<{ cardList: Card[] }> = ({ cardList }) => {
           return (
             <div key={index} className={`card__wrapper card__${cardItem.color}`}>
               <div className="card__label">
-                <IconComp />
+                {IconComp && <IconComp />}
                 <span>{cardItem.title}</span>
               </div>
               <p className="card__value">{cardItem.value}</p>

@@ -4,11 +4,17 @@
   display: flex;
   .content {
     flex: 1;
+    padding: 16px;
   }
 
   .title {
     text-align: center;
     margin-top: 20px;
     color: $blueColor;
+  }
+
+  .statistic {
+    padding: 20px 0;
+    height: 600px;
   }
 }
