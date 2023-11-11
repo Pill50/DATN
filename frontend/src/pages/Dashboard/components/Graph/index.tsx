@@ -1,3 +1,4 @@
+import { MaxIcon, MinIcon } from '@/components/Icons';
 import React, { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
@@ -214,10 +215,24 @@ const Graph: React.FC = () => {
   }, [options]);
 
   return (
-    <div className="h-[300px] mt-10 mb-[100px]">
-      <h2 className="text-center text-[#4285f4] text-2xl font-semibold mb-4">
-        BIỂU ĐỒ TỔNG LƯỢNG NƯỚC TIÊU THỤ CỦA CÁC TRẠM NƯỚC
-      </h2>
+    <div className="h-[300px] px-4">
+      <h2 className="text-[#4285f4] text-2xl font-bold mb-6">Biểu đồ tổng lượng nước tiêu thụ</h2>
+      <div className="flex justify-center items-center gap-4">
+        <div className="bg-red-200 rounded-md w-fit p-2 relative">
+          <div className="rounded-full bg-red-100 w-10 h-10 flex justify-center items-center absolute left-1/2 translate-x-[-60%] top-[-20px]">
+            <MaxIcon />
+          </div>
+          <p className="text-md mt-4">Lưu lượng lớn nhất</p>
+          <p className="text-center font-semibold text-xl">1000 m³</p>
+        </div>
+        <div className="bg-yellow-200 rounded-md w-fit p-2 relative">
+          <div className="rounded-full bg-yellow-100 w-10 h-10 flex justify-center items-center absolute left-1/2 translate-x-[-60%] top-[-20px]">
+            <MinIcon />
+          </div>
+          <p className="text-md mt-4">Lưu lượng nhỏ nhất</p>
+          <p className="text-center font-semibold text-xl">100 m³</p>
+        </div>
+      </div>
       <div className="flex justify-end">
         <button
           type="button"

@@ -27,7 +27,7 @@ const LineAction: React.FC<LineActionProps> = ({
   endPoint,
 }) => {
   const [isOpenInfoBlock, setIsOpenInfoBlock] = useState<boolean>(false);
-  const [options, setOptions] = useState<number>(1);
+  const [options, setOptions] = useState<number>(0);
 
   return (
     <>
@@ -95,14 +95,16 @@ const LineAction: React.FC<LineActionProps> = ({
               className="text-[#333] bg-[#e3e3e3] hover:bg-slate-400 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none "
               onClick={() => {
                 setIsOpenInfoBlock(false);
+                setOptions(0);
                 handleRemoveOptions();
               }}
             >
               HỦY
             </button>
             <button
+              disabled={startPoint === undefined && endPoint === undefined}
               type="button"
-              className="text-white bg-[#4285f4] hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none "
+              className="disabled:opacity-30 text-white active:cursor-pointer bg-[#4285f4] active:hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none "
               onClick={handleSaveEdit}
             >
               LƯU

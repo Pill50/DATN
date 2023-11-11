@@ -10,7 +10,6 @@ const SearchPlace: React.FC<SearchPlaceProps> = ({ handleSearchPlace }) => {
   return (
     <>
       {/* SEARCH */}
-      <h4 className="text-[#DB4437] font-semibold mb-2">Tìm kiếm trạm nước</h4>
       <form
         className="mb-4"
         onSubmit={(e) => {

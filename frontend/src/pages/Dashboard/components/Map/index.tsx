@@ -231,9 +231,7 @@ const MapComponent: React.FC = () => {
 
   return (
     <>
-      {/* <h2 className="text-center text-[#4285f4] text-2xl font-semibold">
-        BẢN ĐỒ THÔNG TIN LẮP ĐẶT CÁC TRẠM TỔNG VÀ ĐỒNG HỒ CON
-      </h2> */}
+      <h2 className=" text-[#4285f4] text-2xl font-bold ml-4">Bản đồ hệ thống nước</h2>
       <div className="flex gap-4 h-[600px]">
         <div className="w-[300px] shadow-md p-4">
           <SearchPlace handleSearchPlace={handleSearchPlace} />
