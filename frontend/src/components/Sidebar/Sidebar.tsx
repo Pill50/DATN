@@ -1,86 +1,93 @@
-import React, { useEffect, useState } from 'react';
-import './Sidebar.scss';
-import {
-  TotalWaterSuplyIcon,
-  DashboardIcon,
-  DeviceIcon,
-  LogoutIcon,
-  NotificationIcon,
-  ProfileIcon,
-  MenuIcon,
-} from '../Icons';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { TotalWaterSuplyIcon, DashboardIcon, LogoutIcon, NotificationIcon, ProfileIcon, InvoiceIcon } from '../Icons';
+import { useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
-  const [isDisplaySidebar, setIsDisplaySidebar] = useState<Boolean>(true);
-
   const location = useLocation();
 
   const isActive = (path: string) => {
-    return location.pathname.startsWith(path) ? 'active' : '';
-  };
-
-  // useEffect(() => {
-  //   if (window.innerWidth > 1200) {
-  //     setIsDisplaySidebar(true);
-  //   }
-  // }, [window]);
-
-  const toggleDisplay = () => {
-    setIsDisplaySidebar(!isDisplaySidebar);
+    return location.pathname.startsWith(path) ? 'text-[#4285f4]' : 'text-[#333]';
   };
 
   return (
     <>
-      <div className="menu-icon" onClick={toggleDisplay}>
-        <MenuIcon />
-      </div>
-      {isDisplaySidebar && (
-        <>
-          <div className="overlay" onClick={toggleDisplay}></div>
-          <div className="sidebar">
-            <div className="container">
-              <ul className="sidebar__list">
-                <Link to={'/profile'} className={`sidebar__item ${isActive('/profile')}`}>
-                  <div className="sidebar__block">
-                    <ProfileIcon />
-                    <span>My profile</span>
-                  </div>
-                </Link>
-                <Link to={'/dashboard'} className={`sidebar__item ${isActive('/dashboard')}`}>
-                  <div className="sidebar__block">
-                    <DashboardIcon />
-                    <span>Dashboard</span>
-                  </div>
-                </Link>
-                <Link to={'/station'} className={`sidebar__item ${isActive('/station')}`}>
-                  <div className="sidebar__block">
-                    <TotalWaterSuplyIcon />
-                    <span>Station</span>
-                  </div>
-                </Link>
-                <Link to="/device" className={`sidebar__item ${isActive('/device')}`}>
-                  <div className="sidebar__block">
-                    <DeviceIcon />
-                    <span>Device</span>
-                  </div>
-                </Link>
-                <Link to="/notification" className={`sidebar__item ${isActive('/notification')}`}>
-                  <div className="sidebar__block">
-                    <NotificationIcon />
-                    <span>Notification</span>
-                  </div>
-                </Link>
-              </ul>
-              <div className="devider"></div>
-              <div className="sidebar__block logout">
+      <aside
+        id="default-sidebar"
+        className="w-56 h-auto transition-transform -translate-x-full sm:translate-x-0 border-r-[#e3e3e3] border-r-[1px]"
+        aria-label="Sidebar"
+      >
+        <div className="h-full px-3 py-4 overflow-y-auto bg-white ">
+          <ul className="space-y-2 font-medium">
+            <li>
+              <NavLink
+                to={'/profile'}
+                className={`flex items-center p-2 rounded-lg group 
+                    ${isActive('profile')}
+                    hover:bg-[#E0E8F7] hover:text-[#4285f4]`}
+              >
+                <ProfileIcon />
+                <span className="ml-3">Thông tin cá nhân</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={'/dashboard'}
+                className={`flex items-center p-2 rounded-lg group
+                    ${isActive('/dashboard')}
+                    hover:bg-[#E0E8F7] hover:text-[#4285f4]`}
+              >
+                <DashboardIcon />
+                <span className="ml-3">Bảng điều khiển</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={'/stations'}
+                className={`flex items-center p-2  rounded-lg group
+                    ${isActive('/stations')}
+                    hover:bg-[#E0E8F7] hover:text-[#4285f4]`}
+              >
+                <TotalWaterSuplyIcon />
+                <span className="ml-3">Quản lý trạm nước</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={'/invoices'}
+                className={`flex items-center p-2  rounded-lg group
+                    ${isActive('/invoices')}
+                    hover:bg-[#E0E8F7] hover:text-[#4285f4]`}
+              >
+                <InvoiceIcon />
+                <span className="ml-3">Quản lý hóa đơn</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={'/notification'}
+                className={`flex items-center p-2  rounded-lg group
+                    ${isActive('/notification')}
+                    hover:bg-[#E0E8F7] hover:text-[#4285f4]`}
+              >
+                <NotificationIcon />
+                <span className="ml-3">Thông báo</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to={'/logout'}
+                className={`flex items-center p-2 text-[#DB4437] rounded-lg group
+                    ${isActive('logout')}
+                    hover:bg-[#E0E8F7]`}
+              >
                 <LogoutIcon />
-                <span>Logout</span>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
+                <span className="ml-3">Đăng xuất</span>
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      </aside>
     </>
   );
 };

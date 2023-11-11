@@ -1,21 +1,18 @@
 import React from 'react';
-import './Notification.scss';
 import Sidebar from '@/components/Sidebar/Sidebar';
-import Card from './Card/Card';
+import Card from './components/Card';
 
 // MOCK DATA
 import { notiList } from '@/Mockdata/NotiList';
 import { NotificationType } from '@/types/notification';
-import Button from '@/components/Button';
 
 const Notification: React.FC = () => {
   return (
-    <div className="notification">
+    <div className="flex">
       <Sidebar />
-      <div className="content">
-        <h1 className="title">NOTIFICATION</h1>
-        <div className="notification__cards">
-          <Button secondary>CLEAR ALL</Button>
+      <div className="flex flex-col justify-center items-center flex-1 p-4">
+        <h1 className="flex justify-center text-[#4285f4] text-3xl font-semibold">THÔNG BÁO</h1>
+        <div className="flex flex-col justify-center items-center gap-2">
           {notiList.map((noti: NotificationType) => {
             return <Card key={noti.id} content={noti} />;
           })}
