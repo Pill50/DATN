@@ -18,5 +18,5 @@ public class WaterMeterValue {
     private int waterMeterId;
     private int flowRateValue;
     private int totalRateValue;
-    private Date createdAt = Date.from(Instant.now());
+    private Date updatedAt = Date.from(Instant.now());
 }
