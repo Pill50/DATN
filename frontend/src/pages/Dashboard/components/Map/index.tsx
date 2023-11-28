@@ -148,12 +148,14 @@ const MapComponent: React.FC = () => {
   const handleCreateNewLine = () => {
     setStartPoint(undefined);
     setEndPoint(undefined);
+    setOptionsID(1);
     setActionID(1);
   };
 
   const handleRemoveLine = () => {
     setStartPoint(undefined);
     setEndPoint(undefined);
+    setOptionsID(2);
     setActionID(2);
   };
 
