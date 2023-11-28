@@ -1,11 +1,13 @@
 export type StationType = {
   id: number;
+  name: string;
   address: string;
-  totalWaterSupply: number;
+  consumePerDay: number;
   devices: number;
   installationAt: string;
   threshold: number;
   status: number;
+  thumbnail: any;
 };
 
 export type CreateNewStationType = {
