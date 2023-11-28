@@ -102,7 +102,7 @@ const LineAction: React.FC<LineActionProps> = ({
               HỦY
             </button>
             <button
-              disabled={startPoint === undefined && endPoint === undefined}
+              disabled={endPoint === undefined}
               type="button"
               className="disabled:opacity-30 text-white active:cursor-pointer bg-[#4285f4] active:hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none "
               onClick={handleSaveEdit}

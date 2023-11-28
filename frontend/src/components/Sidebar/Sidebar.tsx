@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
-  const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(true);
+  const [isOpenSideBar, setIsOpenSideBar] = useState<boolean>(false);
   const location = useLocation();
 
   const isActive = (path: string) => {
