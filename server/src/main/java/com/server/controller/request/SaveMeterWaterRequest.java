@@ -13,6 +13,5 @@ public class SaveMeterWaterRequest {
     private String address;
     private double longitude;
     private double latitude;
-    private Date installationAt;
     private boolean status;
 }

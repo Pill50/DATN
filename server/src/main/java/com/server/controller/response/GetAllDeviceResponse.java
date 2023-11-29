@@ -1,9 +1,7 @@
 package com.server.controller.response;
 
-import com.server.repository.watermeter.entity.Device;
 import lombok.Data;
 
-import java.util.Date;
 import java.util.List;
 
 @Data

@@ -1,8 +1,9 @@
 package com.server.service;
 
+import com.server.controller.request.SaveDigitalValueRequest;
 import com.server.controller.request.SaveMeterWaterRequest;
 import com.server.controller.response.GetAllDeviceResponse;
-import com.server.repository.watermeter.entity.Device;
+import com.server.controller.response.Device;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
 import com.server.repository.watermeter.entity.WaterMeterValue;
 import com.server.repository.watermeter.repository.WaterMeterDeviceRepository;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,7 +31,6 @@ public class WaterMeterService {
                 request.getAddress(),
                 request.getLongitude(),
                 request.getLatitude(),
-                request.getInstallationAt(),
                 request.isStatus()
             )
         );
@@ -88,5 +87,15 @@ public class WaterMeterService {
         WaterMeterDevice device = waterMeterDeviceRepository.findById(children).get();
         device.setSuperMeterId(parentId);
         waterMeterDeviceRepository.save(device);
+    }
+    public void saveValueDigitalWaterMeter(SaveDigitalValueRequest request){
+        waterMeterValueRepository.save(
+                new WaterMeterValue(
+                    request.getWaterMeterId(),
+                    0,
+                    request.getTotalRateValue(),
+                    request.getImageUrl()
+                )
+        );
     }
 }
