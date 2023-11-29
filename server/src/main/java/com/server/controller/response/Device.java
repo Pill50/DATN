@@ -1,4 +1,4 @@
-package com.server.repository.watermeter.entity;
+package com.server.controller.response;
 
 import lombok.Data;
 

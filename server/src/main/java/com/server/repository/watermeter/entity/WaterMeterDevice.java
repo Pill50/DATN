@@ -3,6 +3,7 @@ package com.server.repository.watermeter.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -19,7 +20,7 @@ public class WaterMeterDevice {
     private Date installationAt;
     private boolean status;
 
-    public WaterMeterDevice(int id, int userId, int superMeterId, String type, String address, double longitude, double latitude, Date installationAt, boolean status) {
+    public WaterMeterDevice(int id, int userId, int superMeterId, String type, String address, double longitude, double latitude, boolean status) {
         this.id = id;
         this.userId = userId;
         this.superMeterId = superMeterId;
@@ -27,7 +28,7 @@ public class WaterMeterDevice {
         this.address = address;
         this.longitude = longitude;
         this.latitude = latitude;
-        this.installationAt = installationAt;
+        this.installationAt = Date.from(Instant.now());
         this.status = status;
     }
 
