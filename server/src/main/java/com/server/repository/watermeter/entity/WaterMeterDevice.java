@@ -20,16 +20,14 @@ public class WaterMeterDevice {
     private Date installationAt;
     private boolean status;
 
-    public WaterMeterDevice(int id, int userId, int superMeterId, String type, String address, double longitude, double latitude, boolean status) {
+    public WaterMeterDevice(int id, int userId, String type, double longitude, double latitude) {
         this.id = id;
         this.userId = userId;
-        this.superMeterId = superMeterId;
         this.type = type;
-        this.address = address;
         this.longitude = longitude;
         this.latitude = latitude;
         this.installationAt = Date.from(Instant.now());
-        this.status = status;
+        this.status = true;
     }
 
     public WaterMeterDevice() {}
