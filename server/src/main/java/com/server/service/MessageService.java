@@ -7,6 +7,7 @@ import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -17,13 +18,19 @@ public class MessageService {
     @Autowired
     private WaterMeterValueRepository waterMeterValueRepository;
 
+    @Value("${ADAFRUIT_KEY}")
+    public String ADAFRUIT_KEY;
+
+    @Value("${USERNAME}")
+    public String USERNAME;
+
     public void subcribe() {
         String broker = "tcp://io.adafruit.com";
-        String username = "hongphat03";
-        String password = "aio_Nrmy33hQxE2M8eSbvVnkpCqWPyXE";
+        String username = USERNAME;
+        String password = ADAFRUIT_KEY;
         String clientid = MqttClient.generateClientId();
         int qos = 0;
-        String topic = "hongphat03/feeds/anh-sang";
+        String topic = USERNAME + "/feeds/value";
 
         try {
             MqttClient client = new MqttClient(broker, clientid, new MemoryPersistence());
