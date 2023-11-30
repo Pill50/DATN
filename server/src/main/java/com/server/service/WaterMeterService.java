@@ -1,7 +1,7 @@
 package com.server.service;
 
-import com.server.controller.request.SaveDigitalValueRequest;
-import com.server.controller.request.SaveMeterWaterRequest;
+import com.server.controller.request.SaveMechanicalValueRequest;
+import com.server.controller.request.SavePulseValueRequest;
 import com.server.controller.response.GetAllDeviceResponse;
 import com.server.controller.response.Device;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
@@ -21,21 +21,10 @@ public class WaterMeterService {
     private WaterMeterDeviceRepository waterMeterDeviceRepository;
     @Autowired
     private WaterMeterValueRepository waterMeterValueRepository;
-    public void saveWaterMeter(SaveMeterWaterRequest request){
-        waterMeterDeviceRepository.save(
-            new WaterMeterDevice(
-                request.getId(),
-                request.getUserId(),
-                request.getSuperMeterId(),
-                request.getType(),
-                request.getAddress(),
-                request.getLongitude(),
-                request.getLatitude(),
-                request.isStatus()
-            )
-        );
-    }
 
+    public void createDevice(WaterMeterDevice device){
+        waterMeterDeviceRepository.save(device);
+    }
     public GetAllDeviceResponse getAllDevice(){
         List<Device> listDevices = new ArrayList<Device>();
 
@@ -50,24 +39,24 @@ public class WaterMeterService {
             if(device.getType().equals("digital")) totalDigital++;
 
             List<Device> childrens = waterMeterDeviceRepository.findBySuperMeterId(device.getId()).stream().map(chilrend -> new Device(
-                    chilrend.getId(),
-                    chilrend.getAddress(),
-                    chilrend.getLongitude(),
-                    chilrend.getLatitude(),
-                    null,
-                    chilrend.getInstallationAt(),
-                    chilrend.isStatus()
+                chilrend.getId(),
+                chilrend.getAddress(),
+                chilrend.getLongitude(),
+                chilrend.getLatitude(),
+                null,
+                chilrend.getInstallationAt(),
+                chilrend.isStatus()
             )).collect(Collectors.toList());;
             listDevices.add(
-                    new Device(
-                            device.getId(),
-                            device.getAddress(),
-                            device.getLongitude(),
-                            device.getLatitude(),
-                            childrens,
-                            device.getInstallationAt(),
-                            device.isStatus()
-                    )
+                new Device(
+                    device.getId(),
+                    device.getAddress(),
+                    device.getLongitude(),
+                    device.getLatitude(),
+                    childrens,
+                    device.getInstallationAt(),
+                    device.isStatus()
+                )
             );
         }
         GetAllDeviceResponse response = new GetAllDeviceResponse(
@@ -88,14 +77,25 @@ public class WaterMeterService {
         device.setSuperMeterId(parentId);
         waterMeterDeviceRepository.save(device);
     }
-    public void saveValueDigitalWaterMeter(SaveDigitalValueRequest request){
+    public void SaveMechanicalValue(SaveMechanicalValueRequest request){
         waterMeterValueRepository.save(
-                new WaterMeterValue(
-                    request.getWaterMeterId(),
-                    0,
-                    request.getTotalRateValue(),
-                    request.getImageUrl()
-                )
+            new WaterMeterValue(
+                request.getWaterMeterId(),
+                0,
+                request.getTotalRateValue(),
+                request.getImageUrl()
+            )
+        );
+    }
+
+    public void SavePulseValue(SavePulseValueRequest request){
+        waterMeterValueRepository.save(
+            new WaterMeterValue(
+                request.getWaterMeterId(),
+                request.getFlowRateValue(),
+                0,
+                ""
+            )
         );
     }
 }

@@ -2,16 +2,14 @@ package com.server.controller.request;
 
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class SaveMeterWaterRequest {
-    private int id;
-    private int userId;
-    private int superMeterId;
+public class CreateDeviceRequest {
+    private int waterMeterId;
     private String type;
     private String address;
     private double longitude;
     private double latitude;
-    private boolean status;
+    private String email;
+    private String fullName;
+    private String phoneNumber;
 }
