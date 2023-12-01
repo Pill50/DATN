@@ -14,7 +14,7 @@ public class WaterMeterDevice {
     private int id;
     private String waterMeterId;
     private int userId;
-    private int superMeterId;
+    private String superMeterId;
     private String type;
     private String address;
     private double longitude;

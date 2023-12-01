@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface WaterMeterDeviceRepository extends JpaRepository<WaterMeterDevice, Integer> {
-    List<WaterMeterDevice> findBySuperMeterId(Integer id);
+    List<WaterMeterDevice> findBySuperMeterId(String id);
+    WaterMeterDevice findByWaterMeterId(String waterMeterId);
 }
