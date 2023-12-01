@@ -10,7 +10,9 @@ import java.util.Date;
 @Data
 public class WaterMeterDevice {
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+    private String waterMeterId;
     private int userId;
     private int superMeterId;
     private String type;
@@ -20,8 +22,8 @@ public class WaterMeterDevice {
     private Date installationAt;
     private boolean status;
 
-    public WaterMeterDevice(int id, int userId, String type, double longitude, double latitude) {
-        this.id = id;
+    public WaterMeterDevice(String waterMeterId, int userId, String type, double longitude, double latitude) {
+        this.waterMeterId = waterMeterId;
         this.userId = userId;
         this.type = type;
         this.longitude = longitude;

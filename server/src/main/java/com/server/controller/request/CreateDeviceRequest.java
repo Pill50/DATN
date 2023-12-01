@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CreateDeviceRequest {
-    private int waterMeterId;
+    private String waterMeterId;
     private String type;
     private String address;
     private double longitude;
