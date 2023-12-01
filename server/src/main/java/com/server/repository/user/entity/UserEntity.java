@@ -28,4 +28,6 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
         this.role = role;
     }
+    public UserEntity(){
+    }
 }

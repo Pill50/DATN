@@ -2,6 +2,7 @@ package com.server.service;
 
 import com.server.controller.request.SaveMechanicalValueRequest;
 import com.server.controller.request.SavePulseValueRequest;
+import com.server.controller.request.UpdateStatusRequest;
 import com.server.controller.response.GetAllDeviceResponse;
 import com.server.controller.response.Device;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
@@ -38,7 +39,7 @@ public class WaterMeterService {
             if(device.getType().equals("pulse")) totalPulse++;
             if(device.getType().equals("digital")) totalDigital++;
 
-            List<Device> childrens = waterMeterDeviceRepository.findBySuperMeterId(device.getId()).stream().map(chilrend -> new Device(
+            List<Device> childrens = waterMeterDeviceRepository.findBySuperMeterId(device.getSuperMeterId()).stream().map(chilrend -> new Device(
                 chilrend.getId(),
                 chilrend.getAddress(),
                 chilrend.getLongitude(),
@@ -72,8 +73,8 @@ public class WaterMeterService {
     public List<WaterMeterValue> getById(Integer id){
         return waterMeterValueRepository.findByWaterMeterId(id);
     }
-    public void addChildren(Integer parentId, Integer children){
-        WaterMeterDevice device = waterMeterDeviceRepository.findById(children).get();
+    public void addChildren(String parentId, String children){
+        WaterMeterDevice device = waterMeterDeviceRepository.findByWaterMeterId(children);
         device.setSuperMeterId(parentId);
         waterMeterDeviceRepository.save(device);
     }
@@ -97,5 +98,11 @@ public class WaterMeterService {
                 ""
             )
         );
+    }
+
+    public void updateStatus(UpdateStatusRequest request){
+        WaterMeterDevice device = waterMeterDeviceRepository.findByWaterMeterId(request.getWaterMeterId());
+        device.setStatus(request.isStatus());
+        waterMeterDeviceRepository.save(device);
     }
 }

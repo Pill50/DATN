@@ -1,9 +1,8 @@
 package com.server.controller;
 
-import com.server.controller.request.CreateDeviceRequest;
-import com.server.controller.request.SaveMechanicalValueRequest;
-import com.server.controller.request.SavePulseValueRequest;
+import com.server.controller.request.*;
 import com.server.controller.response.GetAllDeviceResponse;
+import com.server.model.UserRole;
 import com.server.repository.user.entity.UserEntity;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
 import com.server.repository.watermeter.entity.WaterMeterValue;
@@ -44,7 +43,7 @@ public class WaterMeterController {
                 request.getFullName(),
                 request.getAddress(),
                 request.getPhoneNumber(),
-                "USER"
+                UserRole.USER
             )
         );
         waterMeterService.createDevice(
@@ -58,9 +57,9 @@ public class WaterMeterController {
         );
     }
 
-    @GetMapping("/add-children")
-    public void addChildren(@RequestParam Integer childrenId, @RequestParam Integer parentId){
-        waterMeterService.addChildren(parentId, childrenId);
+    @PostMapping("/add-children")
+    public void addChildren(@RequestBody AddChildrenRequest request){
+        waterMeterService.addChildren(request.getParentId(), request.getChildrenId());
     }
 
     @PostMapping("/save-digital-value")
@@ -71,6 +70,11 @@ public class WaterMeterController {
     @PostMapping("/save-pulse-value")
     public void savePulseValue(@RequestBody SavePulseValueRequest request){
         waterMeterService.SavePulseValue(request);
+    }
+
+    @PostMapping("/update-status")
+    public void updateStatus(@RequestBody UpdateStatusRequest request){
+        waterMeterService.updateStatus(request);
     }
 }
 
