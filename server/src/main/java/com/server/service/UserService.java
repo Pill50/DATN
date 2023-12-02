@@ -23,4 +23,9 @@ public class UserService {
         user.setPhoneNumber(request.getPhoneNumber());
         userRepository.save(user);
     }
+    public void updatePassword(String password, Integer userId){
+        UserEntity user = userRepository.findById(userId).orElse(new UserEntity());
+        user.setPassword(password);
+        userRepository.save(user);
+    }
 }

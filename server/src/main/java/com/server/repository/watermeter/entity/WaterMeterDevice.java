@@ -12,6 +12,7 @@ public class WaterMeterDevice {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
+    @Column(unique = true)
     private String waterMeterId;
     private int userId;
     private String superMeterId;
