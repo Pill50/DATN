@@ -3,6 +3,7 @@ package com.server.controller;
 import com.server.controller.request.*;
 import com.server.controller.response.GetAllDeviceResponse;
 import com.server.controller.response.GetInfoResponse;
+import com.server.error.ErrorResponse;
 import com.server.model.UserRole;
 import com.server.repository.user.entity.UserEntity;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
@@ -10,7 +11,11 @@ import com.server.repository.watermeter.entity.WaterMeterValue;
 import com.server.service.UserService;
 import com.server.service.WaterMeterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -37,6 +42,9 @@ public class WaterMeterController {
     @GetMapping("/by-id")
     public GetInfoResponse getById(@RequestParam String waterMeterId){
         WaterMeterDevice device = waterMeterService.getDeviceByWaterMeterId(waterMeterId);
+        if(device == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Device Not Found");
+        }
         UserEntity user = userService.getById(device.getUserId());
         return new GetInfoResponse(
             waterMeterId,

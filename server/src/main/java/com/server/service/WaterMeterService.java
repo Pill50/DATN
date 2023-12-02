@@ -10,7 +10,9 @@ import com.server.repository.watermeter.entity.WaterMeterValue;
 import com.server.repository.watermeter.repository.WaterMeterDeviceRepository;
 import com.server.repository.watermeter.repository.WaterMeterValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,12 @@ public class WaterMeterService {
     private WaterMeterValueRepository waterMeterValueRepository;
 
     public void createDevice(WaterMeterDevice device){
-        waterMeterDeviceRepository.save(device);
+        try{
+            waterMeterDeviceRepository.save(device);
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.EXPECTATION_FAILED, "Device has been created");
+        }
     }
     public WaterMeterDevice getDeviceByWaterMeterId(String id){
         return waterMeterDeviceRepository.findByWaterMeterId(id);
@@ -104,9 +111,14 @@ public class WaterMeterService {
     }
 
     public Integer updateStatus(UpdateInfoRequest request){
-        WaterMeterDevice device = waterMeterDeviceRepository.findByWaterMeterId(request.getWaterMeterId());
-        device.setStatus(request.isStatus());
-        waterMeterDeviceRepository.save(device);
-        return device.getUserId();
+        try{
+            WaterMeterDevice device = waterMeterDeviceRepository.findByWaterMeterId(request.getWaterMeterId());
+            device.setStatus(request.isStatus());
+            waterMeterDeviceRepository.save(device);
+            return device.getUserId();
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Device Not Found");
+        }
     }
 }
