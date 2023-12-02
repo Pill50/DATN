@@ -43,7 +43,8 @@ public class WaterMeterController {
             user.getAddress(),
             user.getFullName(),
             user.getEmail(),
-            user.getPhoneNumber()
+            user.getPhoneNumber(),
+            device.isStatus()
         );
     }
 
