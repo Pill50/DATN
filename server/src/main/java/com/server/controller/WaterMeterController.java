@@ -2,6 +2,7 @@ package com.server.controller;
 
 import com.server.controller.request.*;
 import com.server.controller.response.GetAllDeviceResponse;
+import com.server.controller.response.GetInfoResponse;
 import com.server.model.UserRole;
 import com.server.repository.user.entity.UserEntity;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
@@ -29,10 +30,22 @@ public class WaterMeterController {
     }
 
     @GetMapping("/list-by-id")
-    public List<WaterMeterValue> getById(@RequestParam Integer id){
+    public List<WaterMeterValue> getListById(@RequestParam Integer id){
         return waterMeterService.getById(id);
     }
 
+    @GetMapping("/by-id")
+    public GetInfoResponse getById(@RequestParam String waterMeterId){
+        WaterMeterDevice device = waterMeterService.getDeviceByWaterMeterId(waterMeterId);
+        UserEntity user = userService.getById(device.getUserId());
+        return new GetInfoResponse(
+            waterMeterId,
+            user.getAddress(),
+            user.getFullName(),
+            user.getEmail(),
+            user.getPhoneNumber()
+        );
+    }
 
     @PostMapping("/create")
     public void saveMeterWater(@RequestBody CreateDeviceRequest request){
@@ -72,9 +85,10 @@ public class WaterMeterController {
         waterMeterService.SavePulseValue(request);
     }
 
-    @PostMapping("/update-status")
-    public void updateStatus(@RequestBody UpdateStatusRequest request){
-        waterMeterService.updateStatus(request);
+    @PostMapping("/update-info")
+    public void updateStatus(@RequestBody UpdateInfoRequest request){
+        Integer userId = waterMeterService.updateStatus(request);
+        userService.updateInfo(request, userId);
     }
 }
 
