@@ -3,7 +3,10 @@ package com.server.controller.request;
 import lombok.Data;
 
 @Data
-public class UpdateStatusRequest {
+public class UpdateInfoRequest {
     private String waterMeterId;
+    private String email;
+    private String fullName;
+    private String phoneNumber;
     private boolean status;
 }

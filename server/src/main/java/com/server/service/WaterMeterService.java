@@ -2,7 +2,7 @@ package com.server.service;
 
 import com.server.controller.request.SaveMechanicalValueRequest;
 import com.server.controller.request.SavePulseValueRequest;
-import com.server.controller.request.UpdateStatusRequest;
+import com.server.controller.request.UpdateInfoRequest;
 import com.server.controller.response.GetAllDeviceResponse;
 import com.server.controller.response.Device;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
@@ -25,6 +25,9 @@ public class WaterMeterService {
 
     public void createDevice(WaterMeterDevice device){
         waterMeterDeviceRepository.save(device);
+    }
+    public WaterMeterDevice getDeviceByWaterMeterId(String id){
+        return waterMeterDeviceRepository.findByWaterMeterId(id);
     }
     public GetAllDeviceResponse getAllDevice(){
         List<Device> listDevices = new ArrayList<Device>();
@@ -100,9 +103,10 @@ public class WaterMeterService {
         );
     }
 
-    public void updateStatus(UpdateStatusRequest request){
+    public Integer updateStatus(UpdateInfoRequest request){
         WaterMeterDevice device = waterMeterDeviceRepository.findByWaterMeterId(request.getWaterMeterId());
         device.setStatus(request.isStatus());
         waterMeterDeviceRepository.save(device);
+        return device.getUserId();
     }
 }
