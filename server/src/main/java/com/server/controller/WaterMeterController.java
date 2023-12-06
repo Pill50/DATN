@@ -1,16 +1,21 @@
 package com.server.controller;
 
-import com.server.controller.request.CreateDeviceRequest;
-import com.server.controller.request.SaveMechanicalValueRequest;
-import com.server.controller.request.SavePulseValueRequest;
+import com.server.controller.request.*;
 import com.server.controller.response.GetAllDeviceResponse;
+import com.server.controller.response.GetInfoResponse;
+import com.server.error.ErrorResponse;
+import com.server.model.UserRole;
 import com.server.repository.user.entity.UserEntity;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
 import com.server.repository.watermeter.entity.WaterMeterValue;
 import com.server.service.UserService;
 import com.server.service.WaterMeterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -30,10 +35,26 @@ public class WaterMeterController {
     }
 
     @GetMapping("/list-by-id")
-    public List<WaterMeterValue> getById(@RequestParam Integer id){
+    public List<WaterMeterValue> getListById(@RequestParam Integer id){
         return waterMeterService.getById(id);
     }
 
+    @GetMapping("/by-id")
+    public GetInfoResponse getById(@RequestParam String waterMeterId){
+        WaterMeterDevice device = waterMeterService.getDeviceByWaterMeterId(waterMeterId);
+        if(device == null){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Device Not Found");
+        }
+        UserEntity user = userService.getById(device.getUserId());
+        return new GetInfoResponse(
+            waterMeterId,
+            user.getAddress(),
+            user.getFullName(),
+            user.getEmail(),
+            user.getPhoneNumber(),
+            device.isStatus()
+        );
+    }
 
     @PostMapping("/create")
     public void saveMeterWater(@RequestBody CreateDeviceRequest request){
@@ -44,7 +65,7 @@ public class WaterMeterController {
                 request.getFullName(),
                 request.getAddress(),
                 request.getPhoneNumber(),
-                "USER"
+                UserRole.USER
             )
         );
         waterMeterService.createDevice(
@@ -58,9 +79,9 @@ public class WaterMeterController {
         );
     }
 
-    @GetMapping("/add-children")
-    public void addChildren(@RequestParam Integer childrenId, @RequestParam Integer parentId){
-        waterMeterService.addChildren(parentId, childrenId);
+    @PostMapping("/add-children")
+    public void addChildren(@RequestBody AddChildrenRequest request){
+        waterMeterService.addChildren(request.getParentId(), request.getChildrenId());
     }
 
     @PostMapping("/save-digital-value")
@@ -71,6 +92,12 @@ public class WaterMeterController {
     @PostMapping("/save-pulse-value")
     public void savePulseValue(@RequestBody SavePulseValueRequest request){
         waterMeterService.SavePulseValue(request);
+    }
+
+    @PostMapping("/update-info")
+    public void updateStatus(@RequestBody UpdateInfoRequest request){
+        Integer userId = waterMeterService.updateStatus(request);
+        userService.updateInfo(request, userId);
     }
 }
 
