@@ -14,6 +14,7 @@ public class WaterMeterDevice {
     private int id;
     @Column(unique = true)
     private String waterMeterId;
+    @Column(unique = true)
     private int userId;
     private String superMeterId;
     private String type;
