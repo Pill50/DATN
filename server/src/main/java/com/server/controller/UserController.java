@@ -1,12 +1,12 @@
 package com.server.controller;
 
 import com.server.controller.request.UpdatePasswordRequest;
+import com.server.controller.response.UserInfoResponse;
 import com.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/user")
@@ -16,5 +16,15 @@ public class UserController {
     @PostMapping("/update-password")
     public void updatePassword(@RequestBody UpdatePasswordRequest request){
         userService.updatePassword(request.getPassword(), request.getUserId());
+    }
+
+    @GetMapping("by-id")
+    public UserInfoResponse getById(@RequestParam Integer userId){
+        try{
+            return userService.getUserInfo(userId);
+        }
+        catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Device Not Found or Invalid User");
+        }
     }
 }

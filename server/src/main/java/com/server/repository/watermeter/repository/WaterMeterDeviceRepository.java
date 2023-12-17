@@ -8,4 +8,5 @@ import java.util.List;
 public interface WaterMeterDeviceRepository extends JpaRepository<WaterMeterDevice, Integer> {
     List<WaterMeterDevice> findBySuperMeterId(String id);
     WaterMeterDevice findByWaterMeterId(String waterMeterId);
+    WaterMeterDevice findByUserId(Integer userId);
 }
