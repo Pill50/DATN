@@ -1,21 +1,13 @@
+import { Device } from '@/types/device';
 import React, { useState } from 'react';
-
-type Point = {
-  name: string;
-  address: string;
-  latitude: number;
-  longitude: number;
-  waterConsumptionPerDay: number;
-  lifetime: string;
-};
 
 interface LineActionProps {
   handleCreateNewLine: Function;
   handleRemoveLine: Function;
   handleRemoveOptions: Function;
   handleSaveEdit: React.MouseEventHandler<HTMLButtonElement>;
-  startPoint: Point;
-  endPoint: Point;
+  startPoint: Device;
+  endPoint: Device;
 }
 
 const LineAction: React.FC<LineActionProps> = ({
@@ -67,7 +59,6 @@ const LineAction: React.FC<LineActionProps> = ({
             <p className="text-center font-semibold text-lg">Nguồn bắt đầu</p>
             {startPoint ? (
               <>
-                <p>Tên: {startPoint.name}</p>
                 <p>Địa chỉ: {startPoint.address}</p>
                 <p>Kinh độ: {startPoint.longitude}</p>
                 <p>Vĩ độ: {startPoint.latitude}</p>
@@ -80,7 +71,6 @@ const LineAction: React.FC<LineActionProps> = ({
             <p className="text-center font-semibold text-lg">Nguồn kết thúc</p>
             {endPoint ? (
               <>
-                <p>Tên: {endPoint.name}</p>
                 <p>Địa chỉ: {endPoint.address}</p>
                 <p>Kinh độ: {endPoint.longitude}</p>
                 <p>Vĩ độ: {endPoint.latitude}</p>
