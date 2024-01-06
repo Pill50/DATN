@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class SaveMechanicalValueRequest {
-    private int waterMeterId;
+    private String waterMeterId;
     private int totalRateValue;
     private String imageUrl;
 }

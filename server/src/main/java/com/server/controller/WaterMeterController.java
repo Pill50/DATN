@@ -35,7 +35,7 @@ public class WaterMeterController {
     }
 
     @GetMapping("/list-by-id")
-    public List<WaterMeterValue> getListById(@RequestParam Integer id){
+    public List<WaterMeterValue> getListById(@RequestParam String id){
         return waterMeterService.getById(id);
     }
 

@@ -30,7 +30,7 @@ public class MessageService {
         String password = ADAFRUIT_KEY;
         String clientid = MqttClient.generateClientId();
         int qos = 0;
-        String topic = USERNAME + "/feeds/value";
+        String topic = USERNAME + "/feeds/water-flow";
 
         try {
             MqttClient client = new MqttClient(broker, clientid, new MemoryPersistence());
@@ -56,7 +56,7 @@ public class MessageService {
                     WaterMeterValue record = new WaterMeterValue();
                     record.setFlowRateValue(data.getFlowRateValue());
                     record.setTotalRateValue(data.getTotalRateValue());
-                    record.setWaterMeterId(data.getId());
+                    record.setWaterMeterId(data.getWaterMeterId());
                     waterMeterValueRepository.save(record);
                 }
 

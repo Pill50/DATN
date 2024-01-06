@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface WaterMeterValueRepository extends JpaRepository<WaterMeterValue, Integer> {
-    List<WaterMeterValue> findByWaterMeterId(Integer id);
+public interface WaterMeterValueRepository extends JpaRepository<WaterMeterValue, String> {
+    List<WaterMeterValue> findByWaterMeterId(String id);
 }
