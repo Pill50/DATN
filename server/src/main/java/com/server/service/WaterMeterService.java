@@ -5,6 +5,8 @@ import com.server.controller.request.SavePulseValueRequest;
 import com.server.controller.request.UpdateInfoRequest;
 import com.server.controller.response.GetAllDeviceResponse;
 import com.server.controller.response.Device;
+import com.server.repository.user.entity.UserEntity;
+import com.server.repository.user.repository.UserRepository;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
 import com.server.repository.watermeter.entity.WaterMeterValue;
 import com.server.repository.watermeter.repository.WaterMeterDeviceRepository;
@@ -24,6 +26,8 @@ public class WaterMeterService {
     private WaterMeterDeviceRepository waterMeterDeviceRepository;
     @Autowired
     private WaterMeterValueRepository waterMeterValueRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     public WaterMeterDevice getByUserId(Integer userId){
         return waterMeterDeviceRepository.findByUserId(userId);
@@ -52,17 +56,24 @@ public class WaterMeterService {
             if(device.getType().equals("pulse")) totalPulse++;
             if(device.getType().equals("digital")) totalDigital++;
 
-            List<Device> childrens = waterMeterDeviceRepository.findBySuperMeterId(device.getWaterMeterId()).stream().map(chilrend -> new Device(
-                chilrend.getWaterMeterId(),
-                chilrend.getLongitude(),
-                chilrend.getLatitude(),
-                null,
-                chilrend.getInstallationAt(),
-                chilrend.isStatus()
-            )).collect(Collectors.toList());;
+            UserEntity user = userRepository.findById(device.getUserId()).orElse(new UserEntity());
+            List<Device> childrens = waterMeterDeviceRepository.findBySuperMeterId(device.getWaterMeterId()).stream().map(children ->
+                    {
+                        UserEntity userOfChildren = userRepository.findById(children.getUserId()).orElse(new UserEntity());
+                        return new Device(
+                                children.getWaterMeterId(),
+                                userOfChildren.getAddress(),
+                                children.getLongitude(),
+                                children.getLatitude(),
+                                null,
+                                children.getInstallationAt(),
+                                children.isStatus()
+                        );
+                    }).collect(Collectors.toList());;
             listDevices.add(
                 new Device(
                     device.getWaterMeterId(),
+                    user.getAddress(),
                     device.getLongitude(),
                     device.getLatitude(),
                     childrens,
