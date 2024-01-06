@@ -18,7 +18,6 @@ public class WaterMeterDevice {
     private int userId;
     private String superMeterId;
     private String type;
-    private String address;
     private double longitude;
     private double latitude;
     private Date installationAt;
