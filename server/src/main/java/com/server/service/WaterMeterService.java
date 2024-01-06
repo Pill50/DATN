@@ -54,7 +54,6 @@ public class WaterMeterService {
 
             List<Device> childrens = waterMeterDeviceRepository.findBySuperMeterId(device.getSuperMeterId()).stream().map(chilrend -> new Device(
                 chilrend.getId(),
-                chilrend.getAddress(),
                 chilrend.getLongitude(),
                 chilrend.getLatitude(),
                 null,
@@ -64,7 +63,6 @@ public class WaterMeterService {
             listDevices.add(
                 new Device(
                     device.getId(),
-                    device.getAddress(),
                     device.getLongitude(),
                     device.getLatitude(),
                     childrens,
