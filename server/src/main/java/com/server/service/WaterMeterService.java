@@ -52,9 +52,8 @@ public class WaterMeterService {
             if(device.getType().equals("pulse")) totalPulse++;
             if(device.getType().equals("digital")) totalDigital++;
 
-            List<Device> childrens = waterMeterDeviceRepository.findBySuperMeterId(device.getSuperMeterId()).stream().map(chilrend -> new Device(
-                chilrend.getId(),
-                chilrend.getAddress(),
+            List<Device> childrens = waterMeterDeviceRepository.findBySuperMeterId(device.getWaterMeterId()).stream().map(chilrend -> new Device(
+                chilrend.getWaterMeterId(),
                 chilrend.getLongitude(),
                 chilrend.getLatitude(),
                 null,
@@ -63,8 +62,7 @@ public class WaterMeterService {
             )).collect(Collectors.toList());;
             listDevices.add(
                 new Device(
-                    device.getId(),
-                    device.getAddress(),
+                    device.getWaterMeterId(),
                     device.getLongitude(),
                     device.getLatitude(),
                     childrens,
@@ -86,11 +84,31 @@ public class WaterMeterService {
     public List<WaterMeterValue> getById(Integer id){
         return waterMeterValueRepository.findByWaterMeterId(id);
     }
-    public void addChildren(String parentId, String children){
+
+    public boolean addLine(String parentId, String children){
         WaterMeterDevice device = waterMeterDeviceRepository.findByWaterMeterId(children);
+        if(device.getSuperMeterId() != null) return false;
         device.setSuperMeterId(parentId);
         waterMeterDeviceRepository.save(device);
+        return true;
     }
+
+    public boolean deleteLine(String id1, String id2){
+        WaterMeterDevice device = waterMeterDeviceRepository.findByWaterMeterId(id1);
+        if(device.getSuperMeterId() != null && device.getSuperMeterId().equals(id2)){
+            device.setSuperMeterId(null);
+            waterMeterDeviceRepository.save(device);
+            return true;
+        }
+        device = waterMeterDeviceRepository.findByWaterMeterId(id2);
+        if(device.getSuperMeterId() != null && device.getSuperMeterId().equals(id1)){
+            device.setSuperMeterId(null);
+            waterMeterDeviceRepository.save(device);
+            return true;
+        }
+        return false;
+    }
+
     public void SaveMechanicalValue(SaveMechanicalValueRequest request){
         waterMeterValueRepository.save(
             new WaterMeterValue(

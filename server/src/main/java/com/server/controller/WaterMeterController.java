@@ -79,9 +79,14 @@ public class WaterMeterController {
         );
     }
 
-    @PostMapping("/add-children")
-    public void addChildren(@RequestBody AddChildrenRequest request){
-        waterMeterService.addChildren(request.getParentId(), request.getChildrenId());
+    @PostMapping("/add-line")
+    public void addLine(@RequestBody AddLineRequest request){
+        if(!waterMeterService.addLine(request.getParentId(), request.getChildrenId())) throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Can not add line");
+    }
+
+    @PostMapping("/delete-line")
+    public void deleteLine(@RequestBody DeleteLineRequest request){
+        if(!waterMeterService.deleteLine(request.getId1(), request.getId2())) throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Can not delete line");
     }
 
     @PostMapping("/save-digital-value")
