@@ -25,6 +25,9 @@ public class WaterMeterService {
     @Autowired
     private WaterMeterValueRepository waterMeterValueRepository;
 
+    public WaterMeterDevice getByUserId(Integer userId){
+        return waterMeterDeviceRepository.findByUserId(userId);
+    }
     public void createDevice(WaterMeterDevice device){
         try{
             waterMeterDeviceRepository.save(device);
