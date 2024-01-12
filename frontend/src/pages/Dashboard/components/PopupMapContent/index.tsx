@@ -11,7 +11,10 @@ const PopupMapContent: React.FC<PopupContentProp> = ({ info }) => {
     <div className="text-xs flex flex-col gap-1">
       <p>Địa chỉ: {info.address}</p>
       <p>Số nguồn con: {info.children.length} nguồn</p>
-      <Link to={`/stations/${info.id}`} className="text-[#4285f4] cursor-pointer flex justify-end items-center gap-1">
+      <Link
+        to={`/stations/${info.waterMeterId}`}
+        className="text-[#4285f4] cursor-pointer flex justify-end items-center gap-1"
+      >
         Xem chi tiết <img src={ArrowIcon} alt="->" className="w-4 h-4" />
       </Link>
     </div>

@@ -1,5 +1,4 @@
 export type Device = {
-  id: number;
   waterMeterId: string;
   address: string;
   longitude: number;

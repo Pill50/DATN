@@ -98,7 +98,9 @@ public class WaterMeterService {
 
     public boolean addLine(String parentId, String children){
         WaterMeterDevice device = waterMeterDeviceRepository.findByWaterMeterId(children);
+        System.out.println(device.getSuperMeterId());
         if(device.getSuperMeterId() != null) return false;
+        System.out.println(parentId);
         device.setSuperMeterId(parentId);
         waterMeterDeviceRepository.save(device);
         return true;
