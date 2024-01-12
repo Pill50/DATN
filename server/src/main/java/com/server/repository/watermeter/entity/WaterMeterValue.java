@@ -16,15 +16,15 @@ public class WaterMeterValue {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
     private String waterMeterId;
-    private int flowRateValue;
-    private int totalRateValue;
+    private float flowRateValue;
+    private float totalFlowValue;
     private String imageUrl;
     private Date updatedAt = Date.from(Instant.now());
 
     public WaterMeterValue(String waterMeterId, int flowRateValue, int totalRateValue, String imageUrl) {
         this.waterMeterId = waterMeterId;
         this.flowRateValue = flowRateValue;
-        this.totalRateValue = totalRateValue;
+        this.totalFlowValue = totalRateValue;
         this.imageUrl = imageUrl;
     }
     public WaterMeterValue(){};
