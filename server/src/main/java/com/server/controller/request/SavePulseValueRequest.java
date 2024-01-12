@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class SavePulseValueRequest {
-    private int waterMeterId;
+    private String waterMeterId;
     private int flowRateValue;
 }

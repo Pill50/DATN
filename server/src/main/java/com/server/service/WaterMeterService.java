@@ -92,7 +92,7 @@ public class WaterMeterService {
 
         return response;
     }
-    public List<WaterMeterValue> getById(Integer id){
+    public List<WaterMeterValue> getById(String id){
         return waterMeterValueRepository.findByWaterMeterId(id);
     }
 

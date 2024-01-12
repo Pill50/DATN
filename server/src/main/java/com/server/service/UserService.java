@@ -41,7 +41,7 @@ public class UserService {
         try{
             UserEntity user = userRepository.getById(userId);
             WaterMeterDevice waterMeterDevice = waterMeterService.getByUserId(userId);
-            List<WaterMeterValue> listValue =  waterMeterService.getById(waterMeterDevice.getId());
+            List<WaterMeterValue> listValue =  waterMeterService.getById(waterMeterDevice.getWaterMeterId());
 
             res.setAddress(user.getAddress());
             res.setEmail(user.getEmail());
