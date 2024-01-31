@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { loginValidationSchema } from '@/validations/auth';
+import { registerValidationSchema } from '@/validations/auth';
 
 const initialValues = {
   email: '',
   password: '',
+  confirmPassword: '',
 };
 
 const handleSubmit = () => {
-  console.log('LOGIN SUBMIT');
+  console.log('REGISTER SUBMIT');
 };
 
-const Login: React.FC = () => {
+const Register: React.FC = () => {
   return (
     <>
       <div className="px-3 mb-10 flex flex-col justify-center items-center">
@@ -20,10 +21,11 @@ const Login: React.FC = () => {
           <span className="text-[#DB4437]">Protect</span> Our Water, <span className="text-[#DB4437]">Sustain</span> Our
           Future, <span className="text-[#DB4437]">Every Drop Matters!</span>
         </h1>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={loginValidationSchema}>
+        <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={registerValidationSchema}>
           {(formik) => (
             <Form className="flex flex-col p-4 rounded-xl bg-[#F2F2F2] shadow-md" onSubmit={formik.handleSubmit}>
-              <h1 className="text-center text-[#4285F4] font-bold text-xl">LOGIN TO YOUR ACCOUNT</h1>
+              <h1 className="text-center text-[#4285F4] font-bold text-xl">SIGN UP YOUR NEW ACCOUNT</h1>
+              {/* EMAIL */}
               <div className="flex flex-col my-2">
                 <label htmlFor="email" className="mb-1">
                   Email
@@ -31,14 +33,15 @@ const Login: React.FC = () => {
                 <Field
                   id="email"
                   name="email"
-                  type="text"
-                  placeholder="Enter your email"
+                  type="email"
+                  placeholder="Email"
                   className={`${
                     formik.errors.email && formik.touched.email ? 'border-[#DB4437]' : ''
                   } w-[350px] h-14 p-4 rounded-lg border-[1px] border-[#E3E3E3]`}
                 />
                 <ErrorMessage name="email" component="span" className="text-[#DB4437]" />
               </div>
+              {/* PASSWORD */}
               <div className="flex flex-col my-2">
                 <label htmlFor="password" className="mb-1">
                   Password
@@ -47,23 +50,36 @@ const Login: React.FC = () => {
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="password"
+                  placeholder="Password"
                   className={`${
-                    formik.errors.password && formik.touched.password ? 'border-[#DB4437' : ''
+                    formik.errors.password && formik.touched.password ? 'border-[#DB4437]' : ''
                   } w-[350px] h-14 p-4 rounded-lg border-[1px] border-[#E3E3E3]`}
                 />
                 <ErrorMessage name="password" component="span" className="text-[#DB4437]" />
               </div>
-              <Link to="/forgot-password" className="text-[#4285F4] mb-4 cursor-pointer hover:opacity-80">
-                Forgot password?
-              </Link>
+              {/* CONFIRM PASSWORD */}
+              <div className="flex flex-col my-2">
+                <label htmlFor="confirmPassword" className="mb-1">
+                  Confirm Password
+                </label>
+                <Field
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="Confirm Password"
+                  className={`${
+                    formik.errors.confirmPassword && formik.touched.confirmPassword ? 'border-[#DB4437]' : ''
+                  } w-[350px] h-14 p-4 rounded-lg border-[1px] border-[#E3E3E3]`}
+                />
+                <ErrorMessage name="confirmPassword" component="span" className="text-[#DB4437]" />
+              </div>
               <button type="submit" className="h-14 bg-[#4285F4] rounded-lg text-white cursor-pointer hover:opacity-80">
-                LOGIN
+                SIGN UP
               </button>
               <div className="mt-2 text-center">
-                Don't have an account?{' '}
-                <Link to={'/register'} className="text-[#4285F4] mb-4 cursor-pointer hover:opacity-80">
-                  Sign up
+                Already have an account?{' '}
+                <Link to="/login" className="text-[#4285F4] mb-4 cursor-pointer hover:opacity-80">
+                  Login
                 </Link>
               </div>
             </Form>
@@ -73,4 +89,4 @@ const Login: React.FC = () => {
     </>
   );
 };
-export default Login;
+export default Register;

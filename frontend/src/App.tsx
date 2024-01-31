@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import Login from './pages/Login';
 // import Register from './pages/Register';
 // import ForgotPassword from './pages/ForgotPassword';
 // import ResetPassword from './pages/ResetPassword';
@@ -15,6 +14,7 @@ import ManageStation from './pages/ManageStation';
 import DetailStation from './pages/DetailStation';
 import ManageInvoice from './pages/ManageInvoice';
 import Login from './pages/Auth/Login';
+import Register from './pages/Auth/Register';
 
 const App: React.FC = () => {
   // const [user, setUser] = useState<boolean>(true);
@@ -33,6 +33,7 @@ const App: React.FC = () => {
         <Route path={'/reset-password'} element={<ResetPassword />}></Route> */}
           {/* PRIVATE ROUTE */}
           <Route path={'/login'} element={<Login />}></Route>
+          <Route path={'/register'} element={<Register />}></Route>
           <Route element={<ProtectedRoute user={true} />}>
             {/* <Route path="/change-password" element={<ChangePassword />} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
