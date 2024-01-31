@@ -14,6 +14,7 @@ import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import ForgotPassword from './pages/Auth/ForgotPassword';
 import ChangePassword from './pages/Auth/ChangePassword';
+import ResetPassword from './pages/Auth/ResetPassword';
 
 const App: React.FC = () => {
   // const [user, setUser] = useState<boolean>(true);
@@ -24,19 +25,14 @@ const App: React.FC = () => {
         <Header />
         <Routes>
           <Route index element={<Dashboard />} />
-
-          {/* <Route index element={<Login />}></Route>
-          <Route path={'/register'} element={<Register />}></Route>
-          <Route path={'/register'} element={<Register />}></Route>
-          <Route path={'/forgot-password'} element={<ForgotPassword />}></Route>
-        <Route path={'/reset-password'} element={<ResetPassword />}></Route> */}
-          {/* PRIVATE ROUTE */}
           <Route path={'/login'} element={<Login />}></Route>
           <Route path={'/register'} element={<Register />}></Route>
           <Route path={'/forgot-password'} element={<ForgotPassword />}></Route>
-          <Route path={'/change-password'} element={<ChangePassword />}></Route>
+          <Route path={'/reset-password'} element={<ResetPassword />}></Route>
+
+          {/* PRIVATE ROUTE */}
           <Route element={<ProtectedRoute user={true} />}>
-            {/* <Route path="/change-password" element={<ChangePassword />} /> */}
+            <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/stations/:stationID" element={<DetailStation />} />
             <Route path="/stations" element={<ManageStation />} />
