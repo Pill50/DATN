@@ -14,11 +14,7 @@ import Dashboard from './pages/Dashboard';
 import ManageStation from './pages/ManageStation';
 import DetailStation from './pages/DetailStation';
 import ManageInvoice from './pages/ManageInvoice';
-// import Station from './pages/Station';
-// import Device from './pages/Device';
-// import Profile from './pages/Profile';
-// import DetailStation from './pages/DetailStation';
-// import DetailDevice from './pages/DetailDevice';
+import Login from './pages/Auth/Login';
 
 const App: React.FC = () => {
   // const [user, setUser] = useState<boolean>(true);
@@ -31,12 +27,12 @@ const App: React.FC = () => {
           <Route index element={<Dashboard />} />
 
           {/* <Route index element={<Login />}></Route>
-          <Route path={'/login'} element={<Login />}></Route>
           <Route path={'/register'} element={<Register />}></Route>
           <Route path={'/register'} element={<Register />}></Route>
           <Route path={'/forgot-password'} element={<ForgotPassword />}></Route>
-          <Route path={'/reset-password'} element={<ResetPassword />}></Route> */}
+        <Route path={'/reset-password'} element={<ResetPassword />}></Route> */}
           {/* PRIVATE ROUTE */}
+          <Route path={'/login'} element={<Login />}></Route>
           <Route element={<ProtectedRoute user={true} />}>
             {/* <Route path="/change-password" element={<ChangePassword />} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
