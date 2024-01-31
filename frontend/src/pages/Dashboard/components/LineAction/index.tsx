@@ -1,21 +1,13 @@
+import { Device } from '@/types/device';
 import React, { useState } from 'react';
-
-type Point = {
-  name: string;
-  address: string;
-  latitude: number;
-  longitude: number;
-  waterConsumptionPerDay: number;
-  lifetime: string;
-};
 
 interface LineActionProps {
   handleCreateNewLine: Function;
   handleRemoveLine: Function;
   handleRemoveOptions: Function;
   handleSaveEdit: React.MouseEventHandler<HTMLButtonElement>;
-  startPoint: Point;
-  endPoint: Point;
+  startPoint: Device;
+  endPoint: Device;
 }
 
 const LineAction: React.FC<LineActionProps> = ({
@@ -27,7 +19,7 @@ const LineAction: React.FC<LineActionProps> = ({
   endPoint,
 }) => {
   const [isOpenInfoBlock, setIsOpenInfoBlock] = useState<boolean>(false);
-  const [options, setOptions] = useState<number>(1);
+  const [options, setOptions] = useState<number>(0);
 
   return (
     <>
@@ -67,7 +59,6 @@ const LineAction: React.FC<LineActionProps> = ({
             <p className="text-center font-semibold text-lg">Nguồn bắt đầu</p>
             {startPoint ? (
               <>
-                <p>Tên: {startPoint.name}</p>
                 <p>Địa chỉ: {startPoint.address}</p>
                 <p>Kinh độ: {startPoint.longitude}</p>
                 <p>Vĩ độ: {startPoint.latitude}</p>
@@ -80,7 +71,6 @@ const LineAction: React.FC<LineActionProps> = ({
             <p className="text-center font-semibold text-lg">Nguồn kết thúc</p>
             {endPoint ? (
               <>
-                <p>Tên: {endPoint.name}</p>
                 <p>Địa chỉ: {endPoint.address}</p>
                 <p>Kinh độ: {endPoint.longitude}</p>
                 <p>Vĩ độ: {endPoint.latitude}</p>
@@ -95,14 +85,16 @@ const LineAction: React.FC<LineActionProps> = ({
               className="text-[#333] bg-[#e3e3e3] hover:bg-slate-400 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none "
               onClick={() => {
                 setIsOpenInfoBlock(false);
+                setOptions(0);
                 handleRemoveOptions();
               }}
             >
               HỦY
             </button>
             <button
+              disabled={endPoint === undefined}
               type="button"
-              className="text-white bg-[#4285f4] hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none "
+              className="disabled:opacity-30 text-white active:cursor-pointer bg-[#4285f4] active:hover:bg-blue-800 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none "
               onClick={handleSaveEdit}
             >
               LƯU

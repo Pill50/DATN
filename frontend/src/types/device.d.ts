@@ -1,10 +1,14 @@
-export type DeviceType = {
+export type Device = {
   id: number;
+  waterMeterId: string;
   address: string;
+  longitude: number;
+  latitude: number;
+  installedAt: string;
+  status: boolean;
   waterMeter: number;
   waterFlow: number;
-  installationAt: string;
-  pinPercent: number;
+  children: Device[];
 };
 
 export type CreateNewDeviceType = {

@@ -5,6 +5,8 @@ import PopupContent from '../PopupMapContent';
 import waterMeterImg from '@assets/images/waterMeter.png';
 import SearchPlace from '../SearchPlace';
 import LineAction from '../LineAction';
+import { Device } from '@/types/device';
+import axios from 'axios';
 
 type Marker = {
   id: string;
@@ -109,15 +111,19 @@ const MockSupplyList: Marker[] = [
     subDevices: [],
   },
 ];
+interface MapProps {
+  deviceList?: Device[];
+}
 
-const MapComponent: React.FC = () => {
-  const [selectedMarker, setSelectedMarker] = useState<Marker>();
+const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
+  console.log(deviceList);
+  const [selectedMarker, setSelectedMarker] = useState<Device>();
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [optionsID, setOptionsID] = useState<number>(1);
   const [actionID, setActionID] = useState<number>(1);
-  const [supplyList, setSupplyList] = useState<Marker[]>(MockSupplyList);
-  const [startPoint, setStartPoint] = useState<Marker>();
-  const [endPoint, setEndPoint] = useState<Marker>();
+  const [supplyList, setSupplyList] = useState<Device[]>(deviceList as Device[]);
+  const [startPoint, setStartPoint] = useState<Device>();
+  const [endPoint, setEndPoint] = useState<Device>();
 
   const [viewport, setViewport] = useState({
     latitude: 10.77284540373968,
@@ -125,7 +131,7 @@ const MapComponent: React.FC = () => {
     zoom: 16,
   });
 
-  const handleClickMarker = (marker: Marker) => {
+  const handleClickMarker = (marker: Device) => {
     setViewport({
       latitude: marker.latitude,
       longitude: marker.longitude,
@@ -148,47 +154,55 @@ const MapComponent: React.FC = () => {
   const handleCreateNewLine = () => {
     setStartPoint(undefined);
     setEndPoint(undefined);
+    setOptionsID(1);
     setActionID(1);
   };
 
   const handleRemoveLine = () => {
     setStartPoint(undefined);
     setEndPoint(undefined);
+    setOptionsID(2);
     setActionID(2);
   };
 
-  const handleSaveDrawResult = () => {
-    if (startPoint && endPoint) {
-      const index = supplyList.findIndex((item) => item.address === startPoint?.address);
-      if (index !== -1) {
-        const newsuplyList = [...supplyList];
-        const subDevices = newsuplyList[index].subDevices || []; // Initialize as empty array if undefined
-        subDevices.push(endPoint);
-        newsuplyList[index].subDevices = subDevices; // Update subDevices
-        setSupplyList(newsuplyList);
+  const handleSaveDrawResult = async () => {
+    try {
+      if (startPoint && endPoint) {
+        const data = {
+          childrenId: endPoint.waterMeterId,
+          parentId: startPoint.waterMeterId,
+        };
+        const response = await axios.post('http://localhost:8080/water-meter/add-line', data);
+        if (response.status == 200) {
+          const newList = (await axios.get('http://localhost:8080/water-meter/list')).data;
+          setSupplyList(newList.devices);
+        }
       } else {
-        alert(`Address ${startPoint.address} not found in the list.`);
+        console.log('startPoint or endPoint is not defined.');
       }
+    } catch (error) {
+      console.log(error);
     }
     handleRemoveOptions();
   };
 
-  const handleSaveRemoveResult = () => {
-    if (startPoint && endPoint) {
-      if (!startPoint.subDevices?.find((item) => item.address === endPoint.address)) {
-        alert('Invalid line to remove');
-        return;
-      }
-      const index = supplyList.findIndex((item) => item.address === startPoint?.address);
-      if (index !== -1) {
-        const newsuplyList = [...supplyList];
-        newsuplyList[index].subDevices = newsuplyList[index].subDevices?.filter(
-          (item) => item.address !== endPoint.address,
-        );
-        setSupplyList(newsuplyList);
+  const handleSaveRemoveResult = async () => {
+    try {
+      if (startPoint && endPoint) {
+        const data = {
+          id1: endPoint.waterMeterId,
+          id2: startPoint.waterMeterId,
+        };
+        const response = await axios.post('http://localhost:8080/water-meter/delete-line', data);
+        if (response.status == 200) {
+          const newList = (await axios.get('http://localhost:8080/water-meter/list')).data;
+          setSupplyList(newList.devices);
+        }
       } else {
-        alert(`Address ${startPoint.address} not found in the list.`);
+        console.log('startPoint or endPoint is not defined.');
       }
+    } catch (error) {
+      console.log(error);
     }
     handleRemoveOptions();
   };
@@ -231,9 +245,7 @@ const MapComponent: React.FC = () => {
 
   return (
     <>
-      {/* <h2 className="text-center text-[#4285f4] text-2xl font-semibold">
-        BẢN ĐỒ THÔNG TIN LẮP ĐẶT CÁC TRẠM TỔNG VÀ ĐỒNG HỒ CON
-      </h2> */}
+      <h2 className=" text-[#4285f4] text-2xl font-bold ml-4">Bản đồ hệ thống nước</h2>
       <div className="flex gap-4 h-[600px]">
         <div className="w-[300px] shadow-md p-4">
           <SearchPlace handleSearchPlace={handleSearchPlace} />
@@ -242,8 +254,8 @@ const MapComponent: React.FC = () => {
             handleRemoveLine={handleRemoveLine}
             handleRemoveOptions={handleRemoveOptions}
             handleSaveEdit={handleSaveEdit}
-            startPoint={startPoint as Marker}
-            endPoint={endPoint as Marker}
+            startPoint={startPoint as Device}
+            endPoint={endPoint as Device}
           />
         </div>
         <div className="flex-1 py-4 shadow-md">
@@ -276,12 +288,12 @@ const MapComponent: React.FC = () => {
                       {/* <PinIcon /> */}
                       <img src={waterMeterImg} alt="water meter" className="w-10 h-10" />
                     </div>
-                    <p className="marker__name">{marker.name}</p>
+                    <p className="marker__name">{marker.address}</p>
                   </div>
                 </Marker>
 
-                {marker.subDevices &&
-                  marker.subDevices.map((subMarker, subIndex) => (
+                {marker.children &&
+                  marker.children.map((subMarker, subIndex) => (
                     <React.Fragment key={subIndex}>
                       {/* Calculate line coordinates and add a line */}
                       <Source

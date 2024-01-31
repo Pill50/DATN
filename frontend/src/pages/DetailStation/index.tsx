@@ -12,7 +12,7 @@ const DetailStation: React.FC = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="p-3 flex-1">
+      <div className="p-3 flex-1 mt-2">
         <h1 className="flex justify-center text-[#4285f4] text-3xl font-semibold">THÔNG TIN CHI TIẾT</h1>
         {/* ACTION */}
         <div className="flex gap-2">
@@ -25,8 +25,7 @@ const DetailStation: React.FC = () => {
             CẬP NHẬT DỮ LIỆU MỚI
           </button>
         </div>
-        {/* INFO */}
-        <div className="flex gap-4">
+        <div className="flex gap-4 justify-center">
           {/* INFO */}
           <div className="border-[1px] p-3 rounded-md shadow-md w-fit">
             <div className="flex items-center gap-1">

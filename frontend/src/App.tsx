@@ -13,7 +13,6 @@ import ProtectedRoute from './routes/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
 import ManageStation from './pages/ManageStation';
 import DetailStation from './pages/DetailStation';
-import Notification from './pages/Notification';
 import ManageInvoice from './pages/ManageInvoice';
 // import Station from './pages/Station';
 // import Device from './pages/Device';
@@ -43,7 +42,6 @@ const App: React.FC = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/stations/:stationID" element={<DetailStation />} />
             <Route path="/stations" element={<ManageStation />} />
-            <Route path="/notification" element={<Notification />} />
             <Route path="/invoices" element={<ManageInvoice />} />
             {/* <Route path="/station/:stationID" element={<DetailStation />} />
             <Route path="/station" element={<Station />} />
