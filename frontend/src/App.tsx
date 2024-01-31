@@ -3,11 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import Register from './pages/Register';
-// import ForgotPassword from './pages/ForgotPassword';
 // import ResetPassword from './pages/ResetPassword';
 // import NotFound from './pages/NotFound';
-// import ChangePassword from './pages/ChangePassword';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
 import ManageStation from './pages/ManageStation';
@@ -15,6 +12,8 @@ import DetailStation from './pages/DetailStation';
 import ManageInvoice from './pages/ManageInvoice';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
+import ForgotPassword from './pages/Auth/ForgotPassword';
+import ChangePassword from './pages/Auth/ChangePassword';
 
 const App: React.FC = () => {
   // const [user, setUser] = useState<boolean>(true);
@@ -34,6 +33,8 @@ const App: React.FC = () => {
           {/* PRIVATE ROUTE */}
           <Route path={'/login'} element={<Login />}></Route>
           <Route path={'/register'} element={<Register />}></Route>
+          <Route path={'/forgot-password'} element={<ForgotPassword />}></Route>
+          <Route path={'/change-password'} element={<ChangePassword />}></Route>
           <Route element={<ProtectedRoute user={true} />}>
             {/* <Route path="/change-password" element={<ChangePassword />} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
