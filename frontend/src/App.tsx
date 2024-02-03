@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import ResetPassword from './pages/ResetPassword';
 // import NotFound from './pages/NotFound';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
@@ -17,18 +16,18 @@ import ChangePassword from './pages/Auth/ChangePassword';
 import ResetPassword from './pages/Auth/ResetPassword';
 
 const App: React.FC = () => {
-  // const [user, setUser] = useState<boolean>(true);
+  const [user, setUser] = useState<boolean>(true);
 
   return (
     <>
       <div className="min-h-screen flex flex-col">
         <Header />
         <Routes>
-          <Route index element={<Dashboard />} />
-          <Route path={'/login'} element={<Login />}></Route>
+          <Route index element={<Login />} path={'/login'}></Route>
           <Route path={'/register'} element={<Register />}></Route>
           <Route path={'/forgot-password'} element={<ForgotPassword />}></Route>
           <Route path={'/reset-password'} element={<ResetPassword />}></Route>
+          <Route path={'/'} element={<Dashboard />} />
 
           {/* PRIVATE ROUTE */}
           <Route element={<ProtectedRoute user={true} />}>
@@ -37,11 +36,6 @@ const App: React.FC = () => {
             <Route path="/stations/:stationID" element={<DetailStation />} />
             <Route path="/stations" element={<ManageStation />} />
             <Route path="/invoices" element={<ManageInvoice />} />
-            {/* <Route path="/station/:stationID" element={<DetailStation />} />
-            <Route path="/station" element={<Station />} />
-            <Route path="/device/:deviceID" element={<DetailDevice />} />
-            <Route path="/device" element={<Device />} />
-            <Route path="/profile" element={<Profile />} /> */}
           </Route>
           {/* <Route path={'*'} element={<NotFound />}></Route> */}
         </Routes>

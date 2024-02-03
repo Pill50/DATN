@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserType } from '../../types/user';
-import { RegisterType } from '../../types/auth';
+import { LoginType, RegisterType } from '../../types/auth';
 import { Response } from '../../types/response';
 import { AuthApis } from '@/apis';
 
@@ -17,6 +17,19 @@ export const register = createAsyncThunk<Response<null>, RegisterType, { rejectV
   async (body, ThunkAPI) => {
     try {
       const response = await AuthApis.register(body);
+      return response.data as Response<null>;
+    } catch (error: any) {
+      return ThunkAPI.rejectWithValue(error.data as Response<null>);
+    }
+  },
+);
+
+export const login = createAsyncThunk<Response<null>, LoginType, { rejectValue: Response<null> }>(
+  '/login',
+  async (body, ThunkAPI) => {
+    console.log('HAHA:');
+    try {
+      const response = await AuthApis.login(body);
       return response.data as Response<null>;
     } catch (error: any) {
       return ThunkAPI.rejectWithValue(error.data as Response<null>);
@@ -79,6 +92,7 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // register
     builder.addCase(register.pending, (state) => {
       state.isLoading = true;
     });
@@ -86,6 +100,17 @@ export const authSlice = createSlice({
       state.isLoading = false;
     });
     builder.addCase(register.rejected, (state) => {
+      state.isLoading = false;
+    });
+
+    // login
+    builder.addCase(login.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(login.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(login.rejected, (state) => {
       state.isLoading = false;
     });
   },

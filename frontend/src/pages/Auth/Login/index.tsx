@@ -1,18 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { loginValidationSchema } from '@/validations/auth';
+import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
+import { authActions } from '@/redux/slices';
+import { LoginType } from '@/types/auth';
 
 const initialValues = {
   email: '',
   password: '',
 };
 
-const handleSubmit = () => {
-  console.log('LOGIN SUBMIT');
-};
-
 const Login: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const isLogin: boolean = useAppSelector((state) => state.authSlice.isLogin);
+  const isLoading: boolean = useAppSelector((state) => state.authSlice.isLoading);
+
+  if (isLogin) return <Navigate to={'/'} />;
+
+  const handleSubmit = (values: LoginType) => {
+    // @ts-ignore
+    dispatch(authActions.login(values)).then((response) => {
+      console.log('Response here:', response);
+      console.log(response.payload);
+      // if (response.payload.status_code === 200) {
+      //   // toast.success(response.payload.message);
+      //   //@ts-ignore
+      //   dispatch(authActions.getMe());
+      // } else {
+      //   // toast.error(response.payload.message);
+      // }
+    });
+  };
+
   return (
     <>
       <div className="px-3 mb-10 flex flex-col justify-center items-center">

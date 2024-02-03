@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosPublic = axios.create({
-  baseURL: 'http://localhost/3001',
+  baseURL: 'http://localhost:8080',
 });
 
 export const apiCaller = (method: string, path: string, data?: any) => {
