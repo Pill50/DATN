@@ -30,7 +30,7 @@ public class MessageService {
         String password = ADAFRUIT_KEY;
         String clientid = MqttClient.generateClientId();
         int qos = 0;
-        String topic = USERNAME + "/feeds/datn.water-sensor";
+        String topic = USERNAME + "/feeds/water-flow";
 
         try {
             MqttClient client = new MqttClient(broker, clientid, new MemoryPersistence());

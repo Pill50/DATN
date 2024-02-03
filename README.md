@@ -346,3 +346,12 @@ DETAIL DEVICE
 "statusCode": 200;
 "message": "Get waterflow per month successfully";
 "data": null
+
+
+================================================================
+[POST] /login
+```
+ "username":"",
+ "password":""
+```
+
