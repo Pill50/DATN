@@ -3,6 +3,7 @@ import { UserType } from '../../types/user';
 import { LoginType, RegisterType } from '../../types/auth';
 import { Response } from '../../types/response';
 import { AuthApis } from '@/apis';
+import Cookies from 'js-cookie';
 
 type AuthSlice = {
   user: UserType;
@@ -25,7 +26,7 @@ export const register = createAsyncThunk<Response<null>, RegisterType, { rejectV
 );
 
 export const login = createAsyncThunk<Response<null>, LoginType, { rejectValue: Response<null> }>(
-  '/login',
+  'api/login',
   async (body, ThunkAPI) => {
     console.log('HAHA:');
     try {
@@ -107,7 +108,8 @@ export const authSlice = createSlice({
     builder.addCase(login.pending, (state) => {
       state.isLoading = true;
     });
-    builder.addCase(login.fulfilled, (state) => {
+    builder.addCase(login.fulfilled, (state, action) => {
+      Cookies.set('accessToken', action.payload.data?.accessToken as string);
       state.isLoading = false;
     });
     builder.addCase(login.rejected, (state) => {
