@@ -5,24 +5,6 @@ const axiosPublic = axios.create({
   baseURL: 'http://localhost:8080',
 });
 
-export const apiCaller = (method: string, path: string, data?: any) => {
-  const refreshToken = Cookies.get('refreshToken');
-
-  return axiosPublic({
-    method,
-    headers: {
-      'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET,POST,DELETE,PUT,OPTIONS',
-      'Access-Control-Allow-Headers': '*',
-      'Access-Control-Max-Age': '180',
-      // rftoken: `rfToken=${refreshToken}`,
-    },
-    url: `${path}`,
-    data,
-  });
-};
-
 axiosPublic.interceptors.request.use(
   async (config: any) => {
     const accessToken = Cookies.get('accessToken');
@@ -37,3 +19,12 @@ axiosPublic.interceptors.request.use(
   },
   (error) => Promise.reject(error),
 );
+
+export const apiCaller = (method: string, path: string, data?: any) => {
+  return axiosPublic({
+    method,
+    headers: {},
+    url: `${path}`,
+    data,
+  });
+};

@@ -5,6 +5,8 @@ import { loginValidationSchema } from '@/validations/auth';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
 import { authActions } from '@/redux/slices';
 import { LoginType } from '@/types/auth';
+import toast, { Toaster } from 'react-hot-toast';
+import Loading from '@/components/Loading';
 
 const initialValues = {
   email: '',
@@ -21,21 +23,21 @@ const Login: React.FC = () => {
   const handleSubmit = (values: LoginType) => {
     // @ts-ignore
     dispatch(authActions.login(values)).then((response) => {
-      console.log('Response here:', response);
-      console.log(response.payload);
-      // if (response.payload.status_code === 200) {
-      //   // toast.success(response.payload.message);
-      //   //@ts-ignore
-      //   dispatch(authActions.getMe());
-      // } else {
-      //   // toast.error(response.payload.message);
-      // }
+      if (response.payload.statusCode === 200) {
+        toast.success('Login Successfully!');
+        //@ts-ignore
+        // dispatch(authActions.getMe());
+      } else {
+        toast.error('Login Failed!');
+      }
     });
   };
 
   return (
     <>
+      {isLoading && <Loading />}
       <div className="px-3 mb-10 flex flex-col justify-center items-center">
+        <Toaster />
         <h1 className="mt-10 max-w-[700px] text-center text-[40px] font-bold">
           <span className="text-[#DB4437]">Protect</span> Our Water, <span className="text-[#DB4437]">Sustain</span> Our
           Future, <span className="text-[#DB4437]">Every Drop Matters!</span>

@@ -28,10 +28,13 @@ export const register = createAsyncThunk<Response<null>, RegisterType, { rejectV
 export const login = createAsyncThunk<Response<null>, LoginType, { rejectValue: Response<null> }>(
   'api/login',
   async (body, ThunkAPI) => {
-    console.log('HAHA:');
     try {
       const response = await AuthApis.login(body);
-      return response.data as Response<null>;
+      const responseData: Response<null> = {
+        ...response.data,
+        statusCode: response.status,
+      };
+      return responseData;
     } catch (error: any) {
       return ThunkAPI.rejectWithValue(error.data as Response<null>);
     }
@@ -46,6 +49,8 @@ export const getMe = () => async (dispatch: any) => {
       if (response.status >= 200 && response.status <= 299) {
         dispatch(setUsers(response.data.data));
       } else {
+        Cookies.remove('accessToken');
+        Cookies.remove('refreshToken');
         window.location.href = '/login';
       }
     }
@@ -109,8 +114,9 @@ export const authSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(login.fulfilled, (state, action) => {
-      Cookies.set('accessToken', action.payload.data?.accessToken as string);
+      Cookies.set('accessToken', action.payload?.accessToken as string);
       state.isLoading = false;
+      state.isLogin = true;
     });
     builder.addCase(login.rejected, (state) => {
       state.isLoading = false;

@@ -7,6 +7,8 @@ import SearchPlace from '../SearchPlace';
 import LineAction from '../LineAction';
 import { Device } from '@/types/device';
 import axios from 'axios';
+import { useAppDispatch } from '@/hooks/hooks';
+import { deviceActions } from '@/redux/slices';
 
 type Marker = {
   id: string;
@@ -116,7 +118,6 @@ interface MapProps {
 }
 
 const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
-  console.log(deviceList);
   const [selectedMarker, setSelectedMarker] = useState<Device>();
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [optionsID, setOptionsID] = useState<number>(1);
@@ -125,11 +126,17 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
   const [startPoint, setStartPoint] = useState<Device>();
   const [endPoint, setEndPoint] = useState<Device>();
 
+  useEffect(() => {
+    setSupplyList(deviceList as Device[]);
+  }, [deviceList]);
+
   const [viewport, setViewport] = useState({
     latitude: 10.77284540373968,
     longitude: 106.65774091063211,
     zoom: 16,
   });
+
+  const dispatch = useAppDispatch();
 
   const handleClickMarker = (marker: Device) => {
     setViewport({
@@ -173,6 +180,9 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
           parentId: startPoint.waterMeterId,
         };
         const response = await axios.post('http://localhost:8080/water-meter/add-line', data);
+        //@ts-ignore
+        // const response = dispatch(deviceActions.addLine(data));
+
         if (response.status == 200) {
           const newList = (await axios.get('http://localhost:8080/water-meter/list')).data;
           setSupplyList(newList.devices);
