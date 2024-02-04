@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/user")
-@CrossOrigin()
 @PreAuthorize("hasAuthority('USER')")
 public class UserController {
     @Autowired

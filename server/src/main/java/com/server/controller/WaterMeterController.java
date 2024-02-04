@@ -21,7 +21,6 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@CrossOrigin()
 @RequestMapping("/water-meter")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class WaterMeterController {
