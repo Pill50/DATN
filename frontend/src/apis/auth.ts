@@ -15,8 +15,7 @@ const register = async (values: RegisterType) => {
 };
 
 const login = async (values: LoginType) => {
-  console.log('HIHI');
-  const path = '/login';
+  const path = '/api/login';
   const response = await apiCaller('POST', path, values);
 
   console.log('Response: ', response.status);

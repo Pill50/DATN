@@ -19,8 +19,16 @@ const Dashboard: React.FC = () => {
   const [deviceList, setDeviceList] = useState<Device[]>();
 
   useEffect(() => {
+    var token = encodeURIComponent('eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYmNAZ21haWwuY29tIiwiaWF0IjoxNzA3MDQwMjg1LCJleHAiOjE3MDcwNDAzNDV9.AnpoWZmrC0uIV7_c6WP2-eT0vZsrTQr21Xfsjb48--I')
+    const config = {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    };
+
     const fetchData = async () => {
-      const dataResponse = (await axios.get('http://localhost:8080/water-meter/list')).data;
+      const dataResponse = (await axios.get('http://localhost:8080/water-meter/list', config
+      )).data;
 
       const cardListObj = {
         totalWaterMeters: dataResponse.totalWaterMeters,

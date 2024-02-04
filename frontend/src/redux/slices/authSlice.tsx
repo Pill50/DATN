@@ -48,7 +48,7 @@ export const getMe = () => async (dispatch: any) => {
         window.location.href = '/login';
       }
     }
-  } catch (error: any) {}
+  } catch (error: any) { }
 };
 
 export const logout = () => async (dispatch: any) => {
