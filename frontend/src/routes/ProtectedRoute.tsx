@@ -1,17 +1,10 @@
-import React, { ReactNode } from 'react';
+import Cookies from 'js-cookie';
+import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-interface ProtectedRouteProps {
-  user: any;
-  children?: ReactNode;
-}
-
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ user, children }) => {
-  if (!user) {
-    return <Navigate to="/" replace />;
-  }
-
-  return children ? children : <Outlet />;
+const ProtectedRoute: React.FC = () => {
+  const accessToken = Cookies.get('accessToken');
+  return accessToken ? <Outlet /> : <Navigate to={'/login'} />;
 };
 
 export default ProtectedRoute;

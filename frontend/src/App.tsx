@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -16,8 +16,6 @@ import ChangePassword from './pages/Auth/ChangePassword';
 import ResetPassword from './pages/Auth/ResetPassword';
 
 const App: React.FC = () => {
-  const [user, setUser] = useState<boolean>(true);
-
   return (
     <>
       <div className="min-h-screen flex flex-col">
@@ -27,12 +25,11 @@ const App: React.FC = () => {
           <Route path={'/register'} element={<Register />}></Route>
           <Route path={'/forgot-password'} element={<ForgotPassword />}></Route>
           <Route path={'/reset-password'} element={<ResetPassword />}></Route>
-          <Route path={'/'} element={<Dashboard />} />
 
           {/* PRIVATE ROUTE */}
-          <Route element={<ProtectedRoute user={true} />}>
+          <Route element={<ProtectedRoute />}>
+            <Route path={'/'} element={<Dashboard />} />
             <Route path="/change-password" element={<ChangePassword />} />
-            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/stations/:stationID" element={<DetailStation />} />
             <Route path="/stations" element={<ManageStation />} />
             <Route path="/invoices" element={<ManageInvoice />} />
