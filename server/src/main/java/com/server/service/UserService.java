@@ -67,7 +67,7 @@ public class UserService {
         String token = UUID.randomUUID().toString();
         user.setToken(token);
         userRepository.save(user);
-        url += "?token="+token;
+        url += "/token="+token;
         emailSenderService.sendSimpleEmail(email, "Reset password",url);
         return true;
     }
@@ -77,8 +77,8 @@ public class UserService {
         return userInfo.orElse(null);
     }
 
-    public boolean resetPassword(String email, String token, String password){
-        UserEntity user = checkValidToken(email, token);
+    public boolean resetPassword(String token, String password){
+        UserEntity user = checkValidToken(token);
         if(user == null){
             return false;
         }
@@ -88,11 +88,8 @@ public class UserService {
         return true;
     }
 
-    public UserEntity checkValidToken(String email, String token){
-        Optional<UserEntity> userInfo = userRepository.findByEmail(email);
-        if(userInfo.isEmpty() || !userInfo.get().getToken().equals(token)){
-            return null;
-        }
-        return userInfo.get();
+    public UserEntity checkValidToken(String token){
+        Optional<UserEntity> userInfo = userRepository.findByToken(token);
+        return userInfo.orElse(null);
     }
 }
