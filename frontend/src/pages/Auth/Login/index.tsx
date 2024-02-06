@@ -18,7 +18,7 @@ const Login: React.FC = () => {
   const isLogin: boolean = useAppSelector((state) => state.authSlice.isLogin);
   const isLoading: boolean = useAppSelector((state) => state.authSlice.isLoading);
 
-  if (isLogin) return <Navigate to={'/'} />;
+  if (isLogin) return <Navigate to={'/dashboard'} />;
 
   const handleSubmit = (values: LoginType) => {
     // @ts-ignore
