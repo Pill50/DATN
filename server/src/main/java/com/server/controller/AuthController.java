@@ -21,7 +21,6 @@ public class AuthController {
     private JwtService jwtService;
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private UserService userService;
     @PostMapping("/login")
@@ -42,6 +41,6 @@ public class AuthController {
 
     @PostMapping("/reset-password")
     public boolean resetPassword(@RequestBody ResetPasswordRequest request){
-        return userService.resetPassword(request.getEmail(), request.getToken(), request.getPassword());
+        return userService.resetPassword(request.getToken(), request.getPassword());
     }
 }
