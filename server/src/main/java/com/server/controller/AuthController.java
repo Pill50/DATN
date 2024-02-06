@@ -4,6 +4,7 @@ import com.server.controller.request.AuthRequestDTO;
 import com.server.controller.request.ForgotPassword;
 import com.server.controller.request.JwtResponseDTO;
 import com.server.controller.request.ResetPasswordRequest;
+import com.server.repository.user.entity.UserEntity;
 import com.server.service.JwtService;
 import com.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,12 @@ public class AuthController {
     public JwtResponseDTO AuthenticateAndGetToken(@RequestBody AuthRequestDTO authRequestDTO){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.getEmail(), authRequestDTO.getPassword()));
         if(authentication.isAuthenticated()){
+            UserEntity user = userService.getByEmail(authRequestDTO.getEmail());
             return JwtResponseDTO.builder()
-                    .accessToken(jwtService.GenerateToken(authRequestDTO.getEmail())).build();
+                    .accessToken(jwtService.GenerateToken(authRequestDTO.getEmail()))
+                    .userId(user.getId())
+                    .role(user.getRole())
+                    .build();
         } else {
             throw new UsernameNotFoundException("invalid user request..!!");
         }
