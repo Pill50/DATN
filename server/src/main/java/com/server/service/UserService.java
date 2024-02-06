@@ -29,6 +29,9 @@ public class UserService {
     public UserEntity getById(Integer id){
         return userRepository.findById(id).orElse(new UserEntity());
     }
+    public UserEntity getByEmail(String email){
+        return userRepository.findByEmail(email).orElse(new UserEntity());
+    }
     public void updateInfo(UpdateInfoRequest request, Integer userId){
         UserEntity user = userRepository.findById(userId).orElse(new UserEntity());
         user.setEmail(request.getEmail());
@@ -67,7 +70,7 @@ public class UserService {
         String token = UUID.randomUUID().toString();
         user.setToken(token);
         userRepository.save(user);
-        url += "/token="+token;
+        url += token;
         emailSenderService.sendSimpleEmail(email, "Reset password",url);
         return true;
     }
