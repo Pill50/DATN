@@ -17,7 +17,7 @@ const ForgotPassword: React.FC = () => {
   const handleSubmit = async (values: any) => {
     const data = {
       email: values.email,
-      url: `http://localhost:5173/reset-password`,
+      url: `http://localhost:5173/reset-password/`,
     };
     // @ts-ignore
     const response = await dispatch(authActions.forgotPassword(data));

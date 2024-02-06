@@ -18,7 +18,7 @@ const ResetPassword: React.FC = () => {
 
   const handleSubmit = async (values: any) => {
     const data = {
-      token: token,
+      token,
       password: values.password,
     };
     //@ts-ignore

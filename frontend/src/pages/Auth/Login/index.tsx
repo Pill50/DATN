@@ -17,16 +17,15 @@ const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const isLogin: boolean = useAppSelector((state) => state.authSlice.isLogin);
   const isLoading: boolean = useAppSelector((state) => state.authSlice.isLoading);
+  const role = useAppSelector((state) => state.authSlice.role);
 
-  if (isLogin) return <Navigate to={'/dashboard'} />;
+  if (isLogin && role == 'ADMIN') return <Navigate to={'/dashboard'} />;
 
   const handleSubmit = (values: LoginType) => {
     // @ts-ignore
     dispatch(authActions.login(values)).then((response) => {
       if (response.payload.statusCode === 200) {
         toast.success('Login Successfully!');
-        //@ts-ignore
-        // dispatch(authActions.getMe());
       } else {
         toast.error('Login Failed!');
       }

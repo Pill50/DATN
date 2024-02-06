@@ -67,7 +67,7 @@ public class UserService {
         String token = UUID.randomUUID().toString();
         user.setToken(token);
         userRepository.save(user);
-        url += "/token="+token;
+        url += token;
         emailSenderService.sendSimpleEmail(email, "Reset password",url);
         return true;
     }

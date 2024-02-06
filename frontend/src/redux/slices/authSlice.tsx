@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 type AuthSlice = {
   user: UserType;
   isLogin: boolean;
+  role: 'USER' | 'ADMIN';
   isLoading: boolean;
   error: string;
   success: string;
@@ -108,6 +109,7 @@ const initialState: AuthSlice = {
     password: '',
     key: '',
   },
+  role: 'USER',
   isLogin: false,
   isLoading: false,
   error: '',
@@ -147,6 +149,7 @@ export const authSlice: any = createSlice({
     });
     builder.addCase(login.fulfilled, (state, action) => {
       Cookies.set('accessToken', action.payload?.accessToken as string);
+      // state.role = action.payload?.role as string;
       state.isLoading = false;
       state.isLogin = true;
     });
