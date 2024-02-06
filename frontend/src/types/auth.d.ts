@@ -15,7 +15,7 @@ export type ForgotPasswordType = {
 
 export type ResetPasswordType = {
   password: string;
-  confirmPassword: string;
+  token: string;
 };
 
 export type ChangePasswordType = {

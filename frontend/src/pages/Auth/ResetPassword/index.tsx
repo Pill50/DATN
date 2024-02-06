@@ -1,19 +1,39 @@
 import React from 'react';
 import { resetPasswordValidationSchema } from '@/validations/auth';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { useAppDispatch } from '@/hooks/hooks';
+import { authActions } from '@/redux/slices';
+import { useNavigate, useParams } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const initialValues = {
   password: '',
   confirmPassword: '',
 };
 
-const handleSubmit = () => {
-  console.log('RESET PASSWORD SUBMIT');
-};
-
 const ResetPassword: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { token } = useParams();
+
+  const handleSubmit = async (values: any) => {
+    const data = {
+      token: token,
+      password: values.password,
+    };
+    //@ts-ignore
+    const response = await dispatch(authActions.resetPassword(data));
+    if (response.payload.statusCode === 200) {
+      toast.success('Reset password Successfully!');
+      navigate('/login');
+    } else {
+      toast.error('Reset password Failed!');
+    }
+  };
+
   return (
     <>
+      <Toaster />
       <div className="px-3 mb-10 flex flex-col justify-center items-center">
         <h1 className="mt-10 max-w-[700px] text-center text-[40px] font-bold">
           <span className="text-[#DB4437]">Protect</span> Our Water, <span className="text-[#DB4437]">Sustain</span> Our

@@ -96,6 +96,8 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
           const newList = await dispatch(deviceActions.getAllWaterMeter());
           setSupplyList(newList.payload.data.devices);
           toast.success('Add new line successfully');
+        } else {
+          toast.error('You can not add line');
         }
       } else {
         toast.error('startPoint or endPoint is not defined.');
@@ -121,6 +123,8 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
           const newList = await dispatch(deviceActions.getAllWaterMeter());
           setSupplyList(newList.payload.data.devices);
           toast.success('Delete line successfully');
+        } else {
+          toast.error('Remove line failed');
         }
       } else {
         toast.error('startPoint or endPoint is not defined.');

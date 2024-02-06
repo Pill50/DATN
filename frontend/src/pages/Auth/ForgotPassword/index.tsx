@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { forgotPasswordValidationSchema } from '@/validations/auth';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { Link } from 'react-router-dom';
+import { useAppDispatch } from '@/hooks/hooks';
+import { authActions } from '@/redux/slices';
+import toast, { Toaster } from 'react-hot-toast';
 
 const initialValues = {
   email: '',
 };
 
-const handleSubmit = () => {
-  console.log('FORGOT PASSWORD SUBMIT');
-};
-
 const ForgotPassword: React.FC = () => {
+  const [displayNoti, setDisplayNoti] = useState<Boolean>(false);
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (values: any) => {
+    const data = {
+      email: values.email,
+      url: `http://localhost:5173/reset-password`,
+    };
+    // @ts-ignore
+    const response = await dispatch(authActions.forgotPassword(data));
+    if (response.payload.statusCode === 200) {
+      toast.success('Check your email for more instructions');
+      setDisplayNoti(true);
+    } else {
+      toast.error('Please check your email again!');
+    }
+  };
+
   return (
     <>
+      <Toaster />
       <div className="px-3 mb-10 flex flex-col justify-center items-center">
         <h1 className="mt-10 max-w-[700px] text-center text-[40px] font-bold">
           <span className="text-[#DB4437]">Protect</span> Our Water, <span className="text-[#DB4437]">Sustain</span> Our
@@ -23,9 +41,11 @@ const ForgotPassword: React.FC = () => {
           {(formik) => (
             <Form className="flex flex-col p-4 rounded-xl bg-[#F2F2F2] shadow-md" onSubmit={formik.handleSubmit}>
               <h1 className="text-center text-[#4285F4] font-bold text-xl">FORGOT PASSWORD</h1>
-              <div className="h-14 bg-green-300 flex justify-center items-center rounded-lg font-bold text-green-700 mt-1">
-                Check your mail for further instructions
-              </div>
+              {displayNoti && (
+                <div className="h-14 bg-green-300 flex justify-center items-center rounded-lg font-bold text-green-700 mt-1">
+                  Check your mail for further instructions
+                </div>
+              )}
               <div className="flex flex-col my-2">
                 <label htmlFor="email" className="mb-1">
                   Email

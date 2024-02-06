@@ -1,4 +1,4 @@
-import { LoginType, RegisterType } from '@/types/auth';
+import { ForgotPasswordType, LoginType, RegisterType, ResetPasswordType } from '@/types/auth';
 import { apiCaller } from '@/apiConfigs';
 
 const register = async (values: RegisterType) => {
@@ -15,9 +15,21 @@ const register = async (values: RegisterType) => {
 };
 
 const login = async (values: LoginType) => {
-  const path = '/api/login';
+  const path = '/auth/login';
   const response = await apiCaller('POST', path, values);
+  return response;
+};
 
+const forgotPassword = async (values: ForgotPasswordType) => {
+  const path = '/auth/forgot-password';
+  const response = await apiCaller('POST', path, values);
+  return response;
+};
+
+const resetPassword = async (values: ResetPasswordType) => {
+  const path = '/auth/reset-password';
+  const response = await apiCaller('POST', path, values);
+  console.log('Response here:', response);
   return response;
 };
 
@@ -27,4 +39,4 @@ const getMe = async () => {
   return response;
 };
 
-export { register, login, getMe };
+export { register, login, forgotPassword, resetPassword, getMe };

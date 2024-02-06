@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { UserType } from '../../types/user';
-import { LoginType, RegisterType } from '../../types/auth';
+import { ForgotPasswordType, LoginType, RegisterType, ResetPasswordType } from '../../types/auth';
 import { Response } from '../../types/response';
 import { AuthApis } from '@/apis';
 import Cookies from 'js-cookie';
@@ -26,10 +26,42 @@ export const register = createAsyncThunk<Response<null>, RegisterType, { rejectV
 );
 
 export const login = createAsyncThunk<Response<null>, LoginType, { rejectValue: Response<null> }>(
-  'api/login',
+  'auth/login',
   async (body, ThunkAPI) => {
     try {
       const response = await AuthApis.login(body);
+      const responseData: Response<null> = {
+        ...response.data,
+        statusCode: response.status,
+      };
+      return responseData;
+    } catch (error: any) {
+      return ThunkAPI.rejectWithValue(error.data as Response<null>);
+    }
+  },
+);
+
+export const forgotPassword = createAsyncThunk<Response<null>, ForgotPasswordType, { rejectValue: Response<null> }>(
+  'auth/forgot-password',
+  async (body, ThunkAPI) => {
+    try {
+      const response = await AuthApis.forgotPassword(body);
+      const responseData: Response<null> = {
+        ...response.data,
+        statusCode: response.status,
+      };
+      return responseData;
+    } catch (error: any) {
+      return ThunkAPI.rejectWithValue(error.data as Response<null>);
+    }
+  },
+);
+
+export const resetPassword = createAsyncThunk<Response<null>, ResetPasswordType, { rejectValue: Response<null> }>(
+  'auth/reset-password',
+  async (body, ThunkAPI) => {
+    try {
+      const response = await AuthApis.resetPassword(body);
       const responseData: Response<null> = {
         ...response.data,
         statusCode: response.status,
@@ -82,7 +114,7 @@ const initialState: AuthSlice = {
   success: '',
 };
 
-export const authSlice = createSlice({
+export const authSlice: any = createSlice({
   name: 'auth',
   initialState: initialState,
   reducers: {
