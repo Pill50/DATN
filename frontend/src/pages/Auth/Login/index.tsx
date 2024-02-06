@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { loginValidationSchema } from '@/validations/auth';
 import { useAppDispatch, useAppSelector } from '@/hooks/hooks';
@@ -15,17 +15,20 @@ const initialValues = {
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
-  const isLogin: boolean = useAppSelector((state) => state.authSlice.isLogin);
+  const navigate = useNavigate();
   const isLoading: boolean = useAppSelector((state) => state.authSlice.isLoading);
   const role = useAppSelector((state) => state.authSlice.role);
-
-  if (isLogin && role == 'ADMIN') return <Navigate to={'/dashboard'} />;
 
   const handleSubmit = (values: LoginType) => {
     // @ts-ignore
     dispatch(authActions.login(values)).then((response) => {
       if (response.payload.statusCode === 200) {
-        toast.success('Login Successfully!');
+        if (role === 'ADMIN') {
+          navigate('/dashboard');
+          toast.success('Login Successfully!');
+        } else {
+          toast.error('You must login with admin account');
+        }
       } else {
         toast.error('Login Failed!');
       }

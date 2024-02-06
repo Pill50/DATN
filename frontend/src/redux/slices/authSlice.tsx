@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 type AuthSlice = {
   user: UserType;
   isLogin: boolean;
-  role: 'USER' | 'ADMIN';
+  role: string;
   isLoading: boolean;
   error: string;
   success: string;
@@ -26,12 +26,18 @@ export const register = createAsyncThunk<Response<null>, RegisterType, { rejectV
   },
 );
 
-export const login = createAsyncThunk<Response<null>, LoginType, { rejectValue: Response<null> }>(
+type LoginRes = {
+  userId: string;
+  token: string;
+  role: string;
+};
+
+export const login = createAsyncThunk<Response<LoginRes>, LoginType, { rejectValue: Response<null> }>(
   'auth/login',
   async (body, ThunkAPI) => {
     try {
       const response = await AuthApis.login(body);
-      const responseData: Response<null> = {
+      const responseData: Response<LoginRes> = {
         ...response.data,
         statusCode: response.status,
       };
@@ -149,7 +155,7 @@ export const authSlice: any = createSlice({
     });
     builder.addCase(login.fulfilled, (state, action) => {
       Cookies.set('accessToken', action.payload?.accessToken as string);
-      // state.role = action.payload?.role as string;
+      state.role = action.payload.data?.role as string;
       state.isLoading = false;
       state.isLogin = true;
     });

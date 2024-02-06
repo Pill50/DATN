@@ -1,10 +1,20 @@
+import { useAppSelector } from '@/hooks/hooks';
 import Cookies from 'js-cookie';
-import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const ProtectedRoute: React.FC = () => {
+  const navigate = useNavigate();
   const accessToken = Cookies.get('accessToken');
-  return accessToken ? <Outlet /> : <Navigate to={'/'} />;
+  const role = useAppSelector((state) => state.authSlice.role);
+
+  useEffect(() => {
+    if (role === 'USER') {
+      navigate('/login');
+    }
+  }, [role, navigate]);
+
+  return (accessToken && role === 'ADMIN') ?? <Outlet />;
 };
 
 export default ProtectedRoute;
