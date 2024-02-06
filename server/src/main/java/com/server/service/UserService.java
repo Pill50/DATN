@@ -7,15 +7,20 @@ import com.server.repository.user.repository.UserRepository;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
 import com.server.repository.watermeter.entity.WaterMeterValue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private EmailSenderService emailSenderService;
     @Autowired
     private WaterMeterService waterMeterService;
     public UserEntity create(UserEntity user){
@@ -53,5 +58,41 @@ public class UserService {
         catch (Exception e){
             throw e;
         }
+    }
+
+    public boolean forgotPassword(String email, String url){
+        UserEntity user = validEmail(email);
+        if(user == null)
+            return false;
+        String token = UUID.randomUUID().toString();
+        user.setToken(token);
+        userRepository.save(user);
+        url += "?token="+token;
+        emailSenderService.sendSimpleEmail(email, "Reset password",url);
+        return true;
+    }
+
+    private UserEntity validEmail(String email){
+        Optional<UserEntity> userInfo = userRepository.findByEmail(email);
+        return userInfo.orElse(null);
+    }
+
+    public boolean resetPassword(String email, String token, String password){
+        UserEntity user = checkValidToken(email, token);
+        if(user == null){
+            return false;
+        }
+        user.setToken(null);
+        user.setPassword(new BCryptPasswordEncoder().encode(password));
+        userRepository.save(user);
+        return true;
+    }
+
+    public UserEntity checkValidToken(String email, String token){
+        Optional<UserEntity> userInfo = userRepository.findByEmail(email);
+        if(userInfo.isEmpty() || !userInfo.get().getToken().equals(token)){
+            return null;
+        }
+        return userInfo.get();
     }
 }

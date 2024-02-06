@@ -19,6 +19,7 @@ public class UserEntity {
     private String address;
     private String phoneNumber;
     private String role;
+    private String token;
 
     public UserEntity(String email, String password, String fullName, String address, String phoneNumber, String role) {
         this.email = email;
