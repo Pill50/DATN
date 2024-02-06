@@ -1,5 +1,5 @@
 import { apiCaller } from '@/apiConfigs';
-import { AddLine } from '@/types/device';
+import { AddLine, RemoveLine } from '@/types/device';
 
 const getAllWaterMeter = async () => {
   const path = '/water-meter/list';
@@ -13,4 +13,10 @@ const addLine = async (data: AddLine) => {
   return response;
 };
 
-export { getAllWaterMeter, addLine };
+const deleteLine = async (data: RemoveLine) => {
+  const path = '/water-meter/delete-line';
+  const response = await apiCaller('POST', path, data);
+  return response;
+};
+
+export { getAllWaterMeter, addLine, deleteLine };

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Response } from '../../types/response';
 import { DeviceApis } from '@/apis';
-import { AddLine, DeviceCardList } from '@/types/device';
+import { AddLine, DeviceCardList, RemoveLine } from '@/types/device';
 
 type DeviceSlice = {
   devicesList: DeviceCardList;
@@ -35,9 +35,28 @@ export const addLine = createAsyncThunk<Response<null>, AddLine, { rejectValue: 
     try {
       const response = await DeviceApis.addLine(body);
 
-      console.log(response);
+      const responseData: Response<null> = {
+        data: response.data,
+        statusCode: response.status,
+      };
+      return responseData;
+    } catch (error: any) {
+      return ThunkAPI.rejectWithValue(error.data as Response<null>);
+    }
+  },
+);
 
-      return response.data as Response<null>;
+export const removeLine = createAsyncThunk<Response<null>, RemoveLine, { rejectValue: Response<null> }>(
+  '/water-meter/delete-line',
+  async (body, ThunkAPI) => {
+    try {
+      const response = await DeviceApis.deleteLine(body);
+
+      const responseData: Response<null> = {
+        data: response.data,
+        statusCode: response.status,
+      };
+      return responseData;
     } catch (error: any) {
       return ThunkAPI.rejectWithValue(error.data as Response<null>);
     }

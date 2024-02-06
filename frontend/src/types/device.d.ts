@@ -21,3 +21,8 @@ type AddLine = {
   childrenId: string;
   parentId: string;
 };
+
+type RemoveLine = {
+  childrenId: string;
+  parentId: string;
+};

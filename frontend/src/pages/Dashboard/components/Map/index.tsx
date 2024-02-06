@@ -9,6 +9,7 @@ import { Device } from '@/types/device';
 import axios from 'axios';
 import { useAppDispatch } from '@/hooks/hooks';
 import { deviceActions } from '@/redux/slices';
+import toast, { Toaster } from 'react-hot-toast';
 
 type Marker = {
   id: string;
@@ -179,16 +180,17 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
           childrenId: endPoint.waterMeterId,
           parentId: startPoint.waterMeterId,
         };
-        const response = await axios.post('http://localhost:8080/water-meter/add-line', data);
         //@ts-ignore
-        // const response = dispatch(deviceActions.addLine(data));
+        const response = await dispatch(deviceActions.addLine(data));
 
-        if (response.status == 200) {
-          const newList = (await axios.get('http://localhost:8080/water-meter/list')).data;
-          setSupplyList(newList.devices);
+        if (response.payload?.statusCode == 200) {
+          //@ts-ignore
+          const newList = await dispatch(deviceActions.getAllWaterMeter());
+          setSupplyList(newList.payload.data.devices);
+          toast.success('Add new line successfully');
         }
       } else {
-        console.log('startPoint or endPoint is not defined.');
+        toast.error('startPoint or endPoint is not defined.');
       }
     } catch (error) {
       console.log(error);
@@ -203,13 +205,17 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
           id1: endPoint.waterMeterId,
           id2: startPoint.waterMeterId,
         };
-        const response = await axios.post('http://localhost:8080/water-meter/delete-line', data);
-        if (response.status == 200) {
-          const newList = (await axios.get('http://localhost:8080/water-meter/list')).data;
-          setSupplyList(newList.devices);
+        //@ts-ignore
+        const response = await dispatch(deviceActions.removeLine(data));
+
+        if (response.payload?.statusCode == 200) {
+          //@ts-ignore
+          const newList = await dispatch(deviceActions.getAllWaterMeter());
+          setSupplyList(newList.payload.data.devices);
+          toast.success('Delete line successfully');
         }
       } else {
-        console.log('startPoint or endPoint is not defined.');
+        toast.error('startPoint or endPoint is not defined.');
       }
     } catch (error) {
       console.log(error);
@@ -255,6 +261,7 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
 
   return (
     <>
+      <Toaster />
       <h2 className=" text-[#4285f4] text-2xl font-bold ml-4">Bản đồ hệ thống nước</h2>
       <div className="flex gap-4 h-[600px]">
         <div className="w-[300px] shadow-md p-4">
