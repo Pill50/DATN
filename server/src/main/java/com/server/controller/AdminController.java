@@ -7,26 +7,20 @@ import com.server.model.UserRole;
 import com.server.repository.user.entity.UserEntity;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
 import com.server.repository.watermeter.entity.WaterMeterValue;
-import com.server.service.EmailSenderService;
 import com.server.service.UserService;
 import com.server.service.WaterMeterService;
-import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/water-meter")
+@RequestMapping("/admin")
 @PreAuthorize("hasAuthority('ADMIN')")
-public class WaterMeterController {
-
-    @Autowired
-    private EmailSenderService senderService;
+public class AdminController {
     @Autowired
     private WaterMeterService waterMeterService;
     @Autowired
@@ -50,35 +44,35 @@ public class WaterMeterController {
         }
         UserEntity user = userService.getById(device.getUserId());
         return new GetInfoResponse(
-            waterMeterId,
-            user.getAddress(),
-            user.getFullName(),
-            user.getEmail(),
-            user.getPhoneNumber(),
-            device.isStatus()
+                waterMeterId,
+                user.getAddress(),
+                user.getFullName(),
+                user.getEmail(),
+                user.getPhoneNumber(),
+                device.isStatus()
         );
     }
 
     @PostMapping("/create")
     public void saveMeterWater(@RequestBody CreateDeviceRequest request){
         UserEntity user = userService.create(
-            new UserEntity(
-                request.getEmail(),
-                request.getPhoneNumber(),
-                request.getFullName(),
-                request.getAddress(),
-                request.getPhoneNumber(),
-                UserRole.USER
-            )
+                new UserEntity(
+                        request.getEmail(),
+                        request.getPhoneNumber(),
+                        request.getFullName(),
+                        request.getAddress(),
+                        request.getPhoneNumber(),
+                        UserRole.USER
+                )
         );
         waterMeterService.createDevice(
-            new WaterMeterDevice(
-                request.getWaterMeterId(),
-                user.getId(),
-                request.getType(),
-                request.getLongitude(),
-                request.getLatitude()
-            )
+                new WaterMeterDevice(
+                        request.getWaterMeterId(),
+                        user.getId(),
+                        request.getType(),
+                        request.getLongitude(),
+                        request.getLatitude()
+                )
         );
     }
 
@@ -107,22 +101,4 @@ public class WaterMeterController {
         Integer userId = waterMeterService.updateStatus(request);
         userService.updateInfo(request, userId);
     }
-
-    @PostMapping("/sendEmail")
-    public String sendEmail() throws MessagingException, UnsupportedEncodingException {
-        String recipientEmail = "phatnguyen20cm@gmail.com";
-        String subject = "Hello from Spring Boot";
-        String content = "<p>Hello,</p><p>This is a test email sent from Spring Boot.</p>";
-
-        try {
-            senderService.sendSimpleEmail(recipientEmail,
-                    subject,
-                    content);
-            return "Success";
-        } catch (Exception e) {
-            return "Failed to send email. Error: " + e.getMessage();
-        }
-    }
 }
-
-

@@ -6,7 +6,9 @@ import waterMeterImg from '@assets/images/waterMeter.png';
 import SearchPlace from '../SearchPlace';
 import LineAction from '../LineAction';
 import { Device } from '@/types/device';
-import axios from 'axios';
+import { useAppDispatch } from '@/hooks/hooks';
+import { deviceActions } from '@/redux/slices';
+import toast, { Toaster } from 'react-hot-toast';
 
 type Marker = {
   id: string;
@@ -20,103 +22,11 @@ type Marker = {
   subDevices?: Marker[];
 };
 
-const MockSupplyList: Marker[] = [
-  {
-    id: '1',
-    name: 'Tram Tong 1',
-    address: 'DH Bach Khoa',
-    latitude: 10.77284540373968,
-    longitude: 106.65774091063211,
-    waterConsumptionPerDay: 1000,
-    lifetime: '1 year',
-    totalDevice: 3,
-    subDevices: [
-      {
-        id: '2',
-        name: 'Nguon Con 1',
-        address: 'Khoa KHMT',
-        latitude: 10.77338833011621,
-        longitude: 106.66081812349626,
-        waterConsumptionPerDay: 2000,
-        lifetime: '1 year',
-      },
-      {
-        id: '3',
-        name: 'Nguon Con 2',
-        address: 'Khoa DDT',
-        latitude: 10.772545792252462,
-        longitude: 106.65845034545379,
-        waterConsumptionPerDay: 1000,
-        lifetime: '1 year',
-      },
-      {
-        id: '4',
-        name: 'Nguon Con 3',
-        address: 'Khoa KTXD',
-        latitude: 10.773746089710858,
-        longitude: 106.658963924352,
-        waterConsumptionPerDay: 1000,
-        lifetime: '1 year',
-      },
-    ],
-  },
-  {
-    id: '5',
-    name: 'Tram Tong 2',
-    address: 'DH Y Duoc',
-    latitude: 10.754536008374377,
-    longitude: 106.66337704146085,
-    waterConsumptionPerDay: 2000,
-    lifetime: '2 year',
-    totalDevice: 2,
-  },
-  {
-    id: '6',
-    name: 'Tram Tong 3',
-    address: 'DH KHTN',
-    latitude: 10.762528251574917,
-    longitude: 106.68271856645234,
-    waterConsumptionPerDay: 3000,
-    lifetime: '1 year',
-    totalDevice: 3,
-  },
-  {
-    id: '2',
-    name: 'Nguon Con 1',
-    address: 'Khoa KHMT',
-    latitude: 10.77338833011621,
-    longitude: 106.66081812349626,
-    waterConsumptionPerDay: 2000,
-    lifetime: '1 year',
-    subDevices: [],
-  },
-  {
-    id: '3',
-    name: 'Nguon Con 2',
-    address: 'Khoa DDT',
-    latitude: 10.772545792252462,
-    longitude: 106.65845034545379,
-    waterConsumptionPerDay: 1000,
-    lifetime: '1 year',
-    subDevices: [],
-  },
-  {
-    id: '4',
-    name: 'Nguon Con 3',
-    address: 'Khoa KTXD',
-    latitude: 10.773746089710858,
-    longitude: 106.658963924352,
-    waterConsumptionPerDay: 1000,
-    lifetime: '1 year',
-    subDevices: [],
-  },
-];
 interface MapProps {
   deviceList?: Device[];
 }
 
 const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
-  console.log(deviceList);
   const [selectedMarker, setSelectedMarker] = useState<Device>();
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
   const [optionsID, setOptionsID] = useState<number>(1);
@@ -125,11 +35,17 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
   const [startPoint, setStartPoint] = useState<Device>();
   const [endPoint, setEndPoint] = useState<Device>();
 
+  useEffect(() => {
+    setSupplyList(deviceList as Device[]);
+  }, [deviceList]);
+
   const [viewport, setViewport] = useState({
     latitude: 10.77284540373968,
     longitude: 106.65774091063211,
     zoom: 16,
   });
+
+  const dispatch = useAppDispatch();
 
   const handleClickMarker = (marker: Device) => {
     setViewport({
@@ -172,13 +88,19 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
           childrenId: endPoint.waterMeterId,
           parentId: startPoint.waterMeterId,
         };
-        const response = await axios.post('http://localhost:8080/water-meter/add-line', data);
-        if (response.status == 200) {
-          const newList = (await axios.get('http://localhost:8080/water-meter/list')).data;
-          setSupplyList(newList.devices);
+        //@ts-ignore
+        const response = await dispatch(deviceActions.addLine(data));
+
+        if (response.payload?.statusCode == 200) {
+          //@ts-ignore
+          const newList = await dispatch(deviceActions.getAllWaterMeter());
+          setSupplyList(newList.payload.data.devices);
+          toast.success('Add new line successfully');
+        } else {
+          toast.error('You can not add line');
         }
       } else {
-        console.log('startPoint or endPoint is not defined.');
+        toast.error('startPoint or endPoint is not defined.');
       }
     } catch (error) {
       console.log(error);
@@ -193,13 +115,19 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
           id1: endPoint.waterMeterId,
           id2: startPoint.waterMeterId,
         };
-        const response = await axios.post('http://localhost:8080/water-meter/delete-line', data);
-        if (response.status == 200) {
-          const newList = (await axios.get('http://localhost:8080/water-meter/list')).data;
-          setSupplyList(newList.devices);
+        //@ts-ignore
+        const response = await dispatch(deviceActions.removeLine(data));
+
+        if (response.payload?.statusCode == 200) {
+          //@ts-ignore
+          const newList = await dispatch(deviceActions.getAllWaterMeter());
+          setSupplyList(newList.payload.data.devices);
+          toast.success('Delete line successfully');
+        } else {
+          toast.error('Remove line failed');
         }
       } else {
-        console.log('startPoint or endPoint is not defined.');
+        toast.error('startPoint or endPoint is not defined.');
       }
     } catch (error) {
       console.log(error);
@@ -245,6 +173,7 @@ const MapComponent: React.FC<MapProps> = ({ deviceList }) => {
 
   return (
     <>
+      <Toaster />
       <h2 className=" text-[#4285f4] text-2xl font-bold ml-4">Bản đồ hệ thống nước</h2>
       <div className="flex gap-4 h-[600px]">
         <div className="w-[300px] shadow-md p-4">

@@ -43,7 +43,7 @@ const Sidebar: React.FC = () => {
                 <NavLink
                   to={'/dashboard'}
                   className={`flex items-center p-2 rounded-lg group
-                    ${isActive('/dashboard')}
+                    ${isActive('dashboard')}
                     hover:bg-[#E0E8F7] hover:text-[#4285f4]`}
                 >
                   <DashboardIcon />

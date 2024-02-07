@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class ServerApplication implements CommandLineRunner {
-
 	@Autowired
 	private MessageService messageService;
 	public static void main(String[] args) {

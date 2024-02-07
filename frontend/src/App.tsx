@@ -3,51 +3,36 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-// import Login from './pages/Login';
-// import Register from './pages/Register';
-// import ForgotPassword from './pages/ForgotPassword';
-// import ResetPassword from './pages/ResetPassword';
 // import NotFound from './pages/NotFound';
-// import ChangePassword from './pages/ChangePassword';
 import ProtectedRoute from './routes/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
 import ManageStation from './pages/ManageStation';
 import DetailStation from './pages/DetailStation';
 import ManageInvoice from './pages/ManageInvoice';
-// import Station from './pages/Station';
-// import Device from './pages/Device';
-// import Profile from './pages/Profile';
-// import DetailStation from './pages/DetailStation';
-// import DetailDevice from './pages/DetailDevice';
+import Login from './pages/Auth/Login';
+import Register from './pages/Auth/Register';
+import ForgotPassword from './pages/Auth/ForgotPassword';
+import ChangePassword from './pages/Auth/ChangePassword';
+import ResetPassword from './pages/Auth/ResetPassword';
 
 const App: React.FC = () => {
-  // const [user, setUser] = useState<boolean>(true);
-
   return (
     <>
       <div className="min-h-screen flex flex-col">
         <Header />
         <Routes>
-          <Route index element={<Dashboard />} />
-
-          {/* <Route index element={<Login />}></Route>
-          <Route path={'/login'} element={<Login />}></Route>
-          <Route path={'/register'} element={<Register />}></Route>
+          <Route index element={<Login />} path={'/login'}></Route>
           <Route path={'/register'} element={<Register />}></Route>
           <Route path={'/forgot-password'} element={<ForgotPassword />}></Route>
-          <Route path={'/reset-password'} element={<ResetPassword />}></Route> */}
+          <Route path={'/reset-password/:token'} element={<ResetPassword />}></Route>
+
           {/* PRIVATE ROUTE */}
-          <Route element={<ProtectedRoute user={true} />}>
-            {/* <Route path="/change-password" element={<ChangePassword />} /> */}
-            <Route path="/dashboard" element={<Dashboard />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path={'/dashboard'} element={<Dashboard />} />
+            <Route path="/change-password" element={<ChangePassword />} />
             <Route path="/stations/:stationID" element={<DetailStation />} />
             <Route path="/stations" element={<ManageStation />} />
             <Route path="/invoices" element={<ManageInvoice />} />
-            {/* <Route path="/station/:stationID" element={<DetailStation />} />
-            <Route path="/station" element={<Station />} />
-            <Route path="/device/:deviceID" element={<DetailDevice />} />
-            <Route path="/device" element={<Device />} />
-            <Route path="/profile" element={<Profile />} /> */}
           </Route>
           {/* <Route path={'*'} element={<NotFound />}></Route> */}
         </Routes>

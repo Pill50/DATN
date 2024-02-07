@@ -1,5 +1,4 @@
 export type Device = {
-  id: number;
   waterMeterId: string;
   address: string;
   longitude: number;
@@ -11,7 +10,19 @@ export type Device = {
   children: Device[];
 };
 
-export type CreateNewDeviceType = {
-  address: string;
-  addressOfStation: string;
+export type DeviceCardList = {
+  totalWaterMeters: number;
+  totalPulse: number;
+  totalDigital: number;
+  statusActive: number;
+};
+
+type AddLine = {
+  childrenId: string;
+  parentId: string;
+};
+
+type RemoveLine = {
+  childrenId: string;
+  parentId: string;
 };
