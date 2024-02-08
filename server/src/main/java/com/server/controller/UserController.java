@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/user")
 @PreAuthorize("hasAuthority('USER')")
 public class UserController {
@@ -28,8 +27,7 @@ public class UserController {
             return userService.getUserInfo(userId);
         }
         catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Device Not Found or Invalid User");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Device Not Found or Invalid User");
         }
     }
-
 }

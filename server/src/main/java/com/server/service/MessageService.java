@@ -18,6 +18,9 @@ public class MessageService {
     @Autowired
     private WaterMeterValueRepository waterMeterValueRepository;
 
+    @Autowired
+    private WaterMeterService waterMeterService;
+
     @Value("${ADAFRUIT_KEY}")
     public String ADAFRUIT_KEY;
 
@@ -49,17 +52,11 @@ public class MessageService {
 
                 public void messageArrived(String topic, MqttMessage message) throws IOException {
                     ObjectMapper objectMapper = new ObjectMapper();
-//
                     String raw = new String(message.getPayload());
                     raw = raw.replace('\'','"');
                     System.out.println(raw);
                     WaterMeterValue data = objectMapper.readValue(raw, WaterMeterValue.class);
-//
-                    WaterMeterValue record = new WaterMeterValue();
-                    record.setFlowRateValue(data.getFlowRateValue());
-                    record.setTotalFlowValue(data.getTotalFlowValue());
-                    record.setWaterMeterId(data.getWaterMeterId());
-                    waterMeterValueRepository.save(record);
+                    waterMeterService.InsertWaterValue(data.getWaterMeterId(), data.getFlowRateValue(), data.getTotalFlowValue(), "");
                 }
 
                 public void deliveryComplete(IMqttDeliveryToken token) {

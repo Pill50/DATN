@@ -88,12 +88,7 @@ public class AdminController {
 
     @PostMapping("/save-digital-value")
     public void saveDigitalValue(@RequestBody SaveMechanicalValueRequest request){
-        waterMeterService.SaveMechanicalValue(request);
-    }
-
-    @PostMapping("/save-pulse-value")
-    public void savePulseValue(@RequestBody SavePulseValueRequest request){
-        waterMeterService.SavePulseValue(request);
+        waterMeterService.InsertWaterValue(request.getWaterMeterId(), 0, request.getTotalRateValue(), request.getImageUrl());
     }
 
     @PostMapping("/update-info")

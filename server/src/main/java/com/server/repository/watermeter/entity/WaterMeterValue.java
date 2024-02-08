@@ -21,7 +21,7 @@ public class WaterMeterValue {
     private String imageUrl;
     private Date updatedAt = Date.from(Instant.now());
 
-    public WaterMeterValue(String waterMeterId, int flowRateValue, int totalRateValue, String imageUrl) {
+    public WaterMeterValue(String waterMeterId, float flowRateValue, float totalRateValue, String imageUrl) {
         this.waterMeterId = waterMeterId;
         this.flowRateValue = flowRateValue;
         this.totalFlowValue = totalRateValue;

@@ -7,8 +7,10 @@ import com.server.controller.response.GetAllDeviceResponse;
 import com.server.controller.response.Device;
 import com.server.repository.user.entity.UserEntity;
 import com.server.repository.user.repository.UserRepository;
+import com.server.repository.watermeter.entity.AvgUsage;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
 import com.server.repository.watermeter.entity.WaterMeterValue;
+import com.server.repository.watermeter.repository.AvgUsageRepository;
 import com.server.repository.watermeter.repository.WaterMeterDeviceRepository;
 import com.server.repository.watermeter.repository.WaterMeterValueRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +33,8 @@ public class WaterMeterService {
     private WaterMeterValueRepository waterMeterValueRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AvgUsageRepository avgUsageRepository;
 
     public WaterMeterDevice getByUserId(Integer userId){
         return waterMeterDeviceRepository.findByUserId(userId);
@@ -122,28 +129,58 @@ public class WaterMeterService {
         return false;
     }
 
-    public void SaveMechanicalValue(SaveMechanicalValueRequest request){
+    public void InsertWaterValue(String waterMeterId, float flowRateValue, float totalFlowValue, String imageUrl){
         waterMeterValueRepository.save(
             new WaterMeterValue(
-                request.getWaterMeterId(),
-                0,
-                request.getTotalRateValue(),
-                request.getImageUrl()
+                waterMeterId,
+                flowRateValue,
+                totalFlowValue,
+                imageUrl
             )
         );
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DATE);
+        int month = cal.get(Calendar.MONTH);
+        float avgOfMonth = totalFlowValue;
+        if(flowRateValue > 0 && day == getLastDayOfMonthUsingCalendar(month)){
+            avgOfMonth = waterMeterValueRepository.findAvgUsage(month+1);
+        }
+        AvgUsage avgUsage = avgUsageRepository.findByWaterMeterId(waterMeterId);
+        if(avgUsage != null){
+            if(isHigher(avgUsage.getAvgUsage(), avgOfMonth)){
+                // push noti
+                System.out.println("Noti");
+            }
+            updateAvgUsage(avgUsage, avgOfMonth, waterMeterId);
+
+        }
+        else {
+            updateAvgUsage(new AvgUsage(), avgOfMonth, waterMeterId);
+        }
     }
 
-    public void SavePulseValue(SavePulseValueRequest request){
-        waterMeterValueRepository.save(
-            new WaterMeterValue(
-                request.getWaterMeterId(),
-                request.getFlowRateValue(),
-                0,
-                ""
-            )
-        );
+    private int getLastDayOfMonthUsingCalendar(int month) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, month);
+        return cal.getActualMaximum(Calendar.DAY_OF_MONTH);
     }
 
+    private boolean updateAvgUsage(AvgUsage avgUsage, float avgOfMonth, String waterMeterId){
+        int total = avgUsage.getTotalRecord();
+        float avg = avgUsage.getAvgUsage();
+        avgUsage.setAvgUsage((avg*total+avgOfMonth)/(total+1));
+        avgUsage.setWaterMeterId(waterMeterId);
+        avgUsage.setTotalRecord(total+1);
+        avgUsageRepository.save(avgUsage);
+        return true;
+    }
+
+    private boolean isHigher(float avgUsage, float value){
+        if(value > 1.25*avgUsage){
+            return true;
+        }
+        return false;
+    }
     public Integer updateStatus(UpdateInfoRequest request){
         try{
             WaterMeterDevice device = waterMeterDeviceRepository.findByWaterMeterId(request.getWaterMeterId());
