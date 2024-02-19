@@ -28,7 +28,6 @@ const Dashboard: React.FC = () => {
         //@ts-ignore
         const response = await dispatch(deviceActions.getAllWaterMeter());
 
-        console.log('Response:', response);
         if (response.payload.statusCode === 200) {
           const cardListObj = {
             totalWaterMeters: response.payload.data.totalWaterMeters,
@@ -54,21 +53,19 @@ const Dashboard: React.FC = () => {
 
   const [listening, setListening] = useState(false);
   const [data, setData] = useState([]);
-  let eventSource: any = undefined;
 
   useEffect(() => {
     if (!listening) {
-      const eventSource = new EventSource("http://localhost:8080/auth/subscribe");
-      // let guidValue = null;
+      const eventSource = new EventSource(`http://localhost:8080/auth/subscribe`);
 
-      eventSource.addEventListener("notification", (event) => {
+      eventSource.addEventListener('notification', (event) => {
+        console.log('Event:', event.data);
         // var guidValue = JSON.parse(event.data);
         console.log(`Guid from server: ${event.data.userId}`);
-      })
+      });
     }
   }, []);
 
-  console.log('devicelist:', deviceList);
   return (
     <div className="flex">
       <Toaster />

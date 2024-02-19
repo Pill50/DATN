@@ -29,7 +29,6 @@ const forgotPassword = async (values: ForgotPasswordType) => {
 const resetPassword = async (values: ResetPasswordType) => {
   const path = '/auth/reset-password';
   const response = await apiCaller('POST', path, values);
-  console.log('Response here:', response);
   return response;
 };
 

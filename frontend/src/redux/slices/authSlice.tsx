@@ -155,7 +155,8 @@ export const authSlice: any = createSlice({
     });
     builder.addCase(login.fulfilled, (state, action) => {
       Cookies.set('accessToken', action.payload?.accessToken as string);
-      state.role = action.payload.data?.role as string;
+      Cookies.set('role', action.payload.role as string);
+      state.role = action.payload.role as string;
       state.isLoading = false;
       state.isLogin = true;
     });

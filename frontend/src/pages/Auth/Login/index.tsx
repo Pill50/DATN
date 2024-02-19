@@ -17,15 +17,14 @@ const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isLoading: boolean = useAppSelector((state) => state.authSlice.isLoading);
-  const role = useAppSelector((state) => state.authSlice.role);
 
-  const handleSubmit = (values: LoginType) => {
+  const handleSubmit = async (values: LoginType) => {
     // @ts-ignore
-    dispatch(authActions.login(values)).then((response) => {
+    await dispatch(authActions.login(values)).then((response) => {
       if (response.payload.statusCode === 200) {
-        if (role === 'ADMIN') {
-          navigate('/dashboard');
+        if (response.payload.role === 'ADMIN') {
           toast.success('Login Successfully!');
+          navigate('/dashboard');
         } else {
           toast.error('You must login with admin account');
         }
