@@ -2,7 +2,7 @@ import { apiCaller } from '@/apiConfigs';
 import { AddLine, RemoveLine } from '@/types/device';
 
 const getAllWaterMeter = async () => {
-  const path = '/water-meter/list';
+  const path = '/admin/list';
   const response = await apiCaller('GET', path);
   return response;
 };

@@ -52,6 +52,22 @@ const Dashboard: React.FC = () => {
     fetchData();
   }, []);
 
+  const [listening, setListening] = useState(false);
+  const [data, setData] = useState([]);
+  let eventSource: any = undefined;
+
+  useEffect(() => {
+    if (!listening) {
+      const eventSource = new EventSource("http://localhost:8080/auth/subscribe");
+      // let guidValue = null;
+
+      eventSource.addEventListener("notification", (event) => {
+        // var guidValue = JSON.parse(event.data);
+        console.log(`Guid from server: ${event.data.userId}`);
+      })
+    }
+  }, []);
+
   console.log('devicelist:', deviceList);
   return (
     <div className="flex">
