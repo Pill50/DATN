@@ -5,6 +5,7 @@ import com.server.controller.request.SavePulseValueRequest;
 import com.server.controller.request.UpdateInfoRequest;
 import com.server.controller.response.GetAllDeviceResponse;
 import com.server.controller.response.Device;
+import com.server.model.EventMessage;
 import com.server.repository.user.entity.UserEntity;
 import com.server.repository.user.repository.UserRepository;
 import com.server.repository.watermeter.entity.AvgUsage;
@@ -35,6 +36,8 @@ public class WaterMeterService {
     private UserRepository userRepository;
     @Autowired
     private AvgUsageRepository avgUsageRepository;
+    @Autowired
+    private EventStreamingService eventStreamingService;
 
     public WaterMeterDevice getByUserId(Integer userId){
         return waterMeterDeviceRepository.findByUserId(userId);
@@ -141,21 +144,26 @@ public class WaterMeterService {
         Calendar cal = Calendar.getInstance();
         int day = cal.get(Calendar.DATE);
         int month = cal.get(Calendar.MONTH);
-        float avgOfMonth = totalFlowValue;
+        float avgOfMonth = 0;
         if(flowRateValue > 0 && day == getLastDayOfMonthUsingCalendar(month)){
             avgOfMonth = waterMeterValueRepository.findAvgUsage(month+1);
         }
-        AvgUsage avgUsage = avgUsageRepository.findByWaterMeterId(waterMeterId);
-        if(avgUsage != null){
-            if(isHigher(avgUsage.getAvgUsage(), avgOfMonth)){
-                // push noti
-                System.out.println("Noti");
-            }
-            updateAvgUsage(avgUsage, avgOfMonth, waterMeterId);
-
+        if(imageUrl != ""){
+            avgOfMonth = totalFlowValue;
         }
-        else {
-            updateAvgUsage(new AvgUsage(), avgOfMonth, waterMeterId);
+        if(avgOfMonth != 0){
+            AvgUsage avgUsage = avgUsageRepository.findByWaterMeterId(waterMeterId);
+            if(avgUsage != null){
+                if(isHigher(avgUsage.getAvgUsage(), avgOfMonth)){
+                    // push noti
+                    System.out.println("Noti");
+                    eventStreamingService.sendEvent(new EventMessage(waterMeterId, avgOfMonth));
+                }
+                updateAvgUsage(avgUsage, avgOfMonth, waterMeterId);
+            }
+            else {
+                updateAvgUsage(new AvgUsage(), avgOfMonth, waterMeterId);
+            }
         }
     }
 
