@@ -7,6 +7,7 @@ import com.server.model.UserRole;
 import com.server.repository.user.entity.UserEntity;
 import com.server.repository.watermeter.entity.WaterMeterDevice;
 import com.server.repository.watermeter.entity.WaterMeterValue;
+import com.server.service.EventStreamingService;
 import com.server.service.UserService;
 import com.server.service.WaterMeterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.List;
 
@@ -25,7 +27,6 @@ public class AdminController {
     private WaterMeterService waterMeterService;
     @Autowired
     private UserService userService;
-
     @GetMapping("/list")
     public GetAllDeviceResponse getAllDevice(){
         return waterMeterService.getAllDevice();
@@ -88,12 +89,7 @@ public class AdminController {
 
     @PostMapping("/save-digital-value")
     public void saveDigitalValue(@RequestBody SaveMechanicalValueRequest request){
-        waterMeterService.SaveMechanicalValue(request);
-    }
-
-    @PostMapping("/save-pulse-value")
-    public void savePulseValue(@RequestBody SavePulseValueRequest request){
-        waterMeterService.SavePulseValue(request);
+        waterMeterService.InsertWaterValue(request.getWaterMeterId(), 0, request.getTotalRateValue(), request.getImageUrl());
     }
 
     @PostMapping("/update-info")
@@ -101,4 +97,13 @@ public class AdminController {
         Integer userId = waterMeterService.updateStatus(request);
         userService.updateInfo(request, userId);
     }
+
+//    @GetMapping("/subscribe")
+//    public SseEmitter subscribeEvent(){
+//        SseEmitter sseEmitter = new SseEmitter(Long.MAX_VALUE);
+//        eventStreamingService.add(sseEmitter);
+//        sseEmitter.onCompletion(() -> System.out.println("Event on completion"));
+//        sseEmitter.onTimeout(() -> System.out.println("Event on Timeout"));
+//        return sseEmitter;
+//    }
 }

@@ -92,15 +92,15 @@ public class WaterMeterController {
         if(!waterMeterService.deleteLine(request.getId1(), request.getId2())) throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Can not delete line");
     }
 
-    @PostMapping("/save-digital-value")
-    public void saveDigitalValue(@RequestBody SaveMechanicalValueRequest request){
-        waterMeterService.SaveMechanicalValue(request);
-    }
+//    @PostMapping("/save-digital-value")
+//    public void saveDigitalValue(@RequestBody SaveMechanicalValueRequest request){
+//        waterMeterService.SaveMechanicalValue(request.getWaterMeterId(), request);
+//    }
 
-    @PostMapping("/save-pulse-value")
-    public void savePulseValue(@RequestBody SavePulseValueRequest request){
-        waterMeterService.SavePulseValue(request);
-    }
+//    @PostMapping("/save-pulse-value")
+//    public void savePulseValue(@RequestBody SavePulseValueRequest request){
+//        waterMeterService.SavePulseValue(request);
+//    }
 
     @PostMapping("/update-info")
     public void updateStatus(@RequestBody UpdateInfoRequest request){
