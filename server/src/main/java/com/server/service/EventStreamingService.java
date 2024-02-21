@@ -12,20 +12,18 @@ import java.util.UUID;
 @Component
 public class EventStreamingService {
     private static List<SseEmitter> sseEmitters = new ArrayList<>();
-
     public String add(SseEmitter sseEmitter){
         String uuid = UUID.randomUUID().toString();
         sseEmitters.add(sseEmitter);
         return uuid;
     }
     public void sendEvent(EventMessage message){
-        try{
-            for(SseEmitter s : sseEmitters){
-                s.send(SseEmitter.event().name("notification").data(message.toString()));
+        for(SseEmitter s : sseEmitters){
+            try{
+                s.send(SseEmitter.event().name("notification").data(message, MediaType.APPLICATION_JSON));
             }
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
+            catch (Exception e){
+            }
         }
     }
 }
