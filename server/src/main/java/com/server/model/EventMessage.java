@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class EventMessage {
-    private String userId;
+    private String waterMeterId;
     private float usageOfThisMonth;
 
-    public EventMessage(String userId, float usageOfThisMonth) {
-        this.userId = userId;
+    public EventMessage(String waterMeterId, float usageOfThisMonth) {
+        this.waterMeterId = waterMeterId;
         this.usageOfThisMonth = usageOfThisMonth;
     }
 }
